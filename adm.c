@@ -6,6 +6,7 @@
 
 typedef enum {
     INST_PUSH,
+    INST_NOP,
     INST_POP,
     INST_DUP,
     INST_SWAP,
@@ -13,13 +14,17 @@ typedef enum {
     INST_SUB,
     INST_MUL,
     INST_DIV,
+    INST_MOD,
     INST_CMPE,
     INST_CMPNE,
     INST_CMPG,
     INST_CMPL,
+    INST_CMPGE,
+    INST_CMPLE,
     INST_CJMP,
     INST_JMP,
     INST_PRINT,
+    INST_HALT,
 } Inst_Set;
 
 typedef struct {
@@ -35,6 +40,7 @@ typedef struct {
 } Machine;
 
 #define DEF_INST_PUSH(x) {.type = INST_PUSH, .value = x}
+#define DEF_INST_NOP(x) {.type = INST_NOP}
 #define DEF_INST_POP() {.type = INST_POP}
 #define DEF_INST_DUP() {.type = INST_DUP}
 #define DEF_INST_SWAP() {.type = INST_SWAP}
@@ -42,22 +48,28 @@ typedef struct {
 #define DEF_INST_SUB() {.type = INST_SUB}
 #define DEF_INST_MUL() {.type = INST_MUL}
 #define DEF_INST_DIV() {.type = INST_DIV}
+#define DEF_INST_MOD() {.type = INST_MOD}
 #define DEF_INST_CMPE() {.type = INST_CMPE}
 #define DEF_INST_CMPNE() {.type = INST_CMPNE}
 #define DEF_INST_CMPG() {.type = INST_CMPG}
 #define DEF_INST_CMPL() {.type = INST_CMPL}
+#define DEF_INST_CMPGE() {.type = INST_CMPGE}
+#define DEF_INST_CMPLE() {.type = INST_CMPLE}
 #define DEF_INST_CJMP(x) {.type = INST_CJMP, .value = x}
 #define DEF_INST_JMP(x) {.type = INST_JMP, .value = x}
 #define DEF_INST_PRINT() {.type = INST_PRINT}
+#define DEF_INST_HALT(x) {.type = INST_HALT}
 
 Inst program[] = {
-    DEF_INST_PUSH(1),
-    DEF_INST_PUSH(1),
-    DEF_INST_CMPE(),
-    DEF_INST_CJMP(7),
-    DEF_INST_PUSH(2),
-    DEF_INST_ADD(),
-    DEF_INST_PUSH(4),
+    DEF_INST_PUSH(14),
+    DEF_INST_PUSH(27),
+    DEF_INST_HALT(),
+    DEF_INST_JMP(5),
+    DEF_INST_PUSH(15),
+    DEF_INST_CMPGE(),
+    DEF_INST_NOP(),
+    DEF_INST_NOP(),
+    DEF_INST_NOP(),
     DEF_INST_PRINT(),
 };
 #define PROGRAM_SIZE (sizeof(program)/sizeof(program[0]))
@@ -129,6 +141,9 @@ int main(){
                 //fprintf(stdout, "push %d\n", loaded_machine->instructions[ip].value);
                 push(loaded_machine, loaded_machine->instructions[ip].value);
                 break;
+            case INST_NOP:
+                continue;
+                break;
             case INST_POP:
                 //fprintf(stdout, "pop\n"); 
                 pop(loaded_machine);
@@ -174,6 +189,12 @@ int main(){
                 }
                 push(loaded_machine, a / b);
                 break;
+            case INST_MOD:
+                //fprintf(stdout, "div\n"); 
+                a = pop(loaded_machine);
+                b = pop(loaded_machine);
+                push(loaded_machine, a % b);
+                break;
             case INST_CMPE:
                 a = pop(loaded_machine);
                 b = pop(loaded_machine);
@@ -218,6 +239,28 @@ int main(){
                     push(loaded_machine, 0);
                 }
                 break;
+            case INST_CMPGE:
+                a = pop(loaded_machine);
+                b = pop(loaded_machine);
+                push(loaded_machine, b);
+                push(loaded_machine, a);
+                if (a >= b){
+                    push(loaded_machine, 1);
+                } else {
+                    push(loaded_machine, 0);
+                }
+                break;
+            case INST_CMPLE:
+                a = pop(loaded_machine);
+                b = pop(loaded_machine);
+                push(loaded_machine, b);
+                push(loaded_machine, a);
+                if (a <= b){
+                    push(loaded_machine, 1);
+                } else {
+                    push(loaded_machine, 0);
+                }
+                break;
             case INST_CJMP:
                 if (pop(loaded_machine) == 1){
                     ip = loaded_machine->instructions[ip].value - 1;
@@ -240,7 +283,11 @@ int main(){
                 //fprintf(stdout, "print\n"); 
                 printf("%d\n", pop(loaded_machine));
                 break;
+            case INST_HALT:
+                ip = loaded_machine->program_size;
+                break;
         }
     }
+    print_stack(loaded_machine);
     return 0;
 }
