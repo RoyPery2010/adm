@@ -1,0 +1,2 @@
+# ADM - Adamantium Virtual Machine
+Implementation of a Virtual Machine in C. Planning to implement a custom assembly and assembler And, once it natures, a programming language which compiles to the bytecode.
