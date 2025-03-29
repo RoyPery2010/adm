@@ -1,2 +1,2 @@
 set -xe
-gcc adm.c -o adm -Wall -Wextra
+gcc adm.c pasmlexer.c -o adm -Wall -Wextra
