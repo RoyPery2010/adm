@@ -26,6 +26,24 @@ char *open_file(char *file_path, int *length){
     return current;
 }
 
+void push_token(Lexer *lex, Token value){
+    if (lex->stack_size >= MAX_TOKEN_STACK_SIZE){
+        fprintf(stderr, "ERROR: Stack Overflow\n");
+        exit(1);
+    }
+    lex->token_stack[lex->stack_size] = value;
+    lex->stack_size++;
+}
+
+Token pop_token(Lexer *lex){
+    if (lex->stack_size >= MAX_TOKEN_STACK_SIZE){
+        fprintf(stderr, "ERROR: Stack Underflow\n");
+        exit(1);
+    }
+    lex->stack_size--;
+    return lex->token_stack[lex->stack_size];
+}
+
 Token init_token(TokenType type, char *text, int line, int character){
     Token token = {.type = type, .text = text, .line = line, .character = character};
     return token;
@@ -156,6 +174,9 @@ void print_token(Token token){
         case TYPE_PRINT:
             printf("TYPE PRINT\n");
             break;
+        case TYPE_INT:
+            printf("TYPE INT\n");
+            break;
         case TYPE_HALT:
             printf("TYPE HALT\n");
             break;
@@ -178,21 +199,42 @@ Token generate_keyword(char *current, int *current_index, int line, int characte
     return token;
 }
 
-int lexer(){
+Token generate_int(char *current, int *current_index, int line, int character){
+    char *keyword_name = malloc(sizeof(char) * 16);
+    int keyword_length = 0;
+    while(isdigit(current[*current_index])){
+        keyword_name[keyword_length] = current[*current_index];
+        *current_index += 1;
+        keyword_length++;
+    }
+    keyword_name[keyword_length] = '\0';
+    printf("INT %s\n", keyword_name);
+    TokenType type = TYPE_INT;
+    Token token = init_token(type, keyword_name, line, character);
+    return token;
+}
+
+Lexer lexer(char *file_name){
     int length;
-    char *current = open_file("test.pasm", &length);
+    char *current = open_file(file_name, &length);
     int current_index = 0;
 
     int line = 1;
     int character = 1;
 
+    Lexer lex = {.stack_size = 0, .file_name = "test.pasm"};
+
     while(current_index < length){
+ 
+        printf("current_index %d char %c\n", current_index, current[current_index]);
         if(isalpha(current[current_index])){
             Token token = generate_keyword(current, &current_index, line, character);
             current_index--;
-            print_token(token);
+            push_token(&lex, token);
         } else if(isdigit(current[current_index])){
-            printf("NUMBERIC\n");
+            Token token = generate_int(current, &current_index, line, character);
+            push_token(&lex, token);
+            current_index--;
         } else if(current[current_index] == '\n'){
             line++;
             character = 0;
@@ -200,5 +242,9 @@ int lexer(){
         current_index++;
         character++;
     }
-    return 0;
+    /*printf("stack size %d\n", lex.stack_size);
+    for (int i = 0; i < lex.stack_size; i++){
+        print_token(lex.token_stack[i]);
+    }*/
+    return lex;
 }

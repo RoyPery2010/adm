@@ -1,6 +1,6 @@
 #pragma once
 #include "./pasmlexer.h"
-
+#include <stddef.h>
 #define MAX_STACK_SIZE 1024
 
 typedef enum {
@@ -66,7 +66,6 @@ typedef struct {
 #define DEF_INST_HALT(i) {.type = INST_HALT}
 
 
-#define PROGRAM_SIZE (sizeof(program)/sizeof(program[0]))
 void push(Machine *machine, int value);
 int pop(Machine *machine);
 void index_swap(Machine *machine, int index);
@@ -75,4 +74,4 @@ void print_stack(Machine *machine);
 void write_program_to_file(Machine *machine, char *file_path);
 Machine *read_program_from_file(Machine *machine, char *file_path);
 void run_instructions(Machine *machine);
-int main();
+int adm();

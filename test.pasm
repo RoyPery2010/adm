@@ -1,24 +1,16 @@
-push
-push
-nop
+push 1
+push 0
+push 1
+indup 1
+inswap 0
 pop
+dup
+inswap 1
 pop
-indup
-swap
-inswap
+indup 0
+indup 1
 add
-sub
-mul
-div
-mod
-cmpe
-cmpne
-cmpg
-cmpl
-cmpge
-cmple
-jmp
-zjmp
-nzjmp
+swap
 print
-halt
+jmp 16
+nop

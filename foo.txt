@@ -1,0 +1,5717 @@
+current_index 0 char p
+PUSH
+current_index 4 char  
+current_index 5 char 5
+INT 5
+current_index 6 char 
+
+current_index 7 char p
+PUSH
+current_index 11 char  
+current_index 12 char 1
+INT 15
+current_index 14 char 
+
+current_index 15 char p
+PUSH
+current_index 19 char  
+current_index 20 char 2
+INT 20
+current_index 22 char 
+
+current_index 23 char a
+current_index 26 char 
+
+current_index 27 char s
+current_index 31 char 
+
+current_index 32 char s
+current_index 36 char 
+
+current_index 37 char j
+current_index 40 char  
+current_index 41 char 0
+INT 0
+stack size 11
+TYPE PUSH
+text: push, line: 1, character: 1
+TYPE INT
+text: 5, line: 1, character: 3
+TYPE PUSH
+text: push, line: 2, character: 1
+TYPE INT
+text: 15, line: 2, character: 3
+TYPE PUSH
+text: push, line: 3, character: 1
+TYPE INT
+text: 20, line: 3, character: 3
+TYPE ADD
+text: add, line: 4, character: 1
+TYPE SWAP
+text: swap, line: 5, character: 1
+TYPE SWAP
+text: swap, line: 6, character: 1
+TYPE JMP
+text: jmp, line: 7, character: 1
+TYPE INT
+text: 0, line: 7, character: 3
+generate_list 0 out of 11, type 1
+generate_list 2 out of 11, type 1
+generate_list 4 out of 11, type 1
+generate_list 6 out of 11, type 7
+generate_list 7 out of 11, type 5
+generate_list 8 out of 11, type 5
+generate_list 9 out of 11, type 18
+generate_list 10 out of 11, type 22
+TYPE NOP
+text: (null), line: 0, character: 0
+TYPE PUSH
+text: push, line: 1, character: 1
+TYPE INT
+text: 5, line: 1, character: 3
+TYPE PUSH
+text: push, line: 2, character: 1
+TYPE INT
+text: 15, line: 2, character: 3
+TYPE PUSH
+text: push, line: 3, character: 1
+TYPE INT
+text: 20, line: 3, character: 3
+TYPE ADD
+text: add, line: 4, character: 1
+TYPE SWAP
+text: swap, line: 5, character: 1
+TYPE SWAP
+text: swap, line: 6, character: 1
+TYPE JMP
+text: jmp, line: 7, character: 1
+TYPE INT
+text: 0, line: 7, character: 3
+RUNNING
+program_size 8
+push 5
+stack size after push 1
+push 15
+stack size after push 2
+push 20
+stack size after push 3
+stack size after push 2
+stack size after push 1
+stack size after push 2
+stack size after push 1
+stack size after push 2
+push 5
+stack size after push 3
+push 15
+stack size after push 4
+push 20
+stack size after push 5
+stack size after push 4
+stack size after push 3
+stack size after push 4
+stack size after push 3
+stack size after push 4
+push 5
+stack size after push 5
+push 15
+stack size after push 6
+push 20
+stack size after push 7
+stack size after push 6
+stack size after push 5
+stack size after push 6
+stack size after push 5
+stack size after push 6
+push 5
+stack size after push 7
+push 15
+stack size after push 8
+push 20
+stack size after push 9
+stack size after push 8
+stack size after push 7
+stack size after push 8
+stack size after push 7
+stack size after push 8
+push 5
+stack size after push 9
+push 15
+stack size after push 10
+push 20
+stack size after push 11
+stack size after push 10
+stack size after push 9
+stack size after push 10
+stack size after push 9
+stack size after push 10
+push 5
+stack size after push 11
+push 15
+stack size after push 12
+push 20
+stack size after push 13
+stack size after push 12
+stack size after push 11
+stack size after push 12
+stack size after push 11
+stack size after push 12
+push 5
+stack size after push 13
+push 15
+stack size after push 14
+push 20
+stack size after push 15
+stack size after push 14
+stack size after push 13
+stack size after push 14
+stack size after push 13
+stack size after push 14
+push 5
+stack size after push 15
+push 15
+stack size after push 16
+push 20
+stack size after push 17
+stack size after push 16
+stack size after push 15
+stack size after push 16
+stack size after push 15
+stack size after push 16
+push 5
+stack size after push 17
+push 15
+stack size after push 18
+push 20
+stack size after push 19
+stack size after push 18
+stack size after push 17
+stack size after push 18
+stack size after push 17
+stack size after push 18
+push 5
+stack size after push 19
+push 15
+stack size after push 20
+push 20
+stack size after push 21
+stack size after push 20
+stack size after push 19
+stack size after push 20
+stack size after push 19
+stack size after push 20
+push 5
+stack size after push 21
+push 15
+stack size after push 22
+push 20
+stack size after push 23
+stack size after push 22
+stack size after push 21
+stack size after push 22
+stack size after push 21
+stack size after push 22
+push 5
+stack size after push 23
+push 15
+stack size after push 24
+push 20
+stack size after push 25
+stack size after push 24
+stack size after push 23
+stack size after push 24
+stack size after push 23
+stack size after push 24
+push 5
+stack size after push 25
+push 15
+stack size after push 26
+push 20
+stack size after push 27
+stack size after push 26
+stack size after push 25
+stack size after push 26
+stack size after push 25
+stack size after push 26
+push 5
+stack size after push 27
+push 15
+stack size after push 28
+push 20
+stack size after push 29
+stack size after push 28
+stack size after push 27
+stack size after push 28
+stack size after push 27
+stack size after push 28
+push 5
+stack size after push 29
+push 15
+stack size after push 30
+push 20
+stack size after push 31
+stack size after push 30
+stack size after push 29
+stack size after push 30
+stack size after push 29
+stack size after push 30
+push 5
+stack size after push 31
+push 15
+stack size after push 32
+push 20
+stack size after push 33
+stack size after push 32
+stack size after push 31
+stack size after push 32
+stack size after push 31
+stack size after push 32
+push 5
+stack size after push 33
+push 15
+stack size after push 34
+push 20
+stack size after push 35
+stack size after push 34
+stack size after push 33
+stack size after push 34
+stack size after push 33
+stack size after push 34
+push 5
+stack size after push 35
+push 15
+stack size after push 36
+push 20
+stack size after push 37
+stack size after push 36
+stack size after push 35
+stack size after push 36
+stack size after push 35
+stack size after push 36
+push 5
+stack size after push 37
+push 15
+stack size after push 38
+push 20
+stack size after push 39
+stack size after push 38
+stack size after push 37
+stack size after push 38
+stack size after push 37
+stack size after push 38
+push 5
+stack size after push 39
+push 15
+stack size after push 40
+push 20
+stack size after push 41
+stack size after push 40
+stack size after push 39
+stack size after push 40
+stack size after push 39
+stack size after push 40
+push 5
+stack size after push 41
+push 15
+stack size after push 42
+push 20
+stack size after push 43
+stack size after push 42
+stack size after push 41
+stack size after push 42
+stack size after push 41
+stack size after push 42
+push 5
+stack size after push 43
+push 15
+stack size after push 44
+push 20
+stack size after push 45
+stack size after push 44
+stack size after push 43
+stack size after push 44
+stack size after push 43
+stack size after push 44
+push 5
+stack size after push 45
+push 15
+stack size after push 46
+push 20
+stack size after push 47
+stack size after push 46
+stack size after push 45
+stack size after push 46
+stack size after push 45
+stack size after push 46
+push 5
+stack size after push 47
+push 15
+stack size after push 48
+push 20
+stack size after push 49
+stack size after push 48
+stack size after push 47
+stack size after push 48
+stack size after push 47
+stack size after push 48
+push 5
+stack size after push 49
+push 15
+stack size after push 50
+push 20
+stack size after push 51
+stack size after push 50
+stack size after push 49
+stack size after push 50
+stack size after push 49
+stack size after push 50
+push 5
+stack size after push 51
+push 15
+stack size after push 52
+push 20
+stack size after push 53
+stack size after push 52
+stack size after push 51
+stack size after push 52
+stack size after push 51
+stack size after push 52
+push 5
+stack size after push 53
+push 15
+stack size after push 54
+push 20
+stack size after push 55
+stack size after push 54
+stack size after push 53
+stack size after push 54
+stack size after push 53
+stack size after push 54
+push 5
+stack size after push 55
+push 15
+stack size after push 56
+push 20
+stack size after push 57
+stack size after push 56
+stack size after push 55
+stack size after push 56
+stack size after push 55
+stack size after push 56
+push 5
+stack size after push 57
+push 15
+stack size after push 58
+push 20
+stack size after push 59
+stack size after push 58
+stack size after push 57
+stack size after push 58
+stack size after push 57
+stack size after push 58
+push 5
+stack size after push 59
+push 15
+stack size after push 60
+push 20
+stack size after push 61
+stack size after push 60
+stack size after push 59
+stack size after push 60
+stack size after push 59
+stack size after push 60
+push 5
+stack size after push 61
+push 15
+stack size after push 62
+push 20
+stack size after push 63
+stack size after push 62
+stack size after push 61
+stack size after push 62
+stack size after push 61
+stack size after push 62
+push 5
+stack size after push 63
+push 15
+stack size after push 64
+push 20
+stack size after push 65
+stack size after push 64
+stack size after push 63
+stack size after push 64
+stack size after push 63
+stack size after push 64
+push 5
+stack size after push 65
+push 15
+stack size after push 66
+push 20
+stack size after push 67
+stack size after push 66
+stack size after push 65
+stack size after push 66
+stack size after push 65
+stack size after push 66
+push 5
+stack size after push 67
+push 15
+stack size after push 68
+push 20
+stack size after push 69
+stack size after push 68
+stack size after push 67
+stack size after push 68
+stack size after push 67
+stack size after push 68
+push 5
+stack size after push 69
+push 15
+stack size after push 70
+push 20
+stack size after push 71
+stack size after push 70
+stack size after push 69
+stack size after push 70
+stack size after push 69
+stack size after push 70
+push 5
+stack size after push 71
+push 15
+stack size after push 72
+push 20
+stack size after push 73
+stack size after push 72
+stack size after push 71
+stack size after push 72
+stack size after push 71
+stack size after push 72
+push 5
+stack size after push 73
+push 15
+stack size after push 74
+push 20
+stack size after push 75
+stack size after push 74
+stack size after push 73
+stack size after push 74
+stack size after push 73
+stack size after push 74
+push 5
+stack size after push 75
+push 15
+stack size after push 76
+push 20
+stack size after push 77
+stack size after push 76
+stack size after push 75
+stack size after push 76
+stack size after push 75
+stack size after push 76
+push 5
+stack size after push 77
+push 15
+stack size after push 78
+push 20
+stack size after push 79
+stack size after push 78
+stack size after push 77
+stack size after push 78
+stack size after push 77
+stack size after push 78
+push 5
+stack size after push 79
+push 15
+stack size after push 80
+push 20
+stack size after push 81
+stack size after push 80
+stack size after push 79
+stack size after push 80
+stack size after push 79
+stack size after push 80
+push 5
+stack size after push 81
+push 15
+stack size after push 82
+push 20
+stack size after push 83
+stack size after push 82
+stack size after push 81
+stack size after push 82
+stack size after push 81
+stack size after push 82
+push 5
+stack size after push 83
+push 15
+stack size after push 84
+push 20
+stack size after push 85
+stack size after push 84
+stack size after push 83
+stack size after push 84
+stack size after push 83
+stack size after push 84
+push 5
+stack size after push 85
+push 15
+stack size after push 86
+push 20
+stack size after push 87
+stack size after push 86
+stack size after push 85
+stack size after push 86
+stack size after push 85
+stack size after push 86
+push 5
+stack size after push 87
+push 15
+stack size after push 88
+push 20
+stack size after push 89
+stack size after push 88
+stack size after push 87
+stack size after push 88
+stack size after push 87
+stack size after push 88
+push 5
+stack size after push 89
+push 15
+stack size after push 90
+push 20
+stack size after push 91
+stack size after push 90
+stack size after push 89
+stack size after push 90
+stack size after push 89
+stack size after push 90
+push 5
+stack size after push 91
+push 15
+stack size after push 92
+push 20
+stack size after push 93
+stack size after push 92
+stack size after push 91
+stack size after push 92
+stack size after push 91
+stack size after push 92
+push 5
+stack size after push 93
+push 15
+stack size after push 94
+push 20
+stack size after push 95
+stack size after push 94
+stack size after push 93
+stack size after push 94
+stack size after push 93
+stack size after push 94
+push 5
+stack size after push 95
+push 15
+stack size after push 96
+push 20
+stack size after push 97
+stack size after push 96
+stack size after push 95
+stack size after push 96
+stack size after push 95
+stack size after push 96
+push 5
+stack size after push 97
+push 15
+stack size after push 98
+push 20
+stack size after push 99
+stack size after push 98
+stack size after push 97
+stack size after push 98
+stack size after push 97
+stack size after push 98
+push 5
+stack size after push 99
+push 15
+stack size after push 100
+push 20
+stack size after push 101
+stack size after push 100
+stack size after push 99
+stack size after push 100
+stack size after push 99
+stack size after push 100
+push 5
+stack size after push 101
+push 15
+stack size after push 102
+push 20
+stack size after push 103
+stack size after push 102
+stack size after push 101
+stack size after push 102
+stack size after push 101
+stack size after push 102
+push 5
+stack size after push 103
+push 15
+stack size after push 104
+push 20
+stack size after push 105
+stack size after push 104
+stack size after push 103
+stack size after push 104
+stack size after push 103
+stack size after push 104
+push 5
+stack size after push 105
+push 15
+stack size after push 106
+push 20
+stack size after push 107
+stack size after push 106
+stack size after push 105
+stack size after push 106
+stack size after push 105
+stack size after push 106
+push 5
+stack size after push 107
+push 15
+stack size after push 108
+push 20
+stack size after push 109
+stack size after push 108
+stack size after push 107
+stack size after push 108
+stack size after push 107
+stack size after push 108
+push 5
+stack size after push 109
+push 15
+stack size after push 110
+push 20
+stack size after push 111
+stack size after push 110
+stack size after push 109
+stack size after push 110
+stack size after push 109
+stack size after push 110
+push 5
+stack size after push 111
+push 15
+stack size after push 112
+push 20
+stack size after push 113
+stack size after push 112
+stack size after push 111
+stack size after push 112
+stack size after push 111
+stack size after push 112
+push 5
+stack size after push 113
+push 15
+stack size after push 114
+push 20
+stack size after push 115
+stack size after push 114
+stack size after push 113
+stack size after push 114
+stack size after push 113
+stack size after push 114
+push 5
+stack size after push 115
+push 15
+stack size after push 116
+push 20
+stack size after push 117
+stack size after push 116
+stack size after push 115
+stack size after push 116
+stack size after push 115
+stack size after push 116
+push 5
+stack size after push 117
+push 15
+stack size after push 118
+push 20
+stack size after push 119
+stack size after push 118
+stack size after push 117
+stack size after push 118
+stack size after push 117
+stack size after push 118
+push 5
+stack size after push 119
+push 15
+stack size after push 120
+push 20
+stack size after push 121
+stack size after push 120
+stack size after push 119
+stack size after push 120
+stack size after push 119
+stack size after push 120
+push 5
+stack size after push 121
+push 15
+stack size after push 122
+push 20
+stack size after push 123
+stack size after push 122
+stack size after push 121
+stack size after push 122
+stack size after push 121
+stack size after push 122
+push 5
+stack size after push 123
+push 15
+stack size after push 124
+push 20
+stack size after push 125
+stack size after push 124
+stack size after push 123
+stack size after push 124
+stack size after push 123
+stack size after push 124
+push 5
+stack size after push 125
+push 15
+stack size after push 126
+push 20
+stack size after push 127
+stack size after push 126
+stack size after push 125
+stack size after push 126
+stack size after push 125
+stack size after push 126
+push 5
+stack size after push 127
+push 15
+stack size after push 128
+push 20
+stack size after push 129
+stack size after push 128
+stack size after push 127
+stack size after push 128
+stack size after push 127
+stack size after push 128
+push 5
+stack size after push 129
+push 15
+stack size after push 130
+push 20
+stack size after push 131
+stack size after push 130
+stack size after push 129
+stack size after push 130
+stack size after push 129
+stack size after push 130
+push 5
+stack size after push 131
+push 15
+stack size after push 132
+push 20
+stack size after push 133
+stack size after push 132
+stack size after push 131
+stack size after push 132
+stack size after push 131
+stack size after push 132
+push 5
+stack size after push 133
+push 15
+stack size after push 134
+push 20
+stack size after push 135
+stack size after push 134
+stack size after push 133
+stack size after push 134
+stack size after push 133
+stack size after push 134
+push 5
+stack size after push 135
+push 15
+stack size after push 136
+push 20
+stack size after push 137
+stack size after push 136
+stack size after push 135
+stack size after push 136
+stack size after push 135
+stack size after push 136
+push 5
+stack size after push 137
+push 15
+stack size after push 138
+push 20
+stack size after push 139
+stack size after push 138
+stack size after push 137
+stack size after push 138
+stack size after push 137
+stack size after push 138
+push 5
+stack size after push 139
+push 15
+stack size after push 140
+push 20
+stack size after push 141
+stack size after push 140
+stack size after push 139
+stack size after push 140
+stack size after push 139
+stack size after push 140
+push 5
+stack size after push 141
+push 15
+stack size after push 142
+push 20
+stack size after push 143
+stack size after push 142
+stack size after push 141
+stack size after push 142
+stack size after push 141
+stack size after push 142
+push 5
+stack size after push 143
+push 15
+stack size after push 144
+push 20
+stack size after push 145
+stack size after push 144
+stack size after push 143
+stack size after push 144
+stack size after push 143
+stack size after push 144
+push 5
+stack size after push 145
+push 15
+stack size after push 146
+push 20
+stack size after push 147
+stack size after push 146
+stack size after push 145
+stack size after push 146
+stack size after push 145
+stack size after push 146
+push 5
+stack size after push 147
+push 15
+stack size after push 148
+push 20
+stack size after push 149
+stack size after push 148
+stack size after push 147
+stack size after push 148
+stack size after push 147
+stack size after push 148
+push 5
+stack size after push 149
+push 15
+stack size after push 150
+push 20
+stack size after push 151
+stack size after push 150
+stack size after push 149
+stack size after push 150
+stack size after push 149
+stack size after push 150
+push 5
+stack size after push 151
+push 15
+stack size after push 152
+push 20
+stack size after push 153
+stack size after push 152
+stack size after push 151
+stack size after push 152
+stack size after push 151
+stack size after push 152
+push 5
+stack size after push 153
+push 15
+stack size after push 154
+push 20
+stack size after push 155
+stack size after push 154
+stack size after push 153
+stack size after push 154
+stack size after push 153
+stack size after push 154
+push 5
+stack size after push 155
+push 15
+stack size after push 156
+push 20
+stack size after push 157
+stack size after push 156
+stack size after push 155
+stack size after push 156
+stack size after push 155
+stack size after push 156
+push 5
+stack size after push 157
+push 15
+stack size after push 158
+push 20
+stack size after push 159
+stack size after push 158
+stack size after push 157
+stack size after push 158
+stack size after push 157
+stack size after push 158
+push 5
+stack size after push 159
+push 15
+stack size after push 160
+push 20
+stack size after push 161
+stack size after push 160
+stack size after push 159
+stack size after push 160
+stack size after push 159
+stack size after push 160
+push 5
+stack size after push 161
+push 15
+stack size after push 162
+push 20
+stack size after push 163
+stack size after push 162
+stack size after push 161
+stack size after push 162
+stack size after push 161
+stack size after push 162
+push 5
+stack size after push 163
+push 15
+stack size after push 164
+push 20
+stack size after push 165
+stack size after push 164
+stack size after push 163
+stack size after push 164
+stack size after push 163
+stack size after push 164
+push 5
+stack size after push 165
+push 15
+stack size after push 166
+push 20
+stack size after push 167
+stack size after push 166
+stack size after push 165
+stack size after push 166
+stack size after push 165
+stack size after push 166
+push 5
+stack size after push 167
+push 15
+stack size after push 168
+push 20
+stack size after push 169
+stack size after push 168
+stack size after push 167
+stack size after push 168
+stack size after push 167
+stack size after push 168
+push 5
+stack size after push 169
+push 15
+stack size after push 170
+push 20
+stack size after push 171
+stack size after push 170
+stack size after push 169
+stack size after push 170
+stack size after push 169
+stack size after push 170
+push 5
+stack size after push 171
+push 15
+stack size after push 172
+push 20
+stack size after push 173
+stack size after push 172
+stack size after push 171
+stack size after push 172
+stack size after push 171
+stack size after push 172
+push 5
+stack size after push 173
+push 15
+stack size after push 174
+push 20
+stack size after push 175
+stack size after push 174
+stack size after push 173
+stack size after push 174
+stack size after push 173
+stack size after push 174
+push 5
+stack size after push 175
+push 15
+stack size after push 176
+push 20
+stack size after push 177
+stack size after push 176
+stack size after push 175
+stack size after push 176
+stack size after push 175
+stack size after push 176
+push 5
+stack size after push 177
+push 15
+stack size after push 178
+push 20
+stack size after push 179
+stack size after push 178
+stack size after push 177
+stack size after push 178
+stack size after push 177
+stack size after push 178
+push 5
+stack size after push 179
+push 15
+stack size after push 180
+push 20
+stack size after push 181
+stack size after push 180
+stack size after push 179
+stack size after push 180
+stack size after push 179
+stack size after push 180
+push 5
+stack size after push 181
+push 15
+stack size after push 182
+push 20
+stack size after push 183
+stack size after push 182
+stack size after push 181
+stack size after push 182
+stack size after push 181
+stack size after push 182
+push 5
+stack size after push 183
+push 15
+stack size after push 184
+push 20
+stack size after push 185
+stack size after push 184
+stack size after push 183
+stack size after push 184
+stack size after push 183
+stack size after push 184
+push 5
+stack size after push 185
+push 15
+stack size after push 186
+push 20
+stack size after push 187
+stack size after push 186
+stack size after push 185
+stack size after push 186
+stack size after push 185
+stack size after push 186
+push 5
+stack size after push 187
+push 15
+stack size after push 188
+push 20
+stack size after push 189
+stack size after push 188
+stack size after push 187
+stack size after push 188
+stack size after push 187
+stack size after push 188
+push 5
+stack size after push 189
+push 15
+stack size after push 190
+push 20
+stack size after push 191
+stack size after push 190
+stack size after push 189
+stack size after push 190
+stack size after push 189
+stack size after push 190
+push 5
+stack size after push 191
+push 15
+stack size after push 192
+push 20
+stack size after push 193
+stack size after push 192
+stack size after push 191
+stack size after push 192
+stack size after push 191
+stack size after push 192
+push 5
+stack size after push 193
+push 15
+stack size after push 194
+push 20
+stack size after push 195
+stack size after push 194
+stack size after push 193
+stack size after push 194
+stack size after push 193
+stack size after push 194
+push 5
+stack size after push 195
+push 15
+stack size after push 196
+push 20
+stack size after push 197
+stack size after push 196
+stack size after push 195
+stack size after push 196
+stack size after push 195
+stack size after push 196
+push 5
+stack size after push 197
+push 15
+stack size after push 198
+push 20
+stack size after push 199
+stack size after push 198
+stack size after push 197
+stack size after push 198
+stack size after push 197
+stack size after push 198
+push 5
+stack size after push 199
+push 15
+stack size after push 200
+push 20
+stack size after push 201
+stack size after push 200
+stack size after push 199
+stack size after push 200
+stack size after push 199
+stack size after push 200
+push 5
+stack size after push 201
+push 15
+stack size after push 202
+push 20
+stack size after push 203
+stack size after push 202
+stack size after push 201
+stack size after push 202
+stack size after push 201
+stack size after push 202
+push 5
+stack size after push 203
+push 15
+stack size after push 204
+push 20
+stack size after push 205
+stack size after push 204
+stack size after push 203
+stack size after push 204
+stack size after push 203
+stack size after push 204
+push 5
+stack size after push 205
+push 15
+stack size after push 206
+push 20
+stack size after push 207
+stack size after push 206
+stack size after push 205
+stack size after push 206
+stack size after push 205
+stack size after push 206
+push 5
+stack size after push 207
+push 15
+stack size after push 208
+push 20
+stack size after push 209
+stack size after push 208
+stack size after push 207
+stack size after push 208
+stack size after push 207
+stack size after push 208
+push 5
+stack size after push 209
+push 15
+stack size after push 210
+push 20
+stack size after push 211
+stack size after push 210
+stack size after push 209
+stack size after push 210
+stack size after push 209
+stack size after push 210
+push 5
+stack size after push 211
+push 15
+stack size after push 212
+push 20
+stack size after push 213
+stack size after push 212
+stack size after push 211
+stack size after push 212
+stack size after push 211
+stack size after push 212
+push 5
+stack size after push 213
+push 15
+stack size after push 214
+push 20
+stack size after push 215
+stack size after push 214
+stack size after push 213
+stack size after push 214
+stack size after push 213
+stack size after push 214
+push 5
+stack size after push 215
+push 15
+stack size after push 216
+push 20
+stack size after push 217
+stack size after push 216
+stack size after push 215
+stack size after push 216
+stack size after push 215
+stack size after push 216
+push 5
+stack size after push 217
+push 15
+stack size after push 218
+push 20
+stack size after push 219
+stack size after push 218
+stack size after push 217
+stack size after push 218
+stack size after push 217
+stack size after push 218
+push 5
+stack size after push 219
+push 15
+stack size after push 220
+push 20
+stack size after push 221
+stack size after push 220
+stack size after push 219
+stack size after push 220
+stack size after push 219
+stack size after push 220
+push 5
+stack size after push 221
+push 15
+stack size after push 222
+push 20
+stack size after push 223
+stack size after push 222
+stack size after push 221
+stack size after push 222
+stack size after push 221
+stack size after push 222
+push 5
+stack size after push 223
+push 15
+stack size after push 224
+push 20
+stack size after push 225
+stack size after push 224
+stack size after push 223
+stack size after push 224
+stack size after push 223
+stack size after push 224
+push 5
+stack size after push 225
+push 15
+stack size after push 226
+push 20
+stack size after push 227
+stack size after push 226
+stack size after push 225
+stack size after push 226
+stack size after push 225
+stack size after push 226
+push 5
+stack size after push 227
+push 15
+stack size after push 228
+push 20
+stack size after push 229
+stack size after push 228
+stack size after push 227
+stack size after push 228
+stack size after push 227
+stack size after push 228
+push 5
+stack size after push 229
+push 15
+stack size after push 230
+push 20
+stack size after push 231
+stack size after push 230
+stack size after push 229
+stack size after push 230
+stack size after push 229
+stack size after push 230
+push 5
+stack size after push 231
+push 15
+stack size after push 232
+push 20
+stack size after push 233
+stack size after push 232
+stack size after push 231
+stack size after push 232
+stack size after push 231
+stack size after push 232
+push 5
+stack size after push 233
+push 15
+stack size after push 234
+push 20
+stack size after push 235
+stack size after push 234
+stack size after push 233
+stack size after push 234
+stack size after push 233
+stack size after push 234
+push 5
+stack size after push 235
+push 15
+stack size after push 236
+push 20
+stack size after push 237
+stack size after push 236
+stack size after push 235
+stack size after push 236
+stack size after push 235
+stack size after push 236
+push 5
+stack size after push 237
+push 15
+stack size after push 238
+push 20
+stack size after push 239
+stack size after push 238
+stack size after push 237
+stack size after push 238
+stack size after push 237
+stack size after push 238
+push 5
+stack size after push 239
+push 15
+stack size after push 240
+push 20
+stack size after push 241
+stack size after push 240
+stack size after push 239
+stack size after push 240
+stack size after push 239
+stack size after push 240
+push 5
+stack size after push 241
+push 15
+stack size after push 242
+push 20
+stack size after push 243
+stack size after push 242
+stack size after push 241
+stack size after push 242
+stack size after push 241
+stack size after push 242
+push 5
+stack size after push 243
+push 15
+stack size after push 244
+push 20
+stack size after push 245
+stack size after push 244
+stack size after push 243
+stack size after push 244
+stack size after push 243
+stack size after push 244
+push 5
+stack size after push 245
+push 15
+stack size after push 246
+push 20
+stack size after push 247
+stack size after push 246
+stack size after push 245
+stack size after push 246
+stack size after push 245
+stack size after push 246
+push 5
+stack size after push 247
+push 15
+stack size after push 248
+push 20
+stack size after push 249
+stack size after push 248
+stack size after push 247
+stack size after push 248
+stack size after push 247
+stack size after push 248
+push 5
+stack size after push 249
+push 15
+stack size after push 250
+push 20
+stack size after push 251
+stack size after push 250
+stack size after push 249
+stack size after push 250
+stack size after push 249
+stack size after push 250
+push 5
+stack size after push 251
+push 15
+stack size after push 252
+push 20
+stack size after push 253
+stack size after push 252
+stack size after push 251
+stack size after push 252
+stack size after push 251
+stack size after push 252
+push 5
+stack size after push 253
+push 15
+stack size after push 254
+push 20
+stack size after push 255
+stack size after push 254
+stack size after push 253
+stack size after push 254
+stack size after push 253
+stack size after push 254
+push 5
+stack size after push 255
+push 15
+stack size after push 256
+push 20
+stack size after push 257
+stack size after push 256
+stack size after push 255
+stack size after push 256
+stack size after push 255
+stack size after push 256
+push 5
+stack size after push 257
+push 15
+stack size after push 258
+push 20
+stack size after push 259
+stack size after push 258
+stack size after push 257
+stack size after push 258
+stack size after push 257
+stack size after push 258
+push 5
+stack size after push 259
+push 15
+stack size after push 260
+push 20
+stack size after push 261
+stack size after push 260
+stack size after push 259
+stack size after push 260
+stack size after push 259
+stack size after push 260
+push 5
+stack size after push 261
+push 15
+stack size after push 262
+push 20
+stack size after push 263
+stack size after push 262
+stack size after push 261
+stack size after push 262
+stack size after push 261
+stack size after push 262
+push 5
+stack size after push 263
+push 15
+stack size after push 264
+push 20
+stack size after push 265
+stack size after push 264
+stack size after push 263
+stack size after push 264
+stack size after push 263
+stack size after push 264
+push 5
+stack size after push 265
+push 15
+stack size after push 266
+push 20
+stack size after push 267
+stack size after push 266
+stack size after push 265
+stack size after push 266
+stack size after push 265
+stack size after push 266
+push 5
+stack size after push 267
+push 15
+stack size after push 268
+push 20
+stack size after push 269
+stack size after push 268
+stack size after push 267
+stack size after push 268
+stack size after push 267
+stack size after push 268
+push 5
+stack size after push 269
+push 15
+stack size after push 270
+push 20
+stack size after push 271
+stack size after push 270
+stack size after push 269
+stack size after push 270
+stack size after push 269
+stack size after push 270
+push 5
+stack size after push 271
+push 15
+stack size after push 272
+push 20
+stack size after push 273
+stack size after push 272
+stack size after push 271
+stack size after push 272
+stack size after push 271
+stack size after push 272
+push 5
+stack size after push 273
+push 15
+stack size after push 274
+push 20
+stack size after push 275
+stack size after push 274
+stack size after push 273
+stack size after push 274
+stack size after push 273
+stack size after push 274
+push 5
+stack size after push 275
+push 15
+stack size after push 276
+push 20
+stack size after push 277
+stack size after push 276
+stack size after push 275
+stack size after push 276
+stack size after push 275
+stack size after push 276
+push 5
+stack size after push 277
+push 15
+stack size after push 278
+push 20
+stack size after push 279
+stack size after push 278
+stack size after push 277
+stack size after push 278
+stack size after push 277
+stack size after push 278
+push 5
+stack size after push 279
+push 15
+stack size after push 280
+push 20
+stack size after push 281
+stack size after push 280
+stack size after push 279
+stack size after push 280
+stack size after push 279
+stack size after push 280
+push 5
+stack size after push 281
+push 15
+stack size after push 282
+push 20
+stack size after push 283
+stack size after push 282
+stack size after push 281
+stack size after push 282
+stack size after push 281
+stack size after push 282
+push 5
+stack size after push 283
+push 15
+stack size after push 284
+push 20
+stack size after push 285
+stack size after push 284
+stack size after push 283
+stack size after push 284
+stack size after push 283
+stack size after push 284
+push 5
+stack size after push 285
+push 15
+stack size after push 286
+push 20
+stack size after push 287
+stack size after push 286
+stack size after push 285
+stack size after push 286
+stack size after push 285
+stack size after push 286
+push 5
+stack size after push 287
+push 15
+stack size after push 288
+push 20
+stack size after push 289
+stack size after push 288
+stack size after push 287
+stack size after push 288
+stack size after push 287
+stack size after push 288
+push 5
+stack size after push 289
+push 15
+stack size after push 290
+push 20
+stack size after push 291
+stack size after push 290
+stack size after push 289
+stack size after push 290
+stack size after push 289
+stack size after push 290
+push 5
+stack size after push 291
+push 15
+stack size after push 292
+push 20
+stack size after push 293
+stack size after push 292
+stack size after push 291
+stack size after push 292
+stack size after push 291
+stack size after push 292
+push 5
+stack size after push 293
+push 15
+stack size after push 294
+push 20
+stack size after push 295
+stack size after push 294
+stack size after push 293
+stack size after push 294
+stack size after push 293
+stack size after push 294
+push 5
+stack size after push 295
+push 15
+stack size after push 296
+push 20
+stack size after push 297
+stack size after push 296
+stack size after push 295
+stack size after push 296
+stack size after push 295
+stack size after push 296
+push 5
+stack size after push 297
+push 15
+stack size after push 298
+push 20
+stack size after push 299
+stack size after push 298
+stack size after push 297
+stack size after push 298
+stack size after push 297
+stack size after push 298
+push 5
+stack size after push 299
+push 15
+stack size after push 300
+push 20
+stack size after push 301
+stack size after push 300
+stack size after push 299
+stack size after push 300
+stack size after push 299
+stack size after push 300
+push 5
+stack size after push 301
+push 15
+stack size after push 302
+push 20
+stack size after push 303
+stack size after push 302
+stack size after push 301
+stack size after push 302
+stack size after push 301
+stack size after push 302
+push 5
+stack size after push 303
+push 15
+stack size after push 304
+push 20
+stack size after push 305
+stack size after push 304
+stack size after push 303
+stack size after push 304
+stack size after push 303
+stack size after push 304
+push 5
+stack size after push 305
+push 15
+stack size after push 306
+push 20
+stack size after push 307
+stack size after push 306
+stack size after push 305
+stack size after push 306
+stack size after push 305
+stack size after push 306
+push 5
+stack size after push 307
+push 15
+stack size after push 308
+push 20
+stack size after push 309
+stack size after push 308
+stack size after push 307
+stack size after push 308
+stack size after push 307
+stack size after push 308
+push 5
+stack size after push 309
+push 15
+stack size after push 310
+push 20
+stack size after push 311
+stack size after push 310
+stack size after push 309
+stack size after push 310
+stack size after push 309
+stack size after push 310
+push 5
+stack size after push 311
+push 15
+stack size after push 312
+push 20
+stack size after push 313
+stack size after push 312
+stack size after push 311
+stack size after push 312
+stack size after push 311
+stack size after push 312
+push 5
+stack size after push 313
+push 15
+stack size after push 314
+push 20
+stack size after push 315
+stack size after push 314
+stack size after push 313
+stack size after push 314
+stack size after push 313
+stack size after push 314
+push 5
+stack size after push 315
+push 15
+stack size after push 316
+push 20
+stack size after push 317
+stack size after push 316
+stack size after push 315
+stack size after push 316
+stack size after push 315
+stack size after push 316
+push 5
+stack size after push 317
+push 15
+stack size after push 318
+push 20
+stack size after push 319
+stack size after push 318
+stack size after push 317
+stack size after push 318
+stack size after push 317
+stack size after push 318
+push 5
+stack size after push 319
+push 15
+stack size after push 320
+push 20
+stack size after push 321
+stack size after push 320
+stack size after push 319
+stack size after push 320
+stack size after push 319
+stack size after push 320
+push 5
+stack size after push 321
+push 15
+stack size after push 322
+push 20
+stack size after push 323
+stack size after push 322
+stack size after push 321
+stack size after push 322
+stack size after push 321
+stack size after push 322
+push 5
+stack size after push 323
+push 15
+stack size after push 324
+push 20
+stack size after push 325
+stack size after push 324
+stack size after push 323
+stack size after push 324
+stack size after push 323
+stack size after push 324
+push 5
+stack size after push 325
+push 15
+stack size after push 326
+push 20
+stack size after push 327
+stack size after push 326
+stack size after push 325
+stack size after push 326
+stack size after push 325
+stack size after push 326
+push 5
+stack size after push 327
+push 15
+stack size after push 328
+push 20
+stack size after push 329
+stack size after push 328
+stack size after push 327
+stack size after push 328
+stack size after push 327
+stack size after push 328
+push 5
+stack size after push 329
+push 15
+stack size after push 330
+push 20
+stack size after push 331
+stack size after push 330
+stack size after push 329
+stack size after push 330
+stack size after push 329
+stack size after push 330
+push 5
+stack size after push 331
+push 15
+stack size after push 332
+push 20
+stack size after push 333
+stack size after push 332
+stack size after push 331
+stack size after push 332
+stack size after push 331
+stack size after push 332
+push 5
+stack size after push 333
+push 15
+stack size after push 334
+push 20
+stack size after push 335
+stack size after push 334
+stack size after push 333
+stack size after push 334
+stack size after push 333
+stack size after push 334
+push 5
+stack size after push 335
+push 15
+stack size after push 336
+push 20
+stack size after push 337
+stack size after push 336
+stack size after push 335
+stack size after push 336
+stack size after push 335
+stack size after push 336
+push 5
+stack size after push 337
+push 15
+stack size after push 338
+push 20
+stack size after push 339
+stack size after push 338
+stack size after push 337
+stack size after push 338
+stack size after push 337
+stack size after push 338
+push 5
+stack size after push 339
+push 15
+stack size after push 340
+push 20
+stack size after push 341
+stack size after push 340
+stack size after push 339
+stack size after push 340
+stack size after push 339
+stack size after push 340
+push 5
+stack size after push 341
+push 15
+stack size after push 342
+push 20
+stack size after push 343
+stack size after push 342
+stack size after push 341
+stack size after push 342
+stack size after push 341
+stack size after push 342
+push 5
+stack size after push 343
+push 15
+stack size after push 344
+push 20
+stack size after push 345
+stack size after push 344
+stack size after push 343
+stack size after push 344
+stack size after push 343
+stack size after push 344
+push 5
+stack size after push 345
+push 15
+stack size after push 346
+push 20
+stack size after push 347
+stack size after push 346
+stack size after push 345
+stack size after push 346
+stack size after push 345
+stack size after push 346
+push 5
+stack size after push 347
+push 15
+stack size after push 348
+push 20
+stack size after push 349
+stack size after push 348
+stack size after push 347
+stack size after push 348
+stack size after push 347
+stack size after push 348
+push 5
+stack size after push 349
+push 15
+stack size after push 350
+push 20
+stack size after push 351
+stack size after push 350
+stack size after push 349
+stack size after push 350
+stack size after push 349
+stack size after push 350
+push 5
+stack size after push 351
+push 15
+stack size after push 352
+push 20
+stack size after push 353
+stack size after push 352
+stack size after push 351
+stack size after push 352
+stack size after push 351
+stack size after push 352
+push 5
+stack size after push 353
+push 15
+stack size after push 354
+push 20
+stack size after push 355
+stack size after push 354
+stack size after push 353
+stack size after push 354
+stack size after push 353
+stack size after push 354
+push 5
+stack size after push 355
+push 15
+stack size after push 356
+push 20
+stack size after push 357
+stack size after push 356
+stack size after push 355
+stack size after push 356
+stack size after push 355
+stack size after push 356
+push 5
+stack size after push 357
+push 15
+stack size after push 358
+push 20
+stack size after push 359
+stack size after push 358
+stack size after push 357
+stack size after push 358
+stack size after push 357
+stack size after push 358
+push 5
+stack size after push 359
+push 15
+stack size after push 360
+push 20
+stack size after push 361
+stack size after push 360
+stack size after push 359
+stack size after push 360
+stack size after push 359
+stack size after push 360
+push 5
+stack size after push 361
+push 15
+stack size after push 362
+push 20
+stack size after push 363
+stack size after push 362
+stack size after push 361
+stack size after push 362
+stack size after push 361
+stack size after push 362
+push 5
+stack size after push 363
+push 15
+stack size after push 364
+push 20
+stack size after push 365
+stack size after push 364
+stack size after push 363
+stack size after push 364
+stack size after push 363
+stack size after push 364
+push 5
+stack size after push 365
+push 15
+stack size after push 366
+push 20
+stack size after push 367
+stack size after push 366
+stack size after push 365
+stack size after push 366
+stack size after push 365
+stack size after push 366
+push 5
+stack size after push 367
+push 15
+stack size after push 368
+push 20
+stack size after push 369
+stack size after push 368
+stack size after push 367
+stack size after push 368
+stack size after push 367
+stack size after push 368
+push 5
+stack size after push 369
+push 15
+stack size after push 370
+push 20
+stack size after push 371
+stack size after push 370
+stack size after push 369
+stack size after push 370
+stack size after push 369
+stack size after push 370
+push 5
+stack size after push 371
+push 15
+stack size after push 372
+push 20
+stack size after push 373
+stack size after push 372
+stack size after push 371
+stack size after push 372
+stack size after push 371
+stack size after push 372
+push 5
+stack size after push 373
+push 15
+stack size after push 374
+push 20
+stack size after push 375
+stack size after push 374
+stack size after push 373
+stack size after push 374
+stack size after push 373
+stack size after push 374
+push 5
+stack size after push 375
+push 15
+stack size after push 376
+push 20
+stack size after push 377
+stack size after push 376
+stack size after push 375
+stack size after push 376
+stack size after push 375
+stack size after push 376
+push 5
+stack size after push 377
+push 15
+stack size after push 378
+push 20
+stack size after push 379
+stack size after push 378
+stack size after push 377
+stack size after push 378
+stack size after push 377
+stack size after push 378
+push 5
+stack size after push 379
+push 15
+stack size after push 380
+push 20
+stack size after push 381
+stack size after push 380
+stack size after push 379
+stack size after push 380
+stack size after push 379
+stack size after push 380
+push 5
+stack size after push 381
+push 15
+stack size after push 382
+push 20
+stack size after push 383
+stack size after push 382
+stack size after push 381
+stack size after push 382
+stack size after push 381
+stack size after push 382
+push 5
+stack size after push 383
+push 15
+stack size after push 384
+push 20
+stack size after push 385
+stack size after push 384
+stack size after push 383
+stack size after push 384
+stack size after push 383
+stack size after push 384
+push 5
+stack size after push 385
+push 15
+stack size after push 386
+push 20
+stack size after push 387
+stack size after push 386
+stack size after push 385
+stack size after push 386
+stack size after push 385
+stack size after push 386
+push 5
+stack size after push 387
+push 15
+stack size after push 388
+push 20
+stack size after push 389
+stack size after push 388
+stack size after push 387
+stack size after push 388
+stack size after push 387
+stack size after push 388
+push 5
+stack size after push 389
+push 15
+stack size after push 390
+push 20
+stack size after push 391
+stack size after push 390
+stack size after push 389
+stack size after push 390
+stack size after push 389
+stack size after push 390
+push 5
+stack size after push 391
+push 15
+stack size after push 392
+push 20
+stack size after push 393
+stack size after push 392
+stack size after push 391
+stack size after push 392
+stack size after push 391
+stack size after push 392
+push 5
+stack size after push 393
+push 15
+stack size after push 394
+push 20
+stack size after push 395
+stack size after push 394
+stack size after push 393
+stack size after push 394
+stack size after push 393
+stack size after push 394
+push 5
+stack size after push 395
+push 15
+stack size after push 396
+push 20
+stack size after push 397
+stack size after push 396
+stack size after push 395
+stack size after push 396
+stack size after push 395
+stack size after push 396
+push 5
+stack size after push 397
+push 15
+stack size after push 398
+push 20
+stack size after push 399
+stack size after push 398
+stack size after push 397
+stack size after push 398
+stack size after push 397
+stack size after push 398
+push 5
+stack size after push 399
+push 15
+stack size after push 400
+push 20
+stack size after push 401
+stack size after push 400
+stack size after push 399
+stack size after push 400
+stack size after push 399
+stack size after push 400
+push 5
+stack size after push 401
+push 15
+stack size after push 402
+push 20
+stack size after push 403
+stack size after push 402
+stack size after push 401
+stack size after push 402
+stack size after push 401
+stack size after push 402
+push 5
+stack size after push 403
+push 15
+stack size after push 404
+push 20
+stack size after push 405
+stack size after push 404
+stack size after push 403
+stack size after push 404
+stack size after push 403
+stack size after push 404
+push 5
+stack size after push 405
+push 15
+stack size after push 406
+push 20
+stack size after push 407
+stack size after push 406
+stack size after push 405
+stack size after push 406
+stack size after push 405
+stack size after push 406
+push 5
+stack size after push 407
+push 15
+stack size after push 408
+push 20
+stack size after push 409
+stack size after push 408
+stack size after push 407
+stack size after push 408
+stack size after push 407
+stack size after push 408
+push 5
+stack size after push 409
+push 15
+stack size after push 410
+push 20
+stack size after push 411
+stack size after push 410
+stack size after push 409
+stack size after push 410
+stack size after push 409
+stack size after push 410
+push 5
+stack size after push 411
+push 15
+stack size after push 412
+push 20
+stack size after push 413
+stack size after push 412
+stack size after push 411
+stack size after push 412
+stack size after push 411
+stack size after push 412
+push 5
+stack size after push 413
+push 15
+stack size after push 414
+push 20
+stack size after push 415
+stack size after push 414
+stack size after push 413
+stack size after push 414
+stack size after push 413
+stack size after push 414
+push 5
+stack size after push 415
+push 15
+stack size after push 416
+push 20
+stack size after push 417
+stack size after push 416
+stack size after push 415
+stack size after push 416
+stack size after push 415
+stack size after push 416
+push 5
+stack size after push 417
+push 15
+stack size after push 418
+push 20
+stack size after push 419
+stack size after push 418
+stack size after push 417
+stack size after push 418
+stack size after push 417
+stack size after push 418
+push 5
+stack size after push 419
+push 15
+stack size after push 420
+push 20
+stack size after push 421
+stack size after push 420
+stack size after push 419
+stack size after push 420
+stack size after push 419
+stack size after push 420
+push 5
+stack size after push 421
+push 15
+stack size after push 422
+push 20
+stack size after push 423
+stack size after push 422
+stack size after push 421
+stack size after push 422
+stack size after push 421
+stack size after push 422
+push 5
+stack size after push 423
+push 15
+stack size after push 424
+push 20
+stack size after push 425
+stack size after push 424
+stack size after push 423
+stack size after push 424
+stack size after push 423
+stack size after push 424
+push 5
+stack size after push 425
+push 15
+stack size after push 426
+push 20
+stack size after push 427
+stack size after push 426
+stack size after push 425
+stack size after push 426
+stack size after push 425
+stack size after push 426
+push 5
+stack size after push 427
+push 15
+stack size after push 428
+push 20
+stack size after push 429
+stack size after push 428
+stack size after push 427
+stack size after push 428
+stack size after push 427
+stack size after push 428
+push 5
+stack size after push 429
+push 15
+stack size after push 430
+push 20
+stack size after push 431
+stack size after push 430
+stack size after push 429
+stack size after push 430
+stack size after push 429
+stack size after push 430
+push 5
+stack size after push 431
+push 15
+stack size after push 432
+push 20
+stack size after push 433
+stack size after push 432
+stack size after push 431
+stack size after push 432
+stack size after push 431
+stack size after push 432
+push 5
+stack size after push 433
+push 15
+stack size after push 434
+push 20
+stack size after push 435
+stack size after push 434
+stack size after push 433
+stack size after push 434
+stack size after push 433
+stack size after push 434
+push 5
+stack size after push 435
+push 15
+stack size after push 436
+push 20
+stack size after push 437
+stack size after push 436
+stack size after push 435
+stack size after push 436
+stack size after push 435
+stack size after push 436
+push 5
+stack size after push 437
+push 15
+stack size after push 438
+push 20
+stack size after push 439
+stack size after push 438
+stack size after push 437
+stack size after push 438
+stack size after push 437
+stack size after push 438
+push 5
+stack size after push 439
+push 15
+stack size after push 440
+push 20
+stack size after push 441
+stack size after push 440
+stack size after push 439
+stack size after push 440
+stack size after push 439
+stack size after push 440
+push 5
+stack size after push 441
+push 15
+stack size after push 442
+push 20
+stack size after push 443
+stack size after push 442
+stack size after push 441
+stack size after push 442
+stack size after push 441
+stack size after push 442
+push 5
+stack size after push 443
+push 15
+stack size after push 444
+push 20
+stack size after push 445
+stack size after push 444
+stack size after push 443
+stack size after push 444
+stack size after push 443
+stack size after push 444
+push 5
+stack size after push 445
+push 15
+stack size after push 446
+push 20
+stack size after push 447
+stack size after push 446
+stack size after push 445
+stack size after push 446
+stack size after push 445
+stack size after push 446
+push 5
+stack size after push 447
+push 15
+stack size after push 448
+push 20
+stack size after push 449
+stack size after push 448
+stack size after push 447
+stack size after push 448
+stack size after push 447
+stack size after push 448
+push 5
+stack size after push 449
+push 15
+stack size after push 450
+push 20
+stack size after push 451
+stack size after push 450
+stack size after push 449
+stack size after push 450
+stack size after push 449
+stack size after push 450
+push 5
+stack size after push 451
+push 15
+stack size after push 452
+push 20
+stack size after push 453
+stack size after push 452
+stack size after push 451
+stack size after push 452
+stack size after push 451
+stack size after push 452
+push 5
+stack size after push 453
+push 15
+stack size after push 454
+push 20
+stack size after push 455
+stack size after push 454
+stack size after push 453
+stack size after push 454
+stack size after push 453
+stack size after push 454
+push 5
+stack size after push 455
+push 15
+stack size after push 456
+push 20
+stack size after push 457
+stack size after push 456
+stack size after push 455
+stack size after push 456
+stack size after push 455
+stack size after push 456
+push 5
+stack size after push 457
+push 15
+stack size after push 458
+push 20
+stack size after push 459
+stack size after push 458
+stack size after push 457
+stack size after push 458
+stack size after push 457
+stack size after push 458
+push 5
+stack size after push 459
+push 15
+stack size after push 460
+push 20
+stack size after push 461
+stack size after push 460
+stack size after push 459
+stack size after push 460
+stack size after push 459
+stack size after push 460
+push 5
+stack size after push 461
+push 15
+stack size after push 462
+push 20
+stack size after push 463
+stack size after push 462
+stack size after push 461
+stack size after push 462
+stack size after push 461
+stack size after push 462
+push 5
+stack size after push 463
+push 15
+stack size after push 464
+push 20
+stack size after push 465
+stack size after push 464
+stack size after push 463
+stack size after push 464
+stack size after push 463
+stack size after push 464
+push 5
+stack size after push 465
+push 15
+stack size after push 466
+push 20
+stack size after push 467
+stack size after push 466
+stack size after push 465
+stack size after push 466
+stack size after push 465
+stack size after push 466
+push 5
+stack size after push 467
+push 15
+stack size after push 468
+push 20
+stack size after push 469
+stack size after push 468
+stack size after push 467
+stack size after push 468
+stack size after push 467
+stack size after push 468
+push 5
+stack size after push 469
+push 15
+stack size after push 470
+push 20
+stack size after push 471
+stack size after push 470
+stack size after push 469
+stack size after push 470
+stack size after push 469
+stack size after push 470
+push 5
+stack size after push 471
+push 15
+stack size after push 472
+push 20
+stack size after push 473
+stack size after push 472
+stack size after push 471
+stack size after push 472
+stack size after push 471
+stack size after push 472
+push 5
+stack size after push 473
+push 15
+stack size after push 474
+push 20
+stack size after push 475
+stack size after push 474
+stack size after push 473
+stack size after push 474
+stack size after push 473
+stack size after push 474
+push 5
+stack size after push 475
+push 15
+stack size after push 476
+push 20
+stack size after push 477
+stack size after push 476
+stack size after push 475
+stack size after push 476
+stack size after push 475
+stack size after push 476
+push 5
+stack size after push 477
+push 15
+stack size after push 478
+push 20
+stack size after push 479
+stack size after push 478
+stack size after push 477
+stack size after push 478
+stack size after push 477
+stack size after push 478
+push 5
+stack size after push 479
+push 15
+stack size after push 480
+push 20
+stack size after push 481
+stack size after push 480
+stack size after push 479
+stack size after push 480
+stack size after push 479
+stack size after push 480
+push 5
+stack size after push 481
+push 15
+stack size after push 482
+push 20
+stack size after push 483
+stack size after push 482
+stack size after push 481
+stack size after push 482
+stack size after push 481
+stack size after push 482
+push 5
+stack size after push 483
+push 15
+stack size after push 484
+push 20
+stack size after push 485
+stack size after push 484
+stack size after push 483
+stack size after push 484
+stack size after push 483
+stack size after push 484
+push 5
+stack size after push 485
+push 15
+stack size after push 486
+push 20
+stack size after push 487
+stack size after push 486
+stack size after push 485
+stack size after push 486
+stack size after push 485
+stack size after push 486
+push 5
+stack size after push 487
+push 15
+stack size after push 488
+push 20
+stack size after push 489
+stack size after push 488
+stack size after push 487
+stack size after push 488
+stack size after push 487
+stack size after push 488
+push 5
+stack size after push 489
+push 15
+stack size after push 490
+push 20
+stack size after push 491
+stack size after push 490
+stack size after push 489
+stack size after push 490
+stack size after push 489
+stack size after push 490
+push 5
+stack size after push 491
+push 15
+stack size after push 492
+push 20
+stack size after push 493
+stack size after push 492
+stack size after push 491
+stack size after push 492
+stack size after push 491
+stack size after push 492
+push 5
+stack size after push 493
+push 15
+stack size after push 494
+push 20
+stack size after push 495
+stack size after push 494
+stack size after push 493
+stack size after push 494
+stack size after push 493
+stack size after push 494
+push 5
+stack size after push 495
+push 15
+stack size after push 496
+push 20
+stack size after push 497
+stack size after push 496
+stack size after push 495
+stack size after push 496
+stack size after push 495
+stack size after push 496
+push 5
+stack size after push 497
+push 15
+stack size after push 498
+push 20
+stack size after push 499
+stack size after push 498
+stack size after push 497
+stack size after push 498
+stack size after push 497
+stack size after push 498
+push 5
+stack size after push 499
+push 15
+stack size after push 500
+push 20
+stack size after push 501
+stack size after push 500
+stack size after push 499
+stack size after push 500
+stack size after push 499
+stack size after push 500
+push 5
+stack size after push 501
+push 15
+stack size after push 502
+push 20
+stack size after push 503
+stack size after push 502
+stack size after push 501
+stack size after push 502
+stack size after push 501
+stack size after push 502
+push 5
+stack size after push 503
+push 15
+stack size after push 504
+push 20
+stack size after push 505
+stack size after push 504
+stack size after push 503
+stack size after push 504
+stack size after push 503
+stack size after push 504
+push 5
+stack size after push 505
+push 15
+stack size after push 506
+push 20
+stack size after push 507
+stack size after push 506
+stack size after push 505
+stack size after push 506
+stack size after push 505
+stack size after push 506
+push 5
+stack size after push 507
+push 15
+stack size after push 508
+push 20
+stack size after push 509
+stack size after push 508
+stack size after push 507
+stack size after push 508
+stack size after push 507
+stack size after push 508
+push 5
+stack size after push 509
+push 15
+stack size after push 510
+push 20
+stack size after push 511
+stack size after push 510
+stack size after push 509
+stack size after push 510
+stack size after push 509
+stack size after push 510
+push 5
+stack size after push 511
+push 15
+stack size after push 512
+push 20
+stack size after push 513
+stack size after push 512
+stack size after push 511
+stack size after push 512
+stack size after push 511
+stack size after push 512
+push 5
+stack size after push 513
+push 15
+stack size after push 514
+push 20
+stack size after push 515
+stack size after push 514
+stack size after push 513
+stack size after push 514
+stack size after push 513
+stack size after push 514
+push 5
+stack size after push 515
+push 15
+stack size after push 516
+push 20
+stack size after push 517
+stack size after push 516
+stack size after push 515
+stack size after push 516
+stack size after push 515
+stack size after push 516
+push 5
+stack size after push 517
+push 15
+stack size after push 518
+push 20
+stack size after push 519
+stack size after push 518
+stack size after push 517
+stack size after push 518
+stack size after push 517
+stack size after push 518
+push 5
+stack size after push 519
+push 15
+stack size after push 520
+push 20
+stack size after push 521
+stack size after push 520
+stack size after push 519
+stack size after push 520
+stack size after push 519
+stack size after push 520
+push 5
+stack size after push 521
+push 15
+stack size after push 522
+push 20
+stack size after push 523
+stack size after push 522
+stack size after push 521
+stack size after push 522
+stack size after push 521
+stack size after push 522
+push 5
+stack size after push 523
+push 15
+stack size after push 524
+push 20
+stack size after push 525
+stack size after push 524
+stack size after push 523
+stack size after push 524
+stack size after push 523
+stack size after push 524
+push 5
+stack size after push 525
+push 15
+stack size after push 526
+push 20
+stack size after push 527
+stack size after push 526
+stack size after push 525
+stack size after push 526
+stack size after push 525
+stack size after push 526
+push 5
+stack size after push 527
+push 15
+stack size after push 528
+push 20
+stack size after push 529
+stack size after push 528
+stack size after push 527
+stack size after push 528
+stack size after push 527
+stack size after push 528
+push 5
+stack size after push 529
+push 15
+stack size after push 530
+push 20
+stack size after push 531
+stack size after push 530
+stack size after push 529
+stack size after push 530
+stack size after push 529
+stack size after push 530
+push 5
+stack size after push 531
+push 15
+stack size after push 532
+push 20
+stack size after push 533
+stack size after push 532
+stack size after push 531
+stack size after push 532
+stack size after push 531
+stack size after push 532
+push 5
+stack size after push 533
+push 15
+stack size after push 534
+push 20
+stack size after push 535
+stack size after push 534
+stack size after push 533
+stack size after push 534
+stack size after push 533
+stack size after push 534
+push 5
+stack size after push 535
+push 15
+stack size after push 536
+push 20
+stack size after push 537
+stack size after push 536
+stack size after push 535
+stack size after push 536
+stack size after push 535
+stack size after push 536
+push 5
+stack size after push 537
+push 15
+stack size after push 538
+push 20
+stack size after push 539
+stack size after push 538
+stack size after push 537
+stack size after push 538
+stack size after push 537
+stack size after push 538
+push 5
+stack size after push 539
+push 15
+stack size after push 540
+push 20
+stack size after push 541
+stack size after push 540
+stack size after push 539
+stack size after push 540
+stack size after push 539
+stack size after push 540
+push 5
+stack size after push 541
+push 15
+stack size after push 542
+push 20
+stack size after push 543
+stack size after push 542
+stack size after push 541
+stack size after push 542
+stack size after push 541
+stack size after push 542
+push 5
+stack size after push 543
+push 15
+stack size after push 544
+push 20
+stack size after push 545
+stack size after push 544
+stack size after push 543
+stack size after push 544
+stack size after push 543
+stack size after push 544
+push 5
+stack size after push 545
+push 15
+stack size after push 546
+push 20
+stack size after push 547
+stack size after push 546
+stack size after push 545
+stack size after push 546
+stack size after push 545
+stack size after push 546
+push 5
+stack size after push 547
+push 15
+stack size after push 548
+push 20
+stack size after push 549
+stack size after push 548
+stack size after push 547
+stack size after push 548
+stack size after push 547
+stack size after push 548
+push 5
+stack size after push 549
+push 15
+stack size after push 550
+push 20
+stack size after push 551
+stack size after push 550
+stack size after push 549
+stack size after push 550
+stack size after push 549
+stack size after push 550
+push 5
+stack size after push 551
+push 15
+stack size after push 552
+push 20
+stack size after push 553
+stack size after push 552
+stack size after push 551
+stack size after push 552
+stack size after push 551
+stack size after push 552
+push 5
+stack size after push 553
+push 15
+stack size after push 554
+push 20
+stack size after push 555
+stack size after push 554
+stack size after push 553
+stack size after push 554
+stack size after push 553
+stack size after push 554
+push 5
+stack size after push 555
+push 15
+stack size after push 556
+push 20
+stack size after push 557
+stack size after push 556
+stack size after push 555
+stack size after push 556
+stack size after push 555
+stack size after push 556
+push 5
+stack size after push 557
+push 15
+stack size after push 558
+push 20
+stack size after push 559
+stack size after push 558
+stack size after push 557
+stack size after push 558
+stack size after push 557
+stack size after push 558
+push 5
+stack size after push 559
+push 15
+stack size after push 560
+push 20
+stack size after push 561
+stack size after push 560
+stack size after push 559
+stack size after push 560
+stack size after push 559
+stack size after push 560
+push 5
+stack size after push 561
+push 15
+stack size after push 562
+push 20
+stack size after push 563
+stack size after push 562
+stack size after push 561
+stack size after push 562
+stack size after push 561
+stack size after push 562
+push 5
+stack size after push 563
+push 15
+stack size after push 564
+push 20
+stack size after push 565
+stack size after push 564
+stack size after push 563
+stack size after push 564
+stack size after push 563
+stack size after push 564
+push 5
+stack size after push 565
+push 15
+stack size after push 566
+push 20
+stack size after push 567
+stack size after push 566
+stack size after push 565
+stack size after push 566
+stack size after push 565
+stack size after push 566
+push 5
+stack size after push 567
+push 15
+stack size after push 568
+push 20
+stack size after push 569
+stack size after push 568
+stack size after push 567
+stack size after push 568
+stack size after push 567
+stack size after push 568
+push 5
+stack size after push 569
+push 15
+stack size after push 570
+push 20
+stack size after push 571
+stack size after push 570
+stack size after push 569
+stack size after push 570
+stack size after push 569
+stack size after push 570
+push 5
+stack size after push 571
+push 15
+stack size after push 572
+push 20
+stack size after push 573
+stack size after push 572
+stack size after push 571
+stack size after push 572
+stack size after push 571
+stack size after push 572
+push 5
+stack size after push 573
+push 15
+stack size after push 574
+push 20
+stack size after push 575
+stack size after push 574
+stack size after push 573
+stack size after push 574
+stack size after push 573
+stack size after push 574
+push 5
+stack size after push 575
+push 15
+stack size after push 576
+push 20
+stack size after push 577
+stack size after push 576
+stack size after push 575
+stack size after push 576
+stack size after push 575
+stack size after push 576
+push 5
+stack size after push 577
+push 15
+stack size after push 578
+push 20
+stack size after push 579
+stack size after push 578
+stack size after push 577
+stack size after push 578
+stack size after push 577
+stack size after push 578
+push 5
+stack size after push 579
+push 15
+stack size after push 580
+push 20
+stack size after push 581
+stack size after push 580
+stack size after push 579
+stack size after push 580
+stack size after push 579
+stack size after push 580
+push 5
+stack size after push 581
+push 15
+stack size after push 582
+push 20
+stack size after push 583
+stack size after push 582
+stack size after push 581
+stack size after push 582
+stack size after push 581
+stack size after push 582
+push 5
+stack size after push 583
+push 15
+stack size after push 584
+push 20
+stack size after push 585
+stack size after push 584
+stack size after push 583
+stack size after push 584
+stack size after push 583
+stack size after push 584
+push 5
+stack size after push 585
+push 15
+stack size after push 586
+push 20
+stack size after push 587
+stack size after push 586
+stack size after push 585
+stack size after push 586
+stack size after push 585
+stack size after push 586
+push 5
+stack size after push 587
+push 15
+stack size after push 588
+push 20
+stack size after push 589
+stack size after push 588
+stack size after push 587
+stack size after push 588
+stack size after push 587
+stack size after push 588
+push 5
+stack size after push 589
+push 15
+stack size after push 590
+push 20
+stack size after push 591
+stack size after push 590
+stack size after push 589
+stack size after push 590
+stack size after push 589
+stack size after push 590
+push 5
+stack size after push 591
+push 15
+stack size after push 592
+push 20
+stack size after push 593
+stack size after push 592
+stack size after push 591
+stack size after push 592
+stack size after push 591
+stack size after push 592
+push 5
+stack size after push 593
+push 15
+stack size after push 594
+push 20
+stack size after push 595
+stack size after push 594
+stack size after push 593
+stack size after push 594
+stack size after push 593
+stack size after push 594
+push 5
+stack size after push 595
+push 15
+stack size after push 596
+push 20
+stack size after push 597
+stack size after push 596
+stack size after push 595
+stack size after push 596
+stack size after push 595
+stack size after push 596
+push 5
+stack size after push 597
+push 15
+stack size after push 598
+push 20
+stack size after push 599
+stack size after push 598
+stack size after push 597
+stack size after push 598
+stack size after push 597
+stack size after push 598
+push 5
+stack size after push 599
+push 15
+stack size after push 600
+push 20
+stack size after push 601
+stack size after push 600
+stack size after push 599
+stack size after push 600
+stack size after push 599
+stack size after push 600
+push 5
+stack size after push 601
+push 15
+stack size after push 602
+push 20
+stack size after push 603
+stack size after push 602
+stack size after push 601
+stack size after push 602
+stack size after push 601
+stack size after push 602
+push 5
+stack size after push 603
+push 15
+stack size after push 604
+push 20
+stack size after push 605
+stack size after push 604
+stack size after push 603
+stack size after push 604
+stack size after push 603
+stack size after push 604
+push 5
+stack size after push 605
+push 15
+stack size after push 606
+push 20
+stack size after push 607
+stack size after push 606
+stack size after push 605
+stack size after push 606
+stack size after push 605
+stack size after push 606
+push 5
+stack size after push 607
+push 15
+stack size after push 608
+push 20
+stack size after push 609
+stack size after push 608
+stack size after push 607
+stack size after push 608
+stack size after push 607
+stack size after push 608
+push 5
+stack size after push 609
+push 15
+stack size after push 610
+push 20
+stack size after push 611
+stack size after push 610
+stack size after push 609
+stack size after push 610
+stack size after push 609
+stack size after push 610
+push 5
+stack size after push 611
+push 15
+stack size after push 612
+push 20
+stack size after push 613
+stack size after push 612
+stack size after push 611
+stack size after push 612
+stack size after push 611
+stack size after push 612
+push 5
+stack size after push 613
+push 15
+stack size after push 614
+push 20
+stack size after push 615
+stack size after push 614
+stack size after push 613
+stack size after push 614
+stack size after push 613
+stack size after push 614
+push 5
+stack size after push 615
+push 15
+stack size after push 616
+push 20
+stack size after push 617
+stack size after push 616
+stack size after push 615
+stack size after push 616
+stack size after push 615
+stack size after push 616
+push 5
+stack size after push 617
+push 15
+stack size after push 618
+push 20
+stack size after push 619
+stack size after push 618
+stack size after push 617
+stack size after push 618
+stack size after push 617
+stack size after push 618
+push 5
+stack size after push 619
+push 15
+stack size after push 620
+push 20
+stack size after push 621
+stack size after push 620
+stack size after push 619
+stack size after push 620
+stack size after push 619
+stack size after push 620
+push 5
+stack size after push 621
+push 15
+stack size after push 622
+push 20
+stack size after push 623
+stack size after push 622
+stack size after push 621
+stack size after push 622
+stack size after push 621
+stack size after push 622
+push 5
+stack size after push 623
+push 15
+stack size after push 624
+push 20
+stack size after push 625
+stack size after push 624
+stack size after push 623
+stack size after push 624
+stack size after push 623
+stack size after push 624
+push 5
+stack size after push 625
+push 15
+stack size after push 626
+push 20
+stack size after push 627
+stack size after push 626
+stack size after push 625
+stack size after push 626
+stack size after push 625
+stack size after push 626
+push 5
+stack size after push 627
+push 15
+stack size after push 628
+push 20
+stack size after push 629
+stack size after push 628
+stack size after push 627
+stack size after push 628
+stack size after push 627
+stack size after push 628
+push 5
+stack size after push 629
+push 15
+stack size after push 630
+push 20
+stack size after push 631
+stack size after push 630
+stack size after push 629
+stack size after push 630
+stack size after push 629
+stack size after push 630
+push 5
+stack size after push 631
+push 15
+stack size after push 632
+push 20
+stack size after push 633
+stack size after push 632
+stack size after push 631
+stack size after push 632
+stack size after push 631
+stack size after push 632
+push 5
+stack size after push 633
+push 15
+stack size after push 634
+push 20
+stack size after push 635
+stack size after push 634
+stack size after push 633
+stack size after push 634
+stack size after push 633
+stack size after push 634
+push 5
+stack size after push 635
+push 15
+stack size after push 636
+push 20
+stack size after push 637
+stack size after push 636
+stack size after push 635
+stack size after push 636
+stack size after push 635
+stack size after push 636
+push 5
+stack size after push 637
+push 15
+stack size after push 638
+push 20
+stack size after push 639
+stack size after push 638
+stack size after push 637
+stack size after push 638
+stack size after push 637
+stack size after push 638
+push 5
+stack size after push 639
+push 15
+stack size after push 640
+push 20
+stack size after push 641
+stack size after push 640
+stack size after push 639
+stack size after push 640
+stack size after push 639
+stack size after push 640
+push 5
+stack size after push 641
+push 15
+stack size after push 642
+push 20
+stack size after push 643
+stack size after push 642
+stack size after push 641
+stack size after push 642
+stack size after push 641
+stack size after push 642
+push 5
+stack size after push 643
+push 15
+stack size after push 644
+push 20
+stack size after push 645
+stack size after push 644
+stack size after push 643
+stack size after push 644
+stack size after push 643
+stack size after push 644
+push 5
+stack size after push 645
+push 15
+stack size after push 646
+push 20
+stack size after push 647
+stack size after push 646
+stack size after push 645
+stack size after push 646
+stack size after push 645
+stack size after push 646
+push 5
+stack size after push 647
+push 15
+stack size after push 648
+push 20
+stack size after push 649
+stack size after push 648
+stack size after push 647
+stack size after push 648
+stack size after push 647
+stack size after push 648
+push 5
+stack size after push 649
+push 15
+stack size after push 650
+push 20
+stack size after push 651
+stack size after push 650
+stack size after push 649
+stack size after push 650
+stack size after push 649
+stack size after push 650
+push 5
+stack size after push 651
+push 15
+stack size after push 652
+push 20
+stack size after push 653
+stack size after push 652
+stack size after push 651
+stack size after push 652
+stack size after push 651
+stack size after push 652
+push 5
+stack size after push 653
+push 15
+stack size after push 654
+push 20
+stack size after push 655
+stack size after push 654
+stack size after push 653
+stack size after push 654
+stack size after push 653
+stack size after push 654
+push 5
+stack size after push 655
+push 15
+stack size after push 656
+push 20
+stack size after push 657
+stack size after push 656
+stack size after push 655
+stack size after push 656
+stack size after push 655
+stack size after push 656
+push 5
+stack size after push 657
+push 15
+stack size after push 658
+push 20
+stack size after push 659
+stack size after push 658
+stack size after push 657
+stack size after push 658
+stack size after push 657
+stack size after push 658
+push 5
+stack size after push 659
+push 15
+stack size after push 660
+push 20
+stack size after push 661
+stack size after push 660
+stack size after push 659
+stack size after push 660
+stack size after push 659
+stack size after push 660
+push 5
+stack size after push 661
+push 15
+stack size after push 662
+push 20
+stack size after push 663
+stack size after push 662
+stack size after push 661
+stack size after push 662
+stack size after push 661
+stack size after push 662
+push 5
+stack size after push 663
+push 15
+stack size after push 664
+push 20
+stack size after push 665
+stack size after push 664
+stack size after push 663
+stack size after push 664
+stack size after push 663
+stack size after push 664
+push 5
+stack size after push 665
+push 15
+stack size after push 666
+push 20
+stack size after push 667
+stack size after push 666
+stack size after push 665
+stack size after push 666
+stack size after push 665
+stack size after push 666
+push 5
+stack size after push 667
+push 15
+stack size after push 668
+push 20
+stack size after push 669
+stack size after push 668
+stack size after push 667
+stack size after push 668
+stack size after push 667
+stack size after push 668
+push 5
+stack size after push 669
+push 15
+stack size after push 670
+push 20
+stack size after push 671
+stack size after push 670
+stack size after push 669
+stack size after push 670
+stack size after push 669
+stack size after push 670
+push 5
+stack size after push 671
+push 15
+stack size after push 672
+push 20
+stack size after push 673
+stack size after push 672
+stack size after push 671
+stack size after push 672
+stack size after push 671
+stack size after push 672
+push 5
+stack size after push 673
+push 15
+stack size after push 674
+push 20
+stack size after push 675
+stack size after push 674
+stack size after push 673
+stack size after push 674
+stack size after push 673
+stack size after push 674
+push 5
+stack size after push 675
+push 15
+stack size after push 676
+push 20
+stack size after push 677
+stack size after push 676
+stack size after push 675
+stack size after push 676
+stack size after push 675
+stack size after push 676
+push 5
+stack size after push 677
+push 15
+stack size after push 678
+push 20
+stack size after push 679
+stack size after push 678
+stack size after push 677
+stack size after push 678
+stack size after push 677
+stack size after push 678
+push 5
+stack size after push 679
+push 15
+stack size after push 680
+push 20
+stack size after push 681
+stack size after push 680
+stack size after push 679
+stack size after push 680
+stack size after push 679
+stack size after push 680
+push 5
+stack size after push 681
+push 15
+stack size after push 682
+push 20
+stack size after push 683
+stack size after push 682
+stack size after push 681
+stack size after push 682
+stack size after push 681
+stack size after push 682
+push 5
+stack size after push 683
+push 15
+stack size after push 684
+push 20
+stack size after push 685
+stack size after push 684
+stack size after push 683
+stack size after push 684
+stack size after push 683
+stack size after push 684
+push 5
+stack size after push 685
+push 15
+stack size after push 686
+push 20
+stack size after push 687
+stack size after push 686
+stack size after push 685
+stack size after push 686
+stack size after push 685
+stack size after push 686
+push 5
+stack size after push 687
+push 15
+stack size after push 688
+push 20
+stack size after push 689
+stack size after push 688
+stack size after push 687
+stack size after push 688
+stack size after push 687
+stack size after push 688
+push 5
+stack size after push 689
+push 15
+stack size after push 690
+push 20
+stack size after push 691
+stack size after push 690
+stack size after push 689
+stack size after push 690
+stack size after push 689
+stack size after push 690
+push 5
+stack size after push 691
+push 15
+stack size after push 692
+push 20
+stack size after push 693
+stack size after push 692
+stack size after push 691
+stack size after push 692
+stack size after push 691
+stack size after push 692
+push 5
+stack size after push 693
+push 15
+stack size after push 694
+push 20
+stack size after push 695
+stack size after push 694
+stack size after push 693
+stack size after push 694
+stack size after push 693
+stack size after push 694
+push 5
+stack size after push 695
+push 15
+stack size after push 696
+push 20
+stack size after push 697
+stack size after push 696
+stack size after push 695
+stack size after push 696
+stack size after push 695
+stack size after push 696
+push 5
+stack size after push 697
+push 15
+stack size after push 698
+push 20
+stack size after push 699
+stack size after push 698
+stack size after push 697
+stack size after push 698
+stack size after push 697
+stack size after push 698
+push 5
+stack size after push 699
+push 15
+stack size after push 700
+push 20
+stack size after push 701
+stack size after push 700
+stack size after push 699
+stack size after push 700
+stack size after push 699
+stack size after push 700
+push 5
+stack size after push 701
+push 15
+stack size after push 702
+push 20
+stack size after push 703
+stack size after push 702
+stack size after push 701
+stack size after push 702
+stack size after push 701
+stack size after push 702
+push 5
+stack size after push 703
+push 15
+stack size after push 704
+push 20
+stack size after push 705
+stack size after push 704
+stack size after push 703
+stack size after push 704
+stack size after push 703
+stack size after push 704
+push 5
+stack size after push 705
+push 15
+stack size after push 706
+push 20
+stack size after push 707
+stack size after push 706
+stack size after push 705
+stack size after push 706
+stack size after push 705
+stack size after push 706
+push 5
+stack size after push 707
+push 15
+stack size after push 708
+push 20
+stack size after push 709
+stack size after push 708
+stack size after push 707
+stack size after push 708
+stack size after push 707
+stack size after push 708
+push 5
+stack size after push 709
+push 15
+stack size after push 710
+push 20
+stack size after push 711
+stack size after push 710
+stack size after push 709
+stack size after push 710
+stack size after push 709
+stack size after push 710
+push 5
+stack size after push 711
+push 15
+stack size after push 712
+push 20
+stack size after push 713
+stack size after push 712
+stack size after push 711
+stack size after push 712
+stack size after push 711
+stack size after push 712
+push 5
+stack size after push 713
+push 15
+stack size after push 714
+push 20
+stack size after push 715
+stack size after push 714
+stack size after push 713
+stack size after push 714
+stack size after push 713
+stack size after push 714
+push 5
+stack size after push 715
+push 15
+stack size after push 716
+push 20
+stack size after push 717
+stack size after push 716
+stack size after push 715
+stack size after push 716
+stack size after push 715
+stack size after push 716
+push 5
+stack size after push 717
+push 15
+stack size after push 718
+push 20
+stack size after push 719
+stack size after push 718
+stack size after push 717
+stack size after push 718
+stack size after push 717
+stack size after push 718
+push 5
+stack size after push 719
+push 15
+stack size after push 720
+push 20
+stack size after push 721
+stack size after push 720
+stack size after push 719
+stack size after push 720
+stack size after push 719
+stack size after push 720
+push 5
+stack size after push 721
+push 15
+stack size after push 722
+push 20
+stack size after push 723
+stack size after push 722
+stack size after push 721
+stack size after push 722
+stack size after push 721
+stack size after push 722
+push 5
+stack size after push 723
+push 15
+stack size after push 724
+push 20
+stack size after push 725
+stack size after push 724
+stack size after push 723
+stack size after push 724
+stack size after push 723
+stack size after push 724
+push 5
+stack size after push 725
+push 15
+stack size after push 726
+push 20
+stack size after push 727
+stack size after push 726
+stack size after push 725
+stack size after push 726
+stack size after push 725
+stack size after push 726
+push 5
+stack size after push 727
+push 15
+stack size after push 728
+push 20
+stack size after push 729
+stack size after push 728
+stack size after push 727
+stack size after push 728
+stack size after push 727
+stack size after push 728
+push 5
+stack size after push 729
+push 15
+stack size after push 730
+push 20
+stack size after push 731
+stack size after push 730
+stack size after push 729
+stack size after push 730
+stack size after push 729
+stack size after push 730
+push 5
+stack size after push 731
+push 15
+stack size after push 732
+push 20
+stack size after push 733
+stack size after push 732
+stack size after push 731
+stack size after push 732
+stack size after push 731
+stack size after push 732
+push 5
+stack size after push 733
+push 15
+stack size after push 734
+push 20
+stack size after push 735
+stack size after push 734
+stack size after push 733
+stack size after push 734
+stack size after push 733
+stack size after push 734
+push 5
+stack size after push 735
+push 15
+stack size after push 736
+push 20
+stack size after push 737
+stack size after push 736
+stack size after push 735
+stack size after push 736
+stack size after push 735
+stack size after push 736
+push 5
+stack size after push 737
+push 15
+stack size after push 738
+push 20
+stack size after push 739
+stack size after push 738
+stack size after push 737
+stack size after push 738
+stack size after push 737
+stack size after push 738
+push 5
+stack size after push 739
+push 15
+stack size after push 740
+push 20
+stack size after push 741
+stack size after push 740
+stack size after push 739
+stack size after push 740
+stack size after push 739
+stack size after push 740
+push 5
+stack size after push 741
+push 15
+stack size after push 742
+push 20
+stack size after push 743
+stack size after push 742
+stack size after push 741
+stack size after push 742
+stack size after push 741
+stack size after push 742
+push 5
+stack size after push 743
+push 15
+stack size after push 744
+push 20
+stack size after push 745
+stack size after push 744
+stack size after push 743
+stack size after push 744
+stack size after push 743
+stack size after push 744
+push 5
+stack size after push 745
+push 15
+stack size after push 746
+push 20
+stack size after push 747
+stack size after push 746
+stack size after push 745
+stack size after push 746
+stack size after push 745
+stack size after push 746
+push 5
+stack size after push 747
+push 15
+stack size after push 748
+push 20
+stack size after push 749
+stack size after push 748
+stack size after push 747
+stack size after push 748
+stack size after push 747
+stack size after push 748
+push 5
+stack size after push 749
+push 15
+stack size after push 750
+push 20
+stack size after push 751
+stack size after push 750
+stack size after push 749
+stack size after push 750
+stack size after push 749
+stack size after push 750
+push 5
+stack size after push 751
+push 15
+stack size after push 752
+push 20
+stack size after push 753
+stack size after push 752
+stack size after push 751
+stack size after push 752
+stack size after push 751
+stack size after push 752
+push 5
+stack size after push 753
+push 15
+stack size after push 754
+push 20
+stack size after push 755
+stack size after push 754
+stack size after push 753
+stack size after push 754
+stack size after push 753
+stack size after push 754
+push 5
+stack size after push 755
+push 15
+stack size after push 756
+push 20
+stack size after push 757
+stack size after push 756
+stack size after push 755
+stack size after push 756
+stack size after push 755
+stack size after push 756
+push 5
+stack size after push 757
+push 15
+stack size after push 758
+push 20
+stack size after push 759
+stack size after push 758
+stack size after push 757
+stack size after push 758
+stack size after push 757
+stack size after push 758
+push 5
+stack size after push 759
+push 15
+stack size after push 760
+push 20
+stack size after push 761
+stack size after push 760
+stack size after push 759
+stack size after push 760
+stack size after push 759
+stack size after push 760
+push 5
+stack size after push 761
+push 15
+stack size after push 762
+push 20
+stack size after push 763
+stack size after push 762
+stack size after push 761
+stack size after push 762
+stack size after push 761
+stack size after push 762
+push 5
+stack size after push 763
+push 15
+stack size after push 764
+push 20
+stack size after push 765
+stack size after push 764
+stack size after push 763
+stack size after push 764
+stack size after push 763
+stack size after push 764
+push 5
+stack size after push 765
+push 15
+stack size after push 766
+push 20
+stack size after push 767
+stack size after push 766
+stack size after push 765
+stack size after push 766
+stack size after push 765
+stack size after push 766
+push 5
+stack size after push 767
+push 15
+stack size after push 768
+push 20
+stack size after push 769
+stack size after push 768
+stack size after push 767
+stack size after push 768
+stack size after push 767
+stack size after push 768
+push 5
+stack size after push 769
+push 15
+stack size after push 770
+push 20
+stack size after push 771
+stack size after push 770
+stack size after push 769
+stack size after push 770
+stack size after push 769
+stack size after push 770
+push 5
+stack size after push 771
+push 15
+stack size after push 772
+push 20
+stack size after push 773
+stack size after push 772
+stack size after push 771
+stack size after push 772
+stack size after push 771
+stack size after push 772
+push 5
+stack size after push 773
+push 15
+stack size after push 774
+push 20
+stack size after push 775
+stack size after push 774
+stack size after push 773
+stack size after push 774
+stack size after push 773
+stack size after push 774
+push 5
+stack size after push 775
+push 15
+stack size after push 776
+push 20
+stack size after push 777
+stack size after push 776
+stack size after push 775
+stack size after push 776
+stack size after push 775
+stack size after push 776
+push 5
+stack size after push 777
+push 15
+stack size after push 778
+push 20
+stack size after push 779
+stack size after push 778
+stack size after push 777
+stack size after push 778
+stack size after push 777
+stack size after push 778
+push 5
+stack size after push 779
+push 15
+stack size after push 780
+push 20
+stack size after push 781
+stack size after push 780
+stack size after push 779
+stack size after push 780
+stack size after push 779
+stack size after push 780
+push 5
+stack size after push 781
+push 15
+stack size after push 782
+push 20
+stack size after push 783
+stack size after push 782
+stack size after push 781
+stack size after push 782
+stack size after push 781
+stack size after push 782
+push 5
+stack size after push 783
+push 15
+stack size after push 784
+push 20
+stack size after push 785
+stack size after push 784
+stack size after push 783
+stack size after push 784
+stack size after push 783
+stack size after push 784
+push 5
+stack size after push 785
+push 15
+stack size after push 786
+push 20
+stack size after push 787
+stack size after push 786
+stack size after push 785
+stack size after push 786
+stack size after push 785
+stack size after push 786
+push 5
+stack size after push 787
+push 15
+stack size after push 788
+push 20
+stack size after push 789
+stack size after push 788
+stack size after push 787
+stack size after push 788
+stack size after push 787
+stack size after push 788
+push 5
+stack size after push 789
+push 15
+stack size after push 790
+push 20
+stack size after push 791
+stack size after push 790
+stack size after push 789
+stack size after push 790
+stack size after push 789
+stack size after push 790
+push 5
+stack size after push 791
+push 15
+stack size after push 792
+push 20
+stack size after push 793
+stack size after push 792
+stack size after push 791
+stack size after push 792
+stack size after push 791
+stack size after push 792
+push 5
+stack size after push 793
+push 15
+stack size after push 794
+push 20
+stack size after push 795
+stack size after push 794
+stack size after push 793
+stack size after push 794
+stack size after push 793
+stack size after push 794
+push 5
+stack size after push 795
+push 15
+stack size after push 796
+push 20
+stack size after push 797
+stack size after push 796
+stack size after push 795
+stack size after push 796
+stack size after push 795
+stack size after push 796
+push 5
+stack size after push 797
+push 15
+stack size after push 798
+push 20
+stack size after push 799
+stack size after push 798
+stack size after push 797
+stack size after push 798
+stack size after push 797
+stack size after push 798
+push 5
+stack size after push 799
+push 15
+stack size after push 800
+push 20
+stack size after push 801
+stack size after push 800
+stack size after push 799
+stack size after push 800
+stack size after push 799
+stack size after push 800
+push 5
+stack size after push 801
+push 15
+stack size after push 802
+push 20
+stack size after push 803
+stack size after push 802
+stack size after push 801
+stack size after push 802
+stack size after push 801
+stack size after push 802
+push 5
+stack size after push 803
+push 15
+stack size after push 804
+push 20
+stack size after push 805
+stack size after push 804
+stack size after push 803
+stack size after push 804
+stack size after push 803
+stack size after push 804
+push 5
+stack size after push 805
+push 15
+stack size after push 806
+push 20
+stack size after push 807
+stack size after push 806
+stack size after push 805
+stack size after push 806
+stack size after push 805
+stack size after push 806
+push 5
+stack size after push 807
+push 15
+stack size after push 808
+push 20
+stack size after push 809
+stack size after push 808
+stack size after push 807
+stack size after push 808
+stack size after push 807
+stack size after push 808
+push 5
+stack size after push 809
+push 15
+stack size after push 810
+push 20
+stack size after push 811
+stack size after push 810
+stack size after push 809
+stack size after push 810
+stack size after push 809
+stack size after push 810
+push 5
+stack size after push 811
+push 15
+stack size after push 812
+push 20
+stack size after push 813
+stack size after push 812
+stack size after push 811
+stack size after push 812
+stack size after push 811
+stack size after push 812
+push 5
+stack size after push 813
+push 15
+stack size after push 814
+push 20
+stack size after push 815
+stack size after push 814
+stack size after push 813
+stack size after push 814
+stack size after push 813
+stack size after push 814
+push 5
+stack size after push 815
+push 15
+stack size after push 816
+push 20
+stack size after push 817
+stack size after push 816
+stack size after push 815
+stack size after push 816
+stack size after push 815
+stack size after push 816
+push 5
+stack size after push 817
+push 15
+stack size after push 818
+push 20
+stack size after push 819
+stack size after push 818
+stack size after push 817
+stack size after push 818
+stack size after push 817
+stack size after push 818
+push 5
+stack size after push 819
+push 15
+stack size after push 820
+push 20
+stack size after push 821
+stack size after push 820
+stack size after push 819
+stack size after push 820
+stack size after push 819
+stack size after push 820
+push 5
+stack size after push 821
+push 15
+stack size after push 822
+push 20
+stack size after push 823
+stack size after push 822
+stack size after push 821
+stack size after push 822
+stack size after push 821
+stack size after push 822
+push 5
+stack size after push 823
+push 15
+stack size after push 824
+push 20
+stack size after push 825
+stack size after push 824
+stack size after push 823
+stack size after push 824
+stack size after push 823
+stack size after push 824
+push 5
+stack size after push 825
+push 15
+stack size after push 826
+push 20
+stack size after push 827
+stack size after push 826
+stack size after push 825
+stack size after push 826
+stack size after push 825
+stack size after push 826
+push 5
+stack size after push 827
+push 15
+stack size after push 828
+push 20
+stack size after push 829
+stack size after push 828
+stack size after push 827
+stack size after push 828
+stack size after push 827
+stack size after push 828
+push 5
+stack size after push 829
+push 15
+stack size after push 830
+push 20
+stack size after push 831
+stack size after push 830
+stack size after push 829
+stack size after push 830
+stack size after push 829
+stack size after push 830
+push 5
+stack size after push 831
+push 15
+stack size after push 832
+push 20
+stack size after push 833
+stack size after push 832
+stack size after push 831
+stack size after push 832
+stack size after push 831
+stack size after push 832
+push 5
+stack size after push 833
+push 15
+stack size after push 834
+push 20
+stack size after push 835
+stack size after push 834
+stack size after push 833
+stack size after push 834
+stack size after push 833
+stack size after push 834
+push 5
+stack size after push 835
+push 15
+stack size after push 836
+push 20
+stack size after push 837
+stack size after push 836
+stack size after push 835
+stack size after push 836
+stack size after push 835
+stack size after push 836
+push 5
+stack size after push 837
+push 15
+stack size after push 838
+push 20
+stack size after push 839
+stack size after push 838
+stack size after push 837
+stack size after push 838
+stack size after push 837
+stack size after push 838
+push 5
+stack size after push 839
+push 15
+stack size after push 840
+push 20
+stack size after push 841
+stack size after push 840
+stack size after push 839
+stack size after push 840
+stack size after push 839
+stack size after push 840
+push 5
+stack size after push 841
+push 15
+stack size after push 842
+push 20
+stack size after push 843
+stack size after push 842
+stack size after push 841
+stack size after push 842
+stack size after push 841
+stack size after push 842
+push 5
+stack size after push 843
+push 15
+stack size after push 844
+push 20
+stack size after push 845
+stack size after push 844
+stack size after push 843
+stack size after push 844
+stack size after push 843
+stack size after push 844
+push 5
+stack size after push 845
+push 15
+stack size after push 846
+push 20
+stack size after push 847
+stack size after push 846
+stack size after push 845
+stack size after push 846
+stack size after push 845
+stack size after push 846
+push 5
+stack size after push 847
+push 15
+stack size after push 848
+push 20
+stack size after push 849
+stack size after push 848
+stack size after push 847
+stack size after push 848
+stack size after push 847
+stack size after push 848
+push 5
+stack size after push 849
+push 15
+stack size after push 850
+push 20
+stack size after push 851
+stack size after push 850
+stack size after push 849
+stack size after push 850
+stack size after push 849
+stack size after push 850
+push 5
+stack size after push 851
+push 15
+stack size after push 852
+push 20
+stack size after push 853
+stack size after push 852
+stack size after push 851
+stack size after push 852
+stack size after push 851
+stack size after push 852
+push 5
+stack size after push 853
+push 15
+stack size after push 854
+push 20
+stack size after push 855
+stack size after push 854
+stack size after push 853
+stack size after push 854
+stack size after push 853
+stack size after push 854
+push 5
+stack size after push 855
+push 15
+stack size after push 856
+push 20
+stack size after push 857
+stack size after push 856
+stack size after push 855
+stack size after push 856
+stack size after push 855
+stack size after push 856
+push 5
+stack size after push 857
+push 15
+stack size after push 858
+push 20
+stack size after push 859
+stack size after push 858
+stack size after push 857
+stack size after push 858
+stack size after push 857
+stack size after push 858
+push 5
+stack size after push 859
+push 15
+stack size after push 860
+push 20
+stack size after push 861
+stack size after push 860
+stack size after push 859
+stack size after push 860
+stack size after push 859
+stack size after push 860
+push 5
+stack size after push 861
+push 15
+stack size after push 862
+push 20
+stack size after push 863
+stack size after push 862
+stack size after push 861
+stack size after push 862
+stack size after push 861
+stack size after push 862
+push 5
+stack size after push 863
+push 15
+stack size after push 864
+push 20
+stack size after push 865
+stack size after push 864
+stack size after push 863
+stack size after push 864
+stack size after push 863
+stack size after push 864
+push 5
+stack size after push 865
+push 15
+stack size after push 866
+push 20
+stack size after push 867
+stack size after push 866
+stack size after push 865
+stack size after push 866
+stack size after push 865
+stack size after push 866
+push 5
+stack size after push 867
+push 15
+stack size after push 868
+push 20
+stack size after push 869
+stack size after push 868
+stack size after push 867
+stack size after push 868
+stack size after push 867
+stack size after push 868
+push 5
+stack size after push 869
+push 15
+stack size after push 870
+push 20
+stack size after push 871
+stack size after push 870
+stack size after push 869
+stack size after push 870
+stack size after push 869
+stack size after push 870
+push 5
+stack size after push 871
+push 15
+stack size after push 872
+push 20
+stack size after push 873
+stack size after push 872
+stack size after push 871
+stack size after push 872
+stack size after push 871
+stack size after push 872
+push 5
+stack size after push 873
+push 15
+stack size after push 874
+push 20
+stack size after push 875
+stack size after push 874
+stack size after push 873
+stack size after push 874
+stack size after push 873
+stack size after push 874
+push 5
+stack size after push 875
+push 15
+stack size after push 876
+push 20
+stack size after push 877
+stack size after push 876
+stack size after push 875
+stack size after push 876
+stack size after push 875
+stack size after push 876
+push 5
+stack size after push 877
+push 15
+stack size after push 878
+push 20
+stack size after push 879
+stack size after push 878
+stack size after push 877
+stack size after push 878
+stack size after push 877
+stack size after push 878
+push 5
+stack size after push 879
+push 15
+stack size after push 880
+push 20
+stack size after push 881
+stack size after push 880
+stack size after push 879
+stack size after push 880
+stack size after push 879
+stack size after push 880
+push 5
+stack size after push 881
+push 15
+stack size after push 882
+push 20
+stack size after push 883
+stack size after push 882
+stack size after push 881
+stack size after push 882
+stack size after push 881
+stack size after push 882
+push 5
+stack size after push 883
+push 15
+stack size after push 884
+push 20
+stack size after push 885
+stack size after push 884
+stack size after push 883
+stack size after push 884
+stack size after push 883
+stack size after push 884
+push 5
+stack size after push 885
+push 15
+stack size after push 886
+push 20
+stack size after push 887
+stack size after push 886
+stack size after push 885
+stack size after push 886
+stack size after push 885
+stack size after push 886
+push 5
+stack size after push 887
+push 15
+stack size after push 888
+push 20
+stack size after push 889
+stack size after push 888
+stack size after push 887
+stack size after push 888
+stack size after push 887
+stack size after push 888
+push 5
+stack size after push 889
+push 15
+stack size after push 890
+push 20
+stack size after push 891
+stack size after push 890
+stack size after push 889
+stack size after push 890
+stack size after push 889
+stack size after push 890
+push 5
+stack size after push 891
+push 15
+stack size after push 892
+push 20
+stack size after push 893
+stack size after push 892
+stack size after push 891
+stack size after push 892
+stack size after push 891
+stack size after push 892
+push 5
+stack size after push 893
+push 15
+stack size after push 894
+push 20
+stack size after push 895
+stack size after push 894
+stack size after push 893
+stack size after push 894
+stack size after push 893
+stack size after push 894
+push 5
+stack size after push 895
+push 15
+stack size after push 896
+push 20
+stack size after push 897
+stack size after push 896
+stack size after push 895
+stack size after push 896
+stack size after push 895
+stack size after push 896
+push 5
+stack size after push 897
+push 15
+stack size after push 898
+push 20
+stack size after push 899
+stack size after push 898
+stack size after push 897
+stack size after push 898
+stack size after push 897
+stack size after push 898
+push 5
+stack size after push 899
+push 15
+stack size after push 900
+push 20
+stack size after push 901
+stack size after push 900
+stack size after push 899
+stack size after push 900
+stack size after push 899
+stack size after push 900
+push 5
+stack size after push 901
+push 15
+stack size after push 902
+push 20
+stack size after push 903
+stack size after push 902
+stack size after push 901
+stack size after push 902
+stack size after push 901
+stack size after push 902
+push 5
+stack size after push 903
+push 15
+stack size after push 904
+push 20
+stack size after push 905
+stack size after push 904
+stack size after push 903
+stack size after push 904
+stack size after push 903
+stack size after push 904
+push 5
+stack size after push 905
+push 15
+stack size after push 906
+push 20
+stack size after push 907
+stack size after push 906
+stack size after push 905
+stack size after push 906
+stack size after push 905
+stack size after push 906
+push 5
+stack size after push 907
+push 15
+stack size after push 908
+push 20
+stack size after push 909
+stack size after push 908
+stack size after push 907
+stack size after push 908
+stack size after push 907
+stack size after push 908
+push 5
+stack size after push 909
+push 15
+stack size after push 910
+push 20
+stack size after push 911
+stack size after push 910
+stack size after push 909
+stack size after push 910
+stack size after push 909
+stack size after push 910
+push 5
+stack size after push 911
+push 15
+stack size after push 912
+push 20
+stack size after push 913
+stack size after push 912
+stack size after push 911
+stack size after push 912
+stack size after push 911
+stack size after push 912
+push 5
+stack size after push 913
+push 15
+stack size after push 914
+push 20
+stack size after push 915
+stack size after push 914
+stack size after push 913
+stack size after push 914
+stack size after push 913
+stack size after push 914
+push 5
+stack size after push 915
+push 15
+stack size after push 916
+push 20
+stack size after push 917
+stack size after push 916
+stack size after push 915
+stack size after push 916
+stack size after push 915
+stack size after push 916
+push 5
+stack size after push 917
+push 15
+stack size after push 918
+push 20
+stack size after push 919
+stack size after push 918
+stack size after push 917
+stack size after push 918
+stack size after push 917
+stack size after push 918
+push 5
+stack size after push 919
+push 15
+stack size after push 920
+push 20
+stack size after push 921
+stack size after push 920
+stack size after push 919
+stack size after push 920
+stack size after push 919
+stack size after push 920
+push 5
+stack size after push 921
+push 15
+stack size after push 922
+push 20
+stack size after push 923
+stack size after push 922
+stack size after push 921
+stack size after push 922
+stack size after push 921
+stack size after push 922
+push 5
+stack size after push 923
+push 15
+stack size after push 924
+push 20
+stack size after push 925
+stack size after push 924
+stack size after push 923
+stack size after push 924
+stack size after push 923
+stack size after push 924
+push 5
+stack size after push 925
+push 15
+stack size after push 926
+push 20
+stack size after push 927
+stack size after push 926
+stack size after push 925
+stack size after push 926
+stack size after push 925
+stack size after push 926
+push 5
+stack size after push 927
+push 15
+stack size after push 928
+push 20
+stack size after push 929
+stack size after push 928
+stack size after push 927
+stack size after push 928
+stack size after push 927
+stack size after push 928
+push 5
+stack size after push 929
+push 15
+stack size after push 930
+push 20
+stack size after push 931
+stack size after push 930
+stack size after push 929
+stack size after push 930
+stack size after push 929
+stack size after push 930
+push 5
+stack size after push 931
+push 15
+stack size after push 932
+push 20
+stack size after push 933
+stack size after push 932
+stack size after push 931
+stack size after push 932
+stack size after push 931
+stack size after push 932
+push 5
+stack size after push 933
+push 15
+stack size after push 934
+push 20
+stack size after push 935
+stack size after push 934
+stack size after push 933
+stack size after push 934
+stack size after push 933
+stack size after push 934
+push 5
+stack size after push 935
+push 15
+stack size after push 936
+push 20
+stack size after push 937
+stack size after push 936
+stack size after push 935
+stack size after push 936
+stack size after push 935
+stack size after push 936
+push 5
+stack size after push 937
+push 15
+stack size after push 938
+push 20
+stack size after push 939
+stack size after push 938
+stack size after push 937
+stack size after push 938
+stack size after push 937
+stack size after push 938
+push 5
+stack size after push 939
+push 15
+stack size after push 940
+push 20
+stack size after push 941
+stack size after push 940
+stack size after push 939
+stack size after push 940
+stack size after push 939
+stack size after push 940
+push 5
+stack size after push 941
+push 15
+stack size after push 942
+push 20
+stack size after push 943
+stack size after push 942
+stack size after push 941
+stack size after push 942
+stack size after push 941
+stack size after push 942
+push 5
+stack size after push 943
+push 15
+stack size after push 944
+push 20
+stack size after push 945
+stack size after push 944
+stack size after push 943
+stack size after push 944
+stack size after push 943
+stack size after push 944
+push 5
+stack size after push 945
+push 15
+stack size after push 946
+push 20
+stack size after push 947
+stack size after push 946
+stack size after push 945
+stack size after push 946
+stack size after push 945
+stack size after push 946
+push 5
+stack size after push 947
+push 15
+stack size after push 948
+push 20
+stack size after push 949
+stack size after push 948
+stack size after push 947
+stack size after push 948
+stack size after push 947
+stack size after push 948
+push 5
+stack size after push 949
+push 15
+stack size after push 950
+push 20
+stack size after push 951
+stack size after push 950
+stack size after push 949
+stack size after push 950
+stack size after push 949
+stack size after push 950
+push 5
+stack size after push 951
+push 15
+stack size after push 952
+push 20
+stack size after push 953
+stack size after push 952
+stack size after push 951
+stack size after push 952
+stack size after push 951
+stack size after push 952
+push 5
+stack size after push 953
+push 15
+stack size after push 954
+push 20
+stack size after push 955
+stack size after push 954
+stack size after push 953
+stack size after push 954
+stack size after push 953
+stack size after push 954
+push 5
+stack size after push 955
+push 15
+stack size after push 956
+push 20
+stack size after push 957
+stack size after push 956
+stack size after push 955
+stack size after push 956
+stack size after push 955
+stack size after push 956
+push 5
+stack size after push 957
+push 15
+stack size after push 958
+push 20
+stack size after push 959
+stack size after push 958
+stack size after push 957
+stack size after push 958
+stack size after push 957
+stack size after push 958
+push 5
+stack size after push 959
+push 15
+stack size after push 960
+push 20
+stack size after push 961
+stack size after push 960
+stack size after push 959
+stack size after push 960
+stack size after push 959
+stack size after push 960
+push 5
+stack size after push 961
+push 15
+stack size after push 962
+push 20
+stack size after push 963
+stack size after push 962
+stack size after push 961
+stack size after push 962
+stack size after push 961
+stack size after push 962
+push 5
+stack size after push 963
+push 15
+stack size after push 964
+push 20
+stack size after push 965
+stack size after push 964
+stack size after push 963
+stack size after push 964
+stack size after push 963
+stack size after push 964
+push 5
+stack size after push 965
+push 15
+stack size after push 966
+push 20
+stack size after push 967
+stack size after push 966
+stack size after push 965
+stack size after push 966
+stack size after push 965
+stack size after push 966
+push 5
+stack size after push 967
+push 15
+stack size after push 968
+push 20
+stack size after push 969
+stack size after push 968
+stack size after push 967
+stack size after push 968
+stack size after push 967
+stack size after push 968
+push 5
+stack size after push 969
+push 15
+stack size after push 970
+push 20
+stack size after push 971
+stack size after push 970
+stack size after push 969
+stack size after push 970
+stack size after push 969
+stack size after push 970
+push 5
+stack size after push 971
+push 15
+stack size after push 972
+push 20
+stack size after push 973
+stack size after push 972
+stack size after push 971
+stack size after push 972
+stack size after push 971
+stack size after push 972
+push 5
+stack size after push 973
+push 15
+stack size after push 974
+push 20
+stack size after push 975
+stack size after push 974
+stack size after push 973
+stack size after push 974
+stack size after push 973
+stack size after push 974
+push 5
+stack size after push 975
+push 15
+stack size after push 976
+push 20
+stack size after push 977
+stack size after push 976
+stack size after push 975
+stack size after push 976
+stack size after push 975
+stack size after push 976
+push 5
+stack size after push 977
+push 15
+stack size after push 978
+push 20
+stack size after push 979
+stack size after push 978
+stack size after push 977
+stack size after push 978
+stack size after push 977
+stack size after push 978
+push 5
+stack size after push 979
+push 15
+stack size after push 980
+push 20
+stack size after push 981
+stack size after push 980
+stack size after push 979
+stack size after push 980
+stack size after push 979
+stack size after push 980
+push 5
+stack size after push 981
+push 15
+stack size after push 982
+push 20
+stack size after push 983
+stack size after push 982
+stack size after push 981
+stack size after push 982
+stack size after push 981
+stack size after push 982
+push 5
+stack size after push 983
+push 15
+stack size after push 984
+push 20
+stack size after push 985
+stack size after push 984
+stack size after push 983
+stack size after push 984
+stack size after push 983
+stack size after push 984
+push 5
+stack size after push 985
+push 15
+stack size after push 986
+push 20
+stack size after push 987
+stack size after push 986
+stack size after push 985
+stack size after push 986
+stack size after push 985
+stack size after push 986
+push 5
+stack size after push 987
+push 15
+stack size after push 988
+push 20
+stack size after push 989
+stack size after push 988
+stack size after push 987
+stack size after push 988
+stack size after push 987
+stack size after push 988
+push 5
+stack size after push 989
+push 15
+stack size after push 990
+push 20
+stack size after push 991
+stack size after push 990
+stack size after push 989
+stack size after push 990
+stack size after push 989
+stack size after push 990
+push 5
+stack size after push 991
+push 15
+stack size after push 992
+push 20
+stack size after push 993
+stack size after push 992
+stack size after push 991
+stack size after push 992
+stack size after push 991
+stack size after push 992
+push 5
+stack size after push 993
+push 15
+stack size after push 994
+push 20
+stack size after push 995
+stack size after push 994
+stack size after push 993
+stack size after push 994
+stack size after push 993
+stack size after push 994
+push 5
+stack size after push 995
+push 15
+stack size after push 996
+push 20
+stack size after push 997
+stack size after push 996
+stack size after push 995
+stack size after push 996
+stack size after push 995
+stack size after push 996
+push 5
+stack size after push 997
+push 15
+stack size after push 998
+push 20
+stack size after push 999
+stack size after push 998
+stack size after push 997
+stack size after push 998
+stack size after push 997
+stack size after push 998
+push 5
+stack size after push 999
+push 15
+stack size after push 1000
+push 20
+stack size after push 1001
+stack size after push 1000
+stack size after push 999
+stack size after push 1000
+stack size after push 999
+stack size after push 1000
+push 5
+stack size after push 1001
+push 15
+stack size after push 1002
+push 20
+stack size after push 1003
+stack size after push 1002
+stack size after push 1001
+stack size after push 1002
+stack size after push 1001
+stack size after push 1002
+push 5
+stack size after push 1003
+push 15
+stack size after push 1004
+push 20
+stack size after push 1005
+stack size after push 1004
+stack size after push 1003
+stack size after push 1004
+stack size after push 1003
+stack size after push 1004
+push 5
+stack size after push 1005
+push 15
+stack size after push 1006
+push 20
+stack size after push 1007
+stack size after push 1006
+stack size after push 1005
+stack size after push 1006
+stack size after push 1005
+stack size after push 1006
+push 5
+stack size after push 1007
+push 15
+stack size after push 1008
+push 20
+stack size after push 1009
+stack size after push 1008
+stack size after push 1007
+stack size after push 1008
+stack size after push 1007
+stack size after push 1008
+push 5
+stack size after push 1009
+push 15
+stack size after push 1010
+push 20
+stack size after push 1011
+stack size after push 1010
+stack size after push 1009
+stack size after push 1010
+stack size after push 1009
+stack size after push 1010
+push 5
+stack size after push 1011
+push 15
+stack size after push 1012
+push 20
+stack size after push 1013
+stack size after push 1012
+stack size after push 1011
+stack size after push 1012
+stack size after push 1011
+stack size after push 1012
+push 5
+stack size after push 1013
+push 15
+stack size after push 1014
+push 20
+stack size after push 1015
+stack size after push 1014
+stack size after push 1013
+stack size after push 1014
+stack size after push 1013
+stack size after push 1014
+push 5
+stack size after push 1015
+push 15
+stack size after push 1016
+push 20
+stack size after push 1017
+stack size after push 1016
+stack size after push 1015
+stack size after push 1016
+stack size after push 1015
+stack size after push 1016
+push 5
+stack size after push 1017
+push 15
+stack size after push 1018
+push 20
+stack size after push 1019
+stack size after push 1018
+stack size after push 1017
+stack size after push 1018
+stack size after push 1017
+stack size after push 1018
+push 5
+stack size after push 1019
+push 15
+stack size after push 1020
+push 20
+stack size after push 1021
+stack size after push 1020
+stack size after push 1019
+stack size after push 1020
+stack size after push 1019
+stack size after push 1020
+push 5
+stack size after push 1021
+push 15
+stack size after push 1022
+push 20
+stack size after push 1023
+stack size after push 1022
+stack size after push 1021
+stack size after push 1022
+stack size after push 1021
+stack size after push 1022
+push 5
+stack size after push 1023
+push 15
+stack size after push 1024
+push 20
