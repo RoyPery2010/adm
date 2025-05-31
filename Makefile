@@ -2,11 +2,11 @@ CFLAGS = -Wall -Wextra -Wswitch-enum -std=c11 -pedantic
 LIBS = 
 .PHONY: all
 all: pasm admi
-pasm: pasm.c adm.c
-	$(CC) $(CFLAGS) -o pasm pasm.c $(LIBS)
+pasm: ./src/pasm.c ./src/adm.c
+	$(CC) $(CFLAGS) -o pasm ./src/pasm.c $(LIBS)
 
-admi: admi.c adm.c
-	$(CC) $(CFLAGS) -o admi admi.c $(LIBS)
+admi: ./src/admi.c ./src/adm.c
+	$(CC) $(CFLAGS) -o admi ./src/admi.c $(LIBS)
 .PHONY: examples
 examples: ./examples/fib.adm ./examples/123.adm
 
