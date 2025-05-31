@@ -10,7 +10,7 @@ admi: ./src/admi.c ./src/adm.c
 .PHONY: examples
 examples: ./examples/fib.adm ./examples/123.adm
 
-./examples/fib.adm: ./examples/fib.pasm
+./examples/fib.adm: pasm ./examples/fib.pasm
 	./pasm ./examples/fib.pasm ./examples/fib.adm
-./examples/123.adm: ./examples/123.pasm
+./examples/123.adm: pasm ./examples/123.pasm
 	./pasm ./examples/123.pasm ./examples/123.adm
