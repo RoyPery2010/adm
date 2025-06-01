@@ -1,4 +1,5 @@
-#include "./adm.c"
+#define ADM_IMPLEMENTATION
+#include "./adm.h"
 int main(int argc, char **argv) {
     if (argc < 2) {
         fprintf(stderr, "Usage: ./admi <input.adm>\n");

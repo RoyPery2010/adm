@@ -1,4 +1,7 @@
-#include "./adm.c"
+#define ADM_IMPLEMENTATION
+#include "./adm.h"
+
+
 int main(int argc, char **argv) {
     if (argc < 3) {
         fprintf(stderr, "Usage: ./pasm <input.pasm> <output.adm>\n");
