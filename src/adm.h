@@ -1,6 +1,7 @@
 #ifndef ADM_H
 #define ADM_H
 
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,6 +39,7 @@ typedef enum {
 const char *err_as_cstr(Err err);
 
 typedef enum {
+    INST_NOP = 0,
     INST_PUSH,
     INST_DUP,
     INST_PLUS,
@@ -71,7 +73,7 @@ const char *inst_type_as_cstr(Inst_Type type);
 
 
 
-
+Err adm_execute_program(ADM *adm, int limit);
 Err adm_execute_inst(ADM *adm);
 
 void adm_dump_stack(FILE *stream, const ADM *adm);
@@ -80,7 +82,7 @@ void adm_dump_stack(FILE *stream, const ADM *adm);
 void adm_load_program_from_memory(ADM *adm, Inst *program, size_t program_size);
 
 void adm_save_program_to_file(const ADM *adm, const char *file_path);
-void adm_load_program_to_file(ADM *adm, const char *file_path);
+void adm_load_program_from_file(ADM *adm, const char *file_path);
 
 
 
@@ -132,6 +134,7 @@ const char *err_as_cstr(Err err) {
 
 const char *inst_type_as_cstr(Inst_Type type) {
     switch (type) {
+        case INST_NOP: return "INST_NOP";
         case INST_PUSH: return "INST_PUSH";
         case INST_PLUS: return "INST_PLUS";
         case INST_MINUS: return "INST_MINUS";
@@ -147,6 +150,20 @@ const char *inst_type_as_cstr(Inst_Type type) {
     }
 }
 
+Err adm_execute_program(ADM *adm, int limit) {
+    while (limit != 0 && !adm->halt) {
+        Err err = adm_execute_inst(adm);
+        if (err != ERR_OK) {
+            return err;
+        }
+
+        if (limit > 0) {
+            --limit;
+        }
+    }
+    return ERR_OK;
+}
+
 Err adm_execute_inst(ADM *adm) {
 
     if (adm->ip < 0 || adm->ip >= adm->program_size) {
@@ -156,6 +173,9 @@ Err adm_execute_inst(ADM *adm) {
     Inst inst = adm->program[adm->ip];
 
     switch (inst.type) {
+        case INST_NOP:
+            adm->ip += 1;
+            break;
         case INST_PUSH:
             if (adm->stack_size >= ADM_STACK_CAPACITY) {
                 return ERR_STACK_OVERFLOW;
@@ -292,7 +312,7 @@ void adm_save_program_to_file(const ADM *adm, const char *file_path) {
     fclose(f);
 }
 
-void adm_load_program_to_file(ADM *adm, const char *file_path) {
+void adm_load_program_from_file(ADM *adm, const char *file_path) {
     FILE *f = fopen(file_path, "rb");
     if (f == NULL) {
         fprintf(stderr, "ERROR: Could not open file `%s`: %s\n", file_path, strerror(errno));
