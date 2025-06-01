@@ -79,7 +79,7 @@ void adm_dump_stack(FILE *stream, const ADM *adm);
 
 void adm_load_program_from_memory(ADM *adm, Inst *program, size_t program_size);
 
-void adm_save_program_to_file(Inst *program, size_t program_size, const char *file_path);
+void adm_save_program_to_file(const ADM *adm, const char *file_path);
 void adm_load_program_to_file(ADM *adm, const char *file_path);
 
 
@@ -275,14 +275,14 @@ void adm_load_program_from_memory(ADM *adm, Inst *program, size_t program_size) 
     adm->program_size = program_size;
 }
 
-void adm_save_program_to_file(Inst *program, size_t program_size, const char *file_path) {
+void adm_save_program_to_file(const ADM *adm, const char *file_path) {
     FILE *f = fopen(file_path, "wb");
     if (f == NULL) {
         fprintf(stderr, "ERROR: Could not open file `%s`: %s\n", file_path, strerror(errno));
         exit(1);
     }
 
-    fwrite(program, sizeof(program[0]), program_size, f);
+    fwrite(adm->program, sizeof(adm->program[0]), adm->program_size, f);
 
     if (ferror(f)) {
         fprintf(stderr, "ERROR: Could not write to file `%s`: %s\n", file_path, strerror(errno));
