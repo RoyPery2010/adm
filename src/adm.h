@@ -425,36 +425,35 @@ int sv_to_int(String_View sv) {
 }
 
 Inst adm_translate_line(String_View line) {
-    line = sv_trim_left(line);
-    String_View inst_name = sv_chop_by_delim(&line, ' ');
-
-    if (sv_eq(inst_name, cstr_as_sv("push"))) {
-        line = sv_trim_left(line);
-        int operand = sv_to_int(sv_trim_right(line));
-        return (Inst) {.type = INST_PUSH, .operand = operand};
-    } else if (sv_eq(inst_name, cstr_as_sv("dup"))) {
-        line = sv_trim_left(line);
-        int operand = sv_to_int(sv_trim_right(line));
-        return (Inst) {.type = INST_DUP, .operand = operand};
-    } else if (sv_eq(inst_name, cstr_as_sv("plus"))) {
-        return (Inst) {.type = INST_PLUS};
-    } else if (sv_eq(inst_name, cstr_as_sv("jmp"))) {
-        line = sv_trim_left(line);
-        int operand = sv_to_int(sv_trim_right(line));
-        return (Inst) {.type = INST_JMP, .operand = operand};
-    } else {
-        fprintf(stderr, "ERROR: unknown instruction `%.*s`", (int) inst_name.count, inst_name.data);
-        exit(1);
+    line = sv_trim(line);
+    if (line.count == 0 || line.data[0] == '#') {
+        return (Inst){.type = INST_NOP};
     }
 
+    String_View original = line;
+
+    String_View word = sv_chop_by_delim(&line, ' ');
+    if (sv_eq(word, cstr_as_sv("push"))) {
+        return (Inst){.type = INST_PUSH, .operand = sv_to_int(sv_trim(line))};
+    } else if (sv_eq(word, cstr_as_sv("dup"))) {
+        return (Inst){.type = INST_DUP, .operand = sv_to_int(sv_trim(line))};
+    } else if (sv_eq(word, cstr_as_sv("plus"))) {
+        return (Inst){.type = INST_PLUS};
+    } else if (sv_eq(word, cstr_as_sv("jmp"))) {
+        return (Inst){.type = INST_JMP, .operand = sv_to_int(sv_trim(line))};
+    } else {
+        fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
+        exit(1);
+    }
 }
+
 
 size_t adm_translate_source(String_View source, Inst *program, size_t program_capacity) {
     size_t program_size = 0;
     while (source.count > 0) {
         assert(program_size < program_capacity);
         String_View line = sv_chop_by_delim(&source, '\n');
-        if (line.count > 0) {
+        if (line.count > 0 && *line.data != '#') {
             program[program_size++] = adm_translate_line(line);
         }
     }
