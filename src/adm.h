@@ -75,51 +75,7 @@ typedef enum {
     NUMBER_OF_INSTS,
 } Inst_Type;
 
-static const char *inst_name(Inst_Type type) {
-    switch (type) {
-        case INST_NOP:         return "nop";
-        case INST_PUSH:        return "push";
-        case INST_DUP:         return "dup";
-        case INST_PLUSI:       return "plusi";
-        case INST_MINUSI:      return "minusi";
-        case INST_MULTI:       return "multi";
-        case INST_DIVI:        return "divi";
-        case INST_PLUSF:       return "plusf";
-        case INST_MINUSF:      return "minusf";
-        case INST_MULTF:       return "multf";
-        case INST_DIVF:        return "divf";
-        case INST_JMP:         return "jmp";
-        case INST_JMP_IF:      return "jmp_if";
-        case INST_EQ:          return "eq";
-        case INST_HALT:        return "halt";
-        case INST_PRINT_DEBUG: return "print_debug";
-        case NUMBER_OF_INSTS:
-        default: assert(0 && "inst_name: Unreachable");
-    }
-}
 
-static int inst_has_operand(Inst_Type type) {
-    switch (type) {
-        case INST_NOP:         return 0;
-        case INST_PUSH:        return 1;
-        case INST_DUP:         return 1;
-        case INST_PLUSI:       return 0;
-        case INST_MINUSI:      return 0;
-        case INST_MULTI:       return 0;
-        case INST_DIVI:        return 0;
-        case INST_PLUSF:       return 0;
-        case INST_MINUSF:      return 0;
-        case INST_MULTF:       return 0;
-        case INST_DIVF:        return 0;
-        case INST_JMP:         return 1;
-        case INST_JMP_IF:      return 1;
-        case INST_EQ:          return 0;
-        case INST_HALT:        return 0;
-        case INST_PRINT_DEBUG: return 0;
-        case NUMBER_OF_INSTS:
-        default: assert(0 && "inst_name: Unreachable");
-    }
-}
 
 typedef struct {
     Inst_Type type;
@@ -200,6 +156,54 @@ void pasm_push_deferred_operand(Pasm *pasm, Inst_Addr addr, String_View label);
 void adm_translate_source(String_View source, ADM *adm, Pasm *lt);
 
 #ifdef ADM_IMPLEMENTATION
+const char *inst_name(Inst_Type type);
+int inst_has_operand(Inst_Type type);
+Word number_literal_as_word(String_View sv);
+const char *inst_name(Inst_Type type) {
+    switch (type) {
+        case INST_NOP:         return "nop";
+        case INST_PUSH:        return "push";
+        case INST_DUP:         return "dup";
+        case INST_PLUSI:       return "plusi";
+        case INST_MINUSI:      return "minusi";
+        case INST_MULTI:       return "multi";
+        case INST_DIVI:        return "divi";
+        case INST_PLUSF:       return "plusf";
+        case INST_MINUSF:      return "minusf";
+        case INST_MULTF:       return "multf";
+        case INST_DIVF:        return "divf";
+        case INST_JMP:         return "jmp";
+        case INST_JMP_IF:      return "jmp_if";
+        case INST_EQ:          return "eq";
+        case INST_HALT:        return "halt";
+        case INST_PRINT_DEBUG: return "print_debug";
+        case NUMBER_OF_INSTS:
+        default: assert(0 && "inst_name: Unreachable");
+    }
+}
+
+int inst_has_operand(Inst_Type type) {
+    switch (type) {
+        case INST_NOP:         return 0;
+        case INST_PUSH:        return 1;
+        case INST_DUP:         return 1;
+        case INST_PLUSI:       return 0;
+        case INST_MINUSI:      return 0;
+        case INST_MULTI:       return 0;
+        case INST_DIVI:        return 0;
+        case INST_PLUSF:       return 0;
+        case INST_MINUSF:      return 0;
+        case INST_MULTF:       return 0;
+        case INST_DIVF:        return 0;
+        case INST_JMP:         return 1;
+        case INST_JMP_IF:      return 1;
+        case INST_EQ:          return 0;
+        case INST_HALT:        return 0;
+        case INST_PRINT_DEBUG: return 0;
+        case NUMBER_OF_INSTS:
+        default: assert(0 && "inst_has_operand: Unreachable");
+    }
+}
 ADM adm = {0};
 
 const char *err_as_cstr(Err err) {
@@ -606,6 +610,27 @@ void pasm_push_deferred_operand(Pasm *pasm, Inst_Addr addr, String_View label) {
     };
 }
 
+Word number_literal_as_word(String_View sv) {
+    assert(sv.count < 1024);
+    char cstr[sv.count + 1];
+    char *endptr = 0;
+
+    memcpy(cstr, sv.data, sv.count);
+    cstr[sv.count] = '\0';
+
+    Word result = {0};
+
+    result.as_u64 = strtoull(cstr, &endptr, 10);
+    if ((size_t) (endptr - cstr) != sv.count) {
+        result.as_f64 = strtod(cstr, &endptr);
+        if ((size_t) (endptr - cstr) != sv.count) {
+            fprintf(stderr, "ERROR: `%s` is not a valid number literal\n", cstr);
+            exit(1);
+        }
+    }
+    return result;
+}
+
 
 
 void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
@@ -645,7 +670,7 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
             printf("Found push %.*s\n", (int)line.count, line.data);
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_PUSH, 
-                .operand = {.as_i64 = sv_to_int(sv_trim(line))}
+                .operand =  number_literal_as_word(sv_trim(line))
             };
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_DUP)))) {
             adm->program[adm->program_size++] = (Inst){
@@ -663,6 +688,10 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
         } else if(sv_eq(word, cstr_as_sv(inst_name(INST_PLUSF)))) {
             adm->program[adm->program_size++] = (Inst){
                 .type = INST_PLUSF
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_DIVF)))) {
+            adm->program[adm->program_size++] = (Inst){
+                .type = INST_DIVF
             };
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_JMP)))) {
             String_View labelString = sv_trim(line);
