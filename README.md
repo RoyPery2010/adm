@@ -6,4 +6,5 @@
 ```console
 $ make
 $ make examples
-$ ./admi ./examples/fib.adm
+$ ./adme -i ./examples/fib.adm -l 69
+$ ./adme -i ./examples/e.adm
