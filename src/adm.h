@@ -530,6 +530,10 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
             };
             //printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
             label_table_push(lt, label, adm->program_size);
+        } else if (sv_eq(word, cstr_as_sv("nop"))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_NOP
+            };
         } else if (sv_eq(word, cstr_as_sv("push"))) {
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_PUSH, 
@@ -547,11 +551,18 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
         } else if (sv_eq(word, cstr_as_sv("jmp"))) {
             String_View labelString = sv_trim(line);
             int labelInt = sv_to_int(labelString);
-            label_table_push_unresolved_jmp(lt, adm->program_size, labelString);
-            adm->program[adm->program_size++] = (Inst){
-                .type = INST_JMP,
-                .operand = labelInt, 
-            };
+            if (labelInt > 0 && isdigit(*labelString.data)) {
+                adm->program[adm->program_size++] = (Inst){
+                    .type = INST_JMP,
+                    .operand = labelInt, 
+                };
+            } else {
+                label_table_push_unresolved_jmp(lt, adm->program_size, labelString);
+                adm->program[adm->program_size++] = (Inst){
+                    .type = INST_JMP
+                };
+            }
+            
         } else {
             fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
             exit(1);
