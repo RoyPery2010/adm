@@ -12,43 +12,11 @@ int main(int argc, char *argv[]) {
     adm_load_program_from_file(&adm, input_file_path);
 
     for (Inst_Addr i = 0; i < adm.program_size; ++i) {
-        switch (adm.program[i].type) {
-            case INST_NOP:
-                printf("nop\n");
-                break;
-            case INST_PUSH:
-                printf("push %ld\n", adm.program[i].operand.as_i64);
-                break;
-            case INST_DUP:
-                printf("dup %ld\n", adm.program[i].operand.as_i64);
-                break;
-            case INST_PLUS:
-                printf("plus\n");
-                break;
-            case INST_MINUS:
-                printf("minus\n");
-                break;
-            case INST_MULT:
-                printf("mult\n");
-                break;
-            case INST_DIV:
-                printf("div\n");
-                break;
-            case INST_JMP:
-                printf("jmp %ld\n", adm.program[i].operand.as_i64);
-                break;
-            case INST_JMP_IF:
-                printf("jmp_if %ld\n", adm.program[i].operand.as_i64);
-                break;
-            case INST_EQ:
-                printf("eq\n");
-                break;
-            case INST_HALT:
-                printf("halt\n");
-                break;
-            case INST_PRINT_DEBUG:
-                printf("print_debug\n");
-                break;
-        }
+            printf("%s", inst_names[adm.program[i].type]);
+            if (inst_has_operand[adm.program[i].type]) {
+                printf(" %ld", adm.program[i].operand.as_i64);
+            }
+            printf("\n");
     }
+    return 0;
 }

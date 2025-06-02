@@ -59,16 +59,45 @@ typedef enum {
     INST_NOP = 0, //0
     INST_PUSH, //1
     INST_DUP, //2
-    INST_PLUS, //3
-    INST_MINUS, //4
-    INST_MULT, //5
-    INST_DIV, //6
+    INST_PLUSI, //3
+    INST_MINUSI, //4
+    INST_MULTI, //5
+    INST_DIVI, //6
     INST_JMP, //7
     INST_JMP_IF,
     INST_EQ,
     INST_HALT,
     INST_PRINT_DEBUG,
 } Inst_Type;
+
+const char *inst_names[] = {
+    [INST_NOP]         = "nop",
+    [INST_PUSH]        = "push",
+    [INST_DUP]         = "dup",
+    [INST_PLUSI]       = "plusi",
+    [INST_MINUSI]      = "minusi",
+    [INST_MULTI]       = "multi",
+    [INST_DIVI]        = "divi",
+    [INST_JMP]         = "jmp",
+    [INST_JMP_IF]      = "jmp_if",
+    [INST_EQ]          = "eq",
+    [INST_HALT]        = "halt",
+    [INST_PRINT_DEBUG] = "print_debug",
+};
+const int inst_has_operand[] = {
+    [INST_NOP]         = 0,
+    [INST_PUSH]        = 1,
+    [INST_DUP]         = 1,
+    [INST_PLUSI]       = 0,
+    [INST_MINUSI]      = 0,
+    [INST_MULTI]       = 0,
+    [INST_DIVI]        = 0,
+    [INST_JMP]         = 1,
+    [INST_JMP_IF]      = 1,
+    [INST_EQ]          = 0,
+    [INST_HALT]        = 0,
+    [INST_PRINT_DEBUG] = 0,
+};
 
 typedef struct {
     Inst_Type type;
@@ -177,10 +206,10 @@ const char *inst_type_as_cstr(Inst_Type type) {
     switch (type) {
         case INST_NOP: return "INST_NOP";
         case INST_PUSH: return "INST_PUSH";
-        case INST_PLUS: return "INST_PLUS";
-        case INST_MINUS: return "INST_MINUS";
-        case INST_MULT: return "INST_MULT";
-        case INST_DIV: return "INST_DIV";
+        case INST_PLUSI: return "INST_PLUSI";
+        case INST_MINUSI: return "INST_MINUSI";
+        case INST_MULTI: return "INST_MULTI";
+        case INST_DIVI: return "INST_DIVI";
         case INST_JMP: return "INST_JMP";
         case INST_JMP_IF: return "INST_JMP_IF";
         case INST_EQ: return "INST_EQ";
@@ -226,7 +255,7 @@ Err adm_execute_inst(ADM *adm) {
             adm->stack[adm->stack_size++] = inst.operand;
             adm->ip += 1;
             break;
-        case INST_PLUS:
+        case INST_PLUSI:
             if (adm->stack_size < 2) {
                 return ERR_STACK_UNDERFLOW;
             }
@@ -234,7 +263,7 @@ Err adm_execute_inst(ADM *adm) {
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
-        case INST_MINUS:
+        case INST_MINUSI:
             if (adm->stack_size < 2) {
                 return ERR_STACK_UNDERFLOW;
             }
@@ -242,7 +271,7 @@ Err adm_execute_inst(ADM *adm) {
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
-        case INST_MULT:
+        case INST_MULTI:
             if (adm->stack_size < 2) {
                 return ERR_STACK_UNDERFLOW;
             }
@@ -250,7 +279,7 @@ Err adm_execute_inst(ADM *adm) {
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
-        case INST_DIV:
+        case INST_DIVI:
             if (adm->stack_size < 2) {
                 return ERR_STACK_UNDERFLOW;
             }
@@ -543,28 +572,30 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
             word = sv_trim(sv_chop_by_delim(&line, ' '));
             printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
             pasm_push_label(lt, label, adm->program_size);
-        }
-        
-        else if (sv_eq(word, cstr_as_sv("nop"))) {
+        } else if (sv_eq(word, cstr_as_sv(inst_names[INST_NOP]))) {
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_NOP
             };
-        } else if (sv_eq(word, cstr_as_sv("push"))) {
+        } else if (sv_eq(word, cstr_as_sv(inst_names[INST_PUSH]))) {
             printf("Found push %.*s\n", (int)line.count, line.data);
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_PUSH, 
                 .operand = {.as_i64 = sv_to_int(sv_trim(line))}
             };
-        } else if (sv_eq(word, cstr_as_sv("dup"))) {
+        } else if (sv_eq(word, cstr_as_sv(inst_names[INST_DUP]))) {
             adm->program[adm->program_size++] = (Inst){
                 .type = INST_DUP, 
                 .operand = {.as_i64 = sv_to_int(sv_trim(line))}
             };
-        } else if (sv_eq(word, cstr_as_sv("plus"))) {
+        } else if (sv_eq(word, cstr_as_sv(inst_names[INST_PLUSI]))) {
             adm->program[adm->program_size++] = (Inst){
-                .type = INST_PLUS
+                .type = INST_PLUSI
             };
-        } else if (sv_eq(word, cstr_as_sv("jmp"))) {
+        } else if(sv_eq(word, cstr_as_sv(inst_names[INST_HALT]))) {
+            adm->program[adm->program_size++] = (Inst){
+                .type = INST_HALT
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_names[INST_JMP]))) {
             String_View labelString = sv_trim(line);
             int labelInt = sv_to_int(labelString);
             if (labelInt > 0 && isdigit(*labelString.data)) {

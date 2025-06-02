@@ -7,7 +7,7 @@
 loop: 
     dup 1
     dup 1
-    plus
+    plusi
     jmp loop
 
 
