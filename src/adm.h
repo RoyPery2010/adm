@@ -2,6 +2,7 @@
 #define ADM_H
 
 
+
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +17,8 @@ typedef int64_t Word;
 #define ARRAY_SIZE(xs) (sizeof(xs) / sizeof((xs)[0]))
 #define ADM_STACK_CAPACITY 1024
 #define ADM_PROGRAM_CAPACITY 1024
+#define LABEL_CAPACITY 1024
+#define UNRESOLVED_JMPS_CAPACITY 1024
 
 #define MAKE_INST_PUSH(value) {.type = INST_PUSH, .operand = (value)}
 #define MAKE_INST_PLUS {.type = INST_PLUS}
@@ -23,7 +26,10 @@ typedef int64_t Word;
 #define MAKE_INST_MULT {.type = INST_MULT}
 #define MAKE_INST_DIV {.type = INST_DIV}
 #define MAKE_INST_JMP(addr) {.type = INST_JMP, .operand = (addr)}
-#define MAKE_INST_HALT {.type = INST_HALT, .operand = (addr)}
+#define MAKE_INST_HALT {.type = INST_HALT, .operand = 0}
+#define MAKE_INST_JMP_IF(addr) {.type = INST_JMP_IF, .operand = (addr)}
+#define MAKE_INST_EQ {.type = INST_EQ}
+#define MAKE_INST_PRINT_DEBUG {.type = INST_PRINT_DEBUG, .operand = 0}
 #define MAKE_INST_DUP(addr) {.type = INST_DUP, .operand = (addr)}
 
 typedef enum {
@@ -39,14 +45,14 @@ typedef enum {
 const char *err_as_cstr(Err err);
 
 typedef enum {
-    INST_NOP = 0,
-    INST_PUSH,
-    INST_DUP,
-    INST_PLUS,
-    INST_MINUS,
-    INST_MULT,
-    INST_DIV,
-    INST_JMP,
+    INST_NOP = 0, //0
+    INST_PUSH, //1
+    INST_DUP, //2
+    INST_PLUS, //3
+    INST_MINUS, //4
+    INST_MULT, //5
+    INST_DIV, //6
+    INST_JMP, //7
     INST_JMP_IF,
     INST_EQ,
     INST_HALT,
@@ -102,10 +108,34 @@ String_View sv_trim(String_View sv);
 String_View sv_chop_by_delim(String_View *sv, char delim);
 int sv_eq(String_View a, String_View b);
 int sv_to_int(String_View sv);
-Inst adm_translate_line(String_View line);
 
-size_t adm_translate_source(String_View source, Inst *program, size_t program_capacity);
 String_View slurp_file(const char *file_path);
+
+typedef struct {
+    String_View name;
+    Word addr;
+} Label;
+
+typedef struct {
+    Word addr;
+    String_View label;
+} Unresolved_Jmp;
+
+typedef struct {
+    Label labels[LABEL_CAPACITY];
+    size_t labels_size;
+    Unresolved_Jmp unresolved_jmps[UNRESOLVED_JMPS_CAPACITY];
+    size_t unresolved_jmps_size;
+} Label_Table;
+
+Label_Table lt = {0};
+
+Word label_table_find(Label_Table *lt, String_View name);
+void label_table_push(Label_Table *lt, String_View name, Word addr);
+void label_table_push_unresolved_jmp(Label_Table *lt, Word addr, String_View label);
+
+
+void adm_translate_source(String_View source, ADM *adm, Label_Table *lt);
 
 #ifdef ADM_IMPLEMENTATION
 ADM adm = {0};
@@ -151,7 +181,9 @@ const char *inst_type_as_cstr(Inst_Type type) {
 }
 
 Err adm_execute_program(ADM *adm, int limit) {
+    //printf("Executing program with %zu instructions\n", adm->program_size);
     while (limit != 0 && !adm->halt) {
+        printf("Executing instruction at ip=%ld: %s\n", adm->ip, inst_type_as_cstr(adm->program[adm->ip].type));
         Err err = adm_execute_inst(adm);
         if (err != ERR_OK) {
             return err;
@@ -302,7 +334,12 @@ void adm_save_program_to_file(const ADM *adm, const char *file_path) {
         exit(1);
     }
 
-    fwrite(adm->program, sizeof(adm->program[0]), adm->program_size, f);
+    fwrite(adm->program, sizeof(Inst), adm->program_size, f);
+
+    /*for (Word i = 0; i < adm->program_size; i++) {
+        fprintf(f, "%d %ld\n", adm->program[i].type, adm->program[i].operand);
+    }*/
+
 
     if (ferror(f)) {
         fprintf(stderr, "ERROR: Could not write to file `%s`: %s\n", file_path, strerror(errno));
@@ -332,19 +369,30 @@ void adm_load_program_from_file(ADM *adm, const char *file_path) {
     }
 
 
-    assert(m % sizeof(adm->program[0]) == 0);
-    assert((size_t) m <= ADM_PROGRAM_CAPACITY * sizeof(adm->program[0]));
+    assert(m % sizeof(Inst) == 0);
+    assert((size_t) m <= ADM_PROGRAM_CAPACITY * sizeof(Inst));
 
     if (fseek(f, 0, SEEK_SET) < 0) {
         fprintf(stderr, "ERROR: Could not read file `%s`: %s\n", file_path, strerror(errno));
         exit(1);
     }
+    rewind(f);
 
-    adm->program_size = fread(adm->program, sizeof(adm->program[0]), m / sizeof(adm->program[0]), f);
+    adm->program_size = m / sizeof(Inst);
+    fread(adm->program, sizeof(Inst), adm->program_size, f);
     if (ferror(f)) {
         fprintf(stderr, "ERROR: Could not read file `%s`: %s\n", file_path, strerror(errno));
         exit(1);
     }
+    /*adm->program_size = 0;
+    while (fscanf(f, "%d %ld", (int*)&adm->program[adm->program_size].type, &adm->program[adm->program_size].operand) == 2) {
+        adm->program_size++;
+    }
+    
+    for (Word i = 0; i < adm->program_size; ++i) {
+        printf("%s %ld\n", inst_type_as_cstr(adm->program[i].type), adm->program[i].operand);
+    }*/
+
     fclose(f);
 }
 
@@ -394,19 +442,19 @@ String_View sv_chop_by_delim(String_View *sv, char delim) {
     while (i < sv->count && sv->data[i] != delim) {
         i += 1;
     }
+    //printf("sv_chop_by_delim: i=%zu, count=%zu, delim='%c'\n", i, sv->count, delim);
 
     String_View result = {
         .count = i,
         .data = sv->data,
     };
-
     if (i < sv->count) {
         sv->count -= i + 1;
         sv->data += i + 1;
-    } else {
+    }/*/ else {
         sv->count -= i;
         sv->data += i;
-    }
+    }*/
     return result;
 }
 int sv_eq(String_View a, String_View b) {
@@ -424,40 +472,105 @@ int sv_to_int(String_View sv) {
     return result;
 }
 
-Inst adm_translate_line(String_View line) {
-    line = sv_trim(line);
-    if (line.count == 0 || line.data[0] == '#') {
-        return (Inst){.type = INST_NOP};
-    }
 
-    String_View original = line;
 
-    String_View word = sv_chop_by_delim(&line, ' ');
-    if (sv_eq(word, cstr_as_sv("push"))) {
-        return (Inst){.type = INST_PUSH, .operand = sv_to_int(sv_trim(line))};
-    } else if (sv_eq(word, cstr_as_sv("dup"))) {
-        return (Inst){.type = INST_DUP, .operand = sv_to_int(sv_trim(line))};
-    } else if (sv_eq(word, cstr_as_sv("plus"))) {
-        return (Inst){.type = INST_PLUS};
-    } else if (sv_eq(word, cstr_as_sv("jmp"))) {
-        return (Inst){.type = INST_JMP, .operand = sv_to_int(sv_trim(line))};
-    } else {
-        fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
-        exit(1);
+Word label_table_find(Label_Table *lt, String_View name) {
+    for (size_t i = 0; i < lt->labels_size; ++i) {
+        printf("label_table_find: i=%zu, name=%.*s\n", i, (int)lt->labels[i].name.count, lt->labels[i].name.data);
+        if (sv_eq(lt->labels[i].name, name)) {
+            return lt->labels[i].addr;
+        }
     }
+    fprintf(stderr, "ERROR: Label `%.*s` does not exists\n", (int)name.count, name.data);
+    exit(1);
+}
+
+void label_table_push(Label_Table *lt, String_View name, Word addr) {
+    assert(lt->labels_size < LABEL_CAPACITY);
+    lt->labels[lt->labels_size++] = (Label) {
+        .name = name,
+        .addr = addr,
+    };
+}
+
+void label_table_push_unresolved_jmp(Label_Table *lt, Word addr, String_View label) {
+    assert(lt->unresolved_jmps_size < UNRESOLVED_JMPS_CAPACITY);
+    lt->unresolved_jmps[lt->unresolved_jmps_size++] = (Unresolved_Jmp) {
+        .addr = addr,
+        .label = label,
+    };
 }
 
 
-size_t adm_translate_source(String_View source, Inst *program, size_t program_capacity) {
-    size_t program_size = 0;
+
+void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
+    adm->program_size = 0;
     while (source.count > 0) {
-        assert(program_size < program_capacity);
+        //if (adm->program_size >= 16) break;
+        assert(adm->program_size < ADM_PROGRAM_CAPACITY);
         String_View line = sv_chop_by_delim(&source, '\n');
+        //printf("Line 1: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
         if (line.count > 0 && *line.data != '#') {
-            program[program_size++] = adm_translate_line(line);
+            line = sv_trim(line);
+        }
+        //printf("Line 2: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
+        if (line.count == 0 || line.data[0] == '#') {
+            continue; // skip empty lines and comments
+        }
+        //printf("Line 3: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
+   
+        String_View original = line;
+
+        String_View word = sv_chop_by_delim(&line, ' ');
+        //printf("Word: %.*s count=%d\n", (int)word.count, word.data, (int)word.count);
+        if (word.count > 0 && word.data[word.count - 1] == ':') {
+            String_View label = {
+                .count = word.count - 1,
+                .data = word.data,
+            };
+            //printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
+            label_table_push(lt, label, adm->program_size);
+        } else if (sv_eq(word, cstr_as_sv("push"))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_PUSH, 
+                .operand = sv_to_int(sv_trim(line))
+            };
+        } else if (sv_eq(word, cstr_as_sv("dup"))) {
+            adm->program[adm->program_size++] = (Inst){
+                .type = INST_DUP, 
+                .operand = sv_to_int(sv_trim(line))
+            };
+        } else if (sv_eq(word, cstr_as_sv("plus"))) {
+            adm->program[adm->program_size++] = (Inst){
+                .type = INST_PLUS
+            };
+        } else if (sv_eq(word, cstr_as_sv("jmp"))) {
+            String_View labelString = sv_trim(line);
+            int labelInt = sv_to_int(labelString);
+            label_table_push_unresolved_jmp(lt, adm->program_size, labelString);
+            adm->program[adm->program_size++] = (Inst){
+                .type = INST_JMP,
+                .operand = labelInt, 
+            };
+        } else {
+            fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
+            exit(1);
         }
     }
-    return program_size;
+    for (size_t i = 0; i < lt->unresolved_jmps_size; ++i) {
+        Word addr = label_table_find(lt, lt->unresolved_jmps[i].label);
+        /*printf("Resolving unresolved jmp: %.*s at addr %ld to %ld\n", 
+               (int)lt->unresolved_jmps[i].label.count, 
+               lt->unresolved_jmps[i].label.data, 
+               lt->unresolved_jmps[i].addr, 
+               addr);*/
+        adm->program[lt->unresolved_jmps[i].addr].operand = addr;
+    }
+
+    
+    for (Word i = 0; i < adm->program_size; ++i) {
+        printf("%s %ld\n", inst_type_as_cstr(adm->program[i].type), adm->program[i].operand);
+    }
 }
 
 String_View slurp_file(const char *file_path) {

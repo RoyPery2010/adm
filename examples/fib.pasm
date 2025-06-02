@@ -1,8 +1,11 @@
     # First Two Fibonacci Numbers
     push 0  
     push 1
-    # The Loop
+# The Loop
+loop:
     dup 1
     dup 1
     plus
-    jmp 2 # Repeat
+    jmp loop
+
+

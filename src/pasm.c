@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     const char *output_file_path = shift(&argc, &argv);
 
     String_View source = slurp_file(input_file_path);
-    adm.program_size = adm_translate_source(source, adm.program, ADM_PROGRAM_CAPACITY);
+    adm_translate_source(source, &adm, &lt);
 
     if (adm.program_size == 0) {
         fprintf(stderr, "error: failed to assemble program from '%s'\n", input_file_path);
