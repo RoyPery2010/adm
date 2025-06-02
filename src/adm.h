@@ -183,7 +183,7 @@ const char *inst_type_as_cstr(Inst_Type type) {
 Err adm_execute_program(ADM *adm, int limit) {
     //printf("Executing program with %zu instructions\n", adm->program_size);
     while (limit != 0 && !adm->halt) {
-        printf("Executing instruction at ip=%ld: %s\n", adm->ip, inst_type_as_cstr(adm->program[adm->ip].type));
+        //printf("Executing instruction at ip=%ld: %s\n", adm->ip, inst_type_as_cstr(adm->program[adm->ip].type));
         Err err = adm_execute_inst(adm);
         if (err != ERR_OK) {
             return err;
@@ -508,8 +508,8 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
     while (source.count > 0) {
         //if (adm->program_size >= 16) break;
         assert(adm->program_size < ADM_PROGRAM_CAPACITY);
-        String_View line = sv_chop_by_delim(&source, '\n');
-        //printf("Line 1: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
+        String_View line = sv_trim(sv_chop_by_delim(&source, '\n'));
+        printf("Line 1: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
         if (line.count > 0 && *line.data != '#') {
             line = sv_trim(line);
         }
@@ -522,19 +522,24 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
         String_View original = line;
 
         String_View word = sv_chop_by_delim(&line, ' ');
-        //printf("Word: %.*s count=%d\n", (int)word.count, word.data, (int)word.count);
+        printf("Word: `%.*s` count=%d\n", (int)word.count, word.data, (int)word.count);
         if (word.count > 0 && word.data[word.count - 1] == ':') {
             String_View label = {
                 .count = word.count - 1,
                 .data = word.data,
+
             };
-            //printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
+            word = sv_trim(sv_chop_by_delim(&line, ' '));
+            printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
             label_table_push(lt, label, adm->program_size);
-        } else if (sv_eq(word, cstr_as_sv("nop"))) {
+        }
+        
+        else if (sv_eq(word, cstr_as_sv("nop"))) {
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_NOP
             };
         } else if (sv_eq(word, cstr_as_sv("push"))) {
+            printf("Found push %.*s\n", (int)line.count, line.data);
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_PUSH, 
                 .operand = sv_to_int(sv_trim(line))
@@ -556,16 +561,18 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
                     .type = INST_JMP,
                     .operand = labelInt, 
                 };
+                printf("Adding jmp to addr %d\n", labelInt);
             } else {
                 label_table_push_unresolved_jmp(lt, adm->program_size, labelString);
                 adm->program[adm->program_size++] = (Inst){
                     .type = INST_JMP
                 };
+                printf("Adding unresolved jmp to label %.*s at addr %ld\n", 
+                       (int)labelString.count, labelString.data, adm->program_size);
             }
-            
         } else {
-            fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
-            exit(1);
+                fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
+                exit(1);
         }
     }
     for (size_t i = 0; i < lt->unresolved_jmps_size; ++i) {
@@ -577,7 +584,6 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
                addr);*/
         adm->program[lt->unresolved_jmps[i].addr].operand = addr;
     }
-
     
     for (Word i = 0; i < adm->program_size; ++i) {
         printf("%s %ld\n", inst_type_as_cstr(adm->program[i].type), adm->program[i].operand);

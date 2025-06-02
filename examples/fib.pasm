@@ -1,12 +1,10 @@
-    jmp 1
     nop
     nop
     nop
     # First Two Fibonacci Numbers
     push 0  
     push 1
-# The Loop
-loop:
+loop: 
     dup 1
     dup 1
     plus
