@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-char *shift(int *argc, char ***argv) {
+static char *shift(int *argc, char ***argv) {
     assert(*argc > 0);
     char *result = **argv;
     *argv += 1;
@@ -11,7 +11,7 @@ char *shift(int *argc, char ***argv) {
     return result;
 }
 
-void usage(FILE *stream, const char *program) {
+static void usage(FILE *stream, const char *program) {
     fprintf(stream, "Usage: %s <input.pasm> <output.adm>\n", program);
 }
 
@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
     const char *output_file_path = shift(&argc, &argv);
 
     String_View source = slurp_file(input_file_path);
-    adm_translate_source(source, &adm, &lt);
+    adm_translate_source(source, &adm, &pasm);
 
     if (adm.program_size == 0) {
         fprintf(stderr, "error: failed to assemble program from '%s'\n", input_file_path);

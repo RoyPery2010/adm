@@ -18,7 +18,7 @@ typedef int64_t Word;
 #define ADM_STACK_CAPACITY 1024
 #define ADM_PROGRAM_CAPACITY 1024
 #define LABEL_CAPACITY 1024
-#define UNRESOLVED_JMPS_CAPACITY 1024
+#define DEFERED_OPERANDS_CAPACITY 1024
 
 #define MAKE_INST_PUSH(value) {.type = INST_PUSH, .operand = (value)}
 #define MAKE_INST_PLUS {.type = INST_PLUS}
@@ -119,23 +119,23 @@ typedef struct {
 typedef struct {
     Word addr;
     String_View label;
-} Unresolved_Jmp;
+} Defered_Operand;
 
 typedef struct {
     Label labels[LABEL_CAPACITY];
     size_t labels_size;
-    Unresolved_Jmp unresolved_jmps[UNRESOLVED_JMPS_CAPACITY];
-    size_t unresolved_jmps_size;
-} Label_Table;
+    Defered_Operand defered_operands[DEFERED_OPERANDS_CAPACITY];
+    size_t defered_operands_size;
+} Pasm;
 
-Label_Table lt = {0};
+Pasm pasm = {0};
 
-Word label_table_find(Label_Table *lt, String_View name);
-void label_table_push(Label_Table *lt, String_View name, Word addr);
-void label_table_push_unresolved_jmp(Label_Table *lt, Word addr, String_View label);
+Word pasm_find_label_addr(Pasm *pasm, String_View name);
+void pasm_push_label(Pasm *pasm, String_View name, Word addr);
+void pasm_push_defered_operand(Pasm *pasm, Word addr, String_View label);
 
 
-void adm_translate_source(String_View source, ADM *adm, Label_Table *lt);
+void adm_translate_source(String_View source, ADM *adm, Pasm *lt);
 
 #ifdef ADM_IMPLEMENTATION
 ADM adm = {0};
@@ -474,28 +474,28 @@ int sv_to_int(String_View sv) {
 
 
 
-Word label_table_find(Label_Table *lt, String_View name) {
-    for (size_t i = 0; i < lt->labels_size; ++i) {
-        printf("label_table_find: i=%zu, name=%.*s\n", i, (int)lt->labels[i].name.count, lt->labels[i].name.data);
-        if (sv_eq(lt->labels[i].name, name)) {
-            return lt->labels[i].addr;
+Word pasm_find_label_addr(Pasm *pasm, String_View name) {
+    for (size_t i = 0; i < pasm->labels_size; ++i) {
+        printf("label_table_find: i=%zu, name=%.*s\n", i, (int)pasm->labels[i].name.count, pasm->labels[i].name.data);
+        if (sv_eq(pasm->labels[i].name, name)) {
+            return pasm->labels[i].addr;
         }
     }
     fprintf(stderr, "ERROR: Label `%.*s` does not exists\n", (int)name.count, name.data);
     exit(1);
 }
 
-void label_table_push(Label_Table *lt, String_View name, Word addr) {
-    assert(lt->labels_size < LABEL_CAPACITY);
-    lt->labels[lt->labels_size++] = (Label) {
+void pasm_push_label(Pasm *pasm, String_View name, Word addr) {
+    assert(pasm->labels_size < LABEL_CAPACITY);
+    pasm->labels[pasm->labels_size++] = (Label) {
         .name = name,
         .addr = addr,
     };
 }
 
-void label_table_push_unresolved_jmp(Label_Table *lt, Word addr, String_View label) {
-    assert(lt->unresolved_jmps_size < UNRESOLVED_JMPS_CAPACITY);
-    lt->unresolved_jmps[lt->unresolved_jmps_size++] = (Unresolved_Jmp) {
+void pasm_push_defered_operand(Pasm *pasm, Word addr, String_View label) {
+    assert(pasm->defered_operands_size < DEFERED_OPERANDS_CAPACITY);
+    pasm->defered_operands[pasm->defered_operands_size++] = (Defered_Operand) {
         .addr = addr,
         .label = label,
     };
@@ -503,7 +503,7 @@ void label_table_push_unresolved_jmp(Label_Table *lt, Word addr, String_View lab
 
 
 
-void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
+void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
     adm->program_size = 0;
     while (source.count > 0) {
         //if (adm->program_size >= 16) break;
@@ -531,7 +531,7 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
             };
             word = sv_trim(sv_chop_by_delim(&line, ' '));
             printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
-            label_table_push(lt, label, adm->program_size);
+            pasm_push_label(lt, label, adm->program_size);
         }
         
         else if (sv_eq(word, cstr_as_sv("nop"))) {
@@ -563,7 +563,7 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
                 };
                 printf("Adding jmp to addr %d\n", labelInt);
             } else {
-                label_table_push_unresolved_jmp(lt, adm->program_size, labelString);
+                pasm_push_defered_operand(lt, adm->program_size, labelString);
                 adm->program[adm->program_size++] = (Inst){
                     .type = INST_JMP
                 };
@@ -575,14 +575,14 @@ void adm_translate_source(String_View source, ADM *adm, Label_Table *lt) {
                 exit(1);
         }
     }
-    for (size_t i = 0; i < lt->unresolved_jmps_size; ++i) {
-        Word addr = label_table_find(lt, lt->unresolved_jmps[i].label);
+    for (size_t i = 0; i < pasm.defered_operands_size; ++i) {
+        Word addr = pasm_find_label_addr(lt, pasm.defered_operands[i].label);
         /*printf("Resolving unresolved jmp: %.*s at addr %ld to %ld\n", 
-               (int)lt->unresolved_jmps[i].label.count, 
-               lt->unresolved_jmps[i].label.data, 
-               lt->unresolved_jmps[i].addr, 
+               (int)pasm->defered_operands[i].label.count, 
+               pasm->defered_operands[i].label.data, 
+               pasm->defered_operands[i].addr, 
                addr);*/
-        adm->program[lt->unresolved_jmps[i].addr].operand = addr;
+        adm->program[pasm.defered_operands[i].addr].operand = addr;
     }
     
     for (Word i = 0; i < adm->program_size; ++i) {
