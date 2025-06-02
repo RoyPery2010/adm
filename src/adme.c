@@ -10,13 +10,14 @@ static char *shift(int *argc, char ***argv) {
 }
 
 static void usage(FILE *stream, const char *program) {
-    fprintf(stream, "Usage: %s -i <input.adm> -l <limit> [-h]\n", program);
+    fprintf(stream, "Usage: %s -i <input.adm> -l <limit> [-h] [-d]\n", program);
 }
 
 int main(int argc, char **argv) {
     const char *program = shift(&argc, &argv); // skip the program name
     const char *input_file_path = NULL;
     int limit = -1;
+    int debug = 0;
 
     while(argc > 0) {
         const char *flag = shift(&argc, &argv);
@@ -38,7 +39,9 @@ int main(int argc, char **argv) {
         } else if (strcmp(flag, "-h") == 0) {
             usage(stdout, program);
             exit(0);
-        }  else {
+        } else if (strcmp(flag, "-d") == 0) {
+            debug = 1;
+        } else {
             usage(stderr, program);
             fprintf(stderr, "ERROR: Unknown flag `%s`\n", flag);
             exit(1);
@@ -49,13 +52,29 @@ int main(int argc, char **argv) {
         fprintf(stderr, "ERROR: input was not provided\n");
         exit(1);
     }
-
     adm_load_program_from_file(&adm, input_file_path);
-    Err err = adm_execute_program(&adm, limit);
-    adm_dump_stack(stdout, &adm);
-    if (err != ERR_OK) {
-        fprintf(stderr, "ERROR: %s\n", err_as_cstr(err));
-        return 1;
+    if (!debug) {
+        Err err = adm_execute_program(&adm, limit);
+        adm_dump_stack(stdout, &adm);
+        if (err != ERR_OK) {
+            fprintf(stderr, "ERROR: %s\n", err_as_cstr(err));
+            return 1;
+        }
+    } else {
+        while (limit != 0 && !adm.halt) {
+            adm_dump_stack(stdout, &adm);
+            getchar();
+            Err err = adm_execute_inst(&adm);
+            if (err != ERR_OK) {
+                fprintf(stderr, "ERROR: %s\n", err_as_cstr(err));
+                return 1;
+            }
+
+            if (limit > 0) {
+                --limit;
+            }
+        }
     }
+    
     return 0;
 }

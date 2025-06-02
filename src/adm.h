@@ -59,6 +59,7 @@ typedef enum {
     INST_NOP = 0,
     INST_PUSH,
     INST_DUP,
+    INST_SWAP,
     INST_PLUSI,
     INST_MINUSI,
     INST_MULTI,
@@ -72,6 +73,8 @@ typedef enum {
     INST_EQ,
     INST_HALT,
     INST_PRINT_DEBUG,
+    INST_NOT,
+    INST_GEF,
     NUMBER_OF_INSTS,
 } Inst_Type;
 
@@ -177,6 +180,9 @@ const char *inst_name(Inst_Type type) {
         case INST_EQ:          return "eq";
         case INST_HALT:        return "halt";
         case INST_PRINT_DEBUG: return "print_debug";
+        case INST_SWAP:        return "swap";
+        case INST_NOT:         return "not";
+        case INST_GEF:         return "gef";
         case NUMBER_OF_INSTS:
         default: assert(0 && "inst_name: Unreachable");
     }
@@ -200,6 +206,9 @@ int inst_has_operand(Inst_Type type) {
         case INST_EQ:          return 0;
         case INST_HALT:        return 0;
         case INST_PRINT_DEBUG: return 0;
+        case INST_SWAP:        return 0;
+        case INST_NOT:         return 0;
+        case INST_GEF:         return 0;
         case NUMBER_OF_INSTS:
         default: assert(0 && "inst_has_operand: Unreachable");
     }
@@ -246,6 +255,9 @@ const char *inst_type_as_cstr(Inst_Type type) {
         case INST_HALT: return "INST_HALT";
         case INST_PRINT_DEBUG: return "INST_PRINT_DEBUG";
         case INST_DUP: return "INST_DUP";
+        case INST_SWAP: return "INST_SWAP";
+        case INST_NOT: return "INST_NOT";
+        case INST_GEF: return "INST_GEF";
         case NUMBER_OF_INSTS: 
         default: assert(0 && "inst_type_as_cstr: unreachable");
     }
@@ -390,7 +402,10 @@ Err adm_execute_inst(ADM *adm) {
                 return ERR_STACK_UNDERFLOW;
             }
 
-            printf("%lu\n", adm->stack[adm->stack_size - 1].as_u64);
+            fprintf(stdout, " u64: %lu, i64: %ld, f64: %lf, ptr: %p\n", adm->stack[adm->stack_size - 1].as_u64, 
+                    adm->stack[adm->stack_size - 1].as_i64, 
+                    adm->stack[adm->stack_size - 1].as_f64, 
+                    adm->stack[adm->stack_size - 1].as_ptr);
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
@@ -407,8 +422,42 @@ Err adm_execute_inst(ADM *adm) {
             adm->stack_size += 1;
             adm->ip += 1;
             break;
-        case NUMBER_OF_INSTS:
+        case INST_SWAP:
+            if (inst.operand.as_u64 >= adm->stack_size) {
+                printf("swap\n");
+                return ERR_STACK_UNDERFLOW;
+            }
+
+            const uint64_t a = adm->stack_size - 1;
+            const uint64_t b = adm->stack_size - 1 - inst.operand.as_u64;
+
+
+            Word t = adm->stack[a];
+            adm->stack[a] = adm->stack[b];
+            adm->stack[b] = t;
+            adm->ip += 1;
+            break;
+        case INST_NOT:
+            if (adm->stack_size < 1) {
+                return ERR_STACK_UNDERFLOW;
+            }
+
+            // Convert to boolean
+            adm->stack[adm->stack_size - 1].as_u64 = !adm->stack[adm->stack_size - 1].as_u64;
+            adm->ip += 1;
+            break;
+        case INST_GEF:
+            if (adm->stack_size < 2) {
+                return ERR_STACK_UNDERFLOW;
+            }
+
+            // Greater than or equal to
+            adm->stack[adm->stack_size - 2].as_u64 = adm->stack[adm->stack_size - 1].as_u64 >= adm->stack[adm->stack_size - 2].as_u64;
+            adm->stack_size -= 1;
+            adm->ip += 1;
+            break;
             
+        case NUMBER_OF_INSTS:
         default:
             return ERR_ILLEGAL_INST;
         }
@@ -636,7 +685,7 @@ Word number_literal_as_word(String_View sv) {
 void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
     adm->program_size = 0;
     while (source.count > 0) {
-        //if (adm->program_size >= 16) break;
+        //if (adm->program_size >= 8) break;
         assert(adm->program_size < ADM_PROGRAM_CAPACITY);
         String_View line = sv_trim(sv_chop_by_delim(&source, '\n'));
         printf("Line 1: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
@@ -693,6 +742,30 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
             adm->program[adm->program_size++] = (Inst){
                 .type = INST_DIVF
             };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_MULTF)))) {
+            adm->program[adm->program_size++] = (Inst){
+                .type = INST_MULTF
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_SWAP)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_SWAP
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_EQ)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_EQ
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_NOT)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_NOT
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_GEF)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_GEF
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_PRINT_DEBUG)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_PRINT_DEBUG
+            };
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_JMP)))) {
             String_View labelString = sv_trim(line);
             int labelInt = sv_to_int(labelString);
@@ -709,6 +782,23 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
                 };
                 printf("Adding unresolved jmp to label %.*s at addr %ld\n", 
                        (int)labelString.count, labelString.data, adm->program_size);
+            }
+        }
+        else if (sv_eq(word, cstr_as_sv(inst_name(INST_JMP_IF)))) {
+            String_View labelString = sv_trim(line);
+            int labelInt = sv_to_int(labelString);
+            if (labelInt > 0 && isdigit(*labelString.data)) {
+                adm->program[adm->program_size++] = (Inst){
+                    .type = INST_JMP_IF,
+                    .operand = {.as_i64 = labelInt}, 
+                };
+                //printf("Adding jmp to addr %d\n", labelInt);
+            } else {
+                pasm_push_deferred_operand(lt, adm->program_size, labelString);
+                adm->program[adm->program_size++] = (Inst){
+                    .type = INST_JMP_IF
+                };
+                //printf("Adding unresolved jmp to label %.*s at addr %ld\n", (int)labelString.count, labelString.data, adm->program_size);
             }
         } else {
                 fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
