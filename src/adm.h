@@ -11,14 +11,13 @@
 #include <errno.h>
 #include <ctype.h>
 
-typedef int64_t Word;
 
 
 #define ARRAY_SIZE(xs) (sizeof(xs) / sizeof((xs)[0]))
 #define ADM_STACK_CAPACITY 1024
 #define ADM_PROGRAM_CAPACITY 1024
 #define LABEL_CAPACITY 1024
-#define DEFERED_OPERANDS_CAPACITY 1024
+#define DEFERRED_OPERANDS_CAPACITY 1024
 
 #define MAKE_INST_PUSH(value) {.type = INST_PUSH, .operand = (value)}
 #define MAKE_INST_PLUS {.type = INST_PLUS}
@@ -31,6 +30,18 @@ typedef int64_t Word;
 #define MAKE_INST_EQ {.type = INST_EQ}
 #define MAKE_INST_PRINT_DEBUG {.type = INST_PRINT_DEBUG, .operand = 0}
 #define MAKE_INST_DUP(addr) {.type = INST_DUP, .operand = (addr)}
+
+typedef uint64_t Inst_Addr;
+
+typedef union {
+    uint64_t as_u64;
+    int64_t as_i64;
+    double as_f64;
+    void *as_ptr;
+} Word;
+
+static_assert(sizeof(Word) == 8, "The ADM's Word is expected to be 64 bits");
+
 
 typedef enum {
     ERR_OK = 0,
@@ -66,10 +77,10 @@ typedef struct {
 
 typedef struct {
     Word stack[ADM_STACK_CAPACITY];
-    Word stack_size;
+    uint64_t stack_size;
     Inst program[ADM_PROGRAM_CAPACITY];
-    Word program_size;
-    Word ip;
+    uint64_t program_size;
+    Inst_Addr ip;
     int halt;
 } ADM;
 
@@ -113,26 +124,26 @@ String_View slurp_file(const char *file_path);
 
 typedef struct {
     String_View name;
-    Word addr;
+    Inst_Addr addr;
 } Label;
 
 typedef struct {
-    Word addr;
+    Inst_Addr addr;
     String_View label;
-} Defered_Operand;
+} Deferred_Operand;
 
 typedef struct {
     Label labels[LABEL_CAPACITY];
     size_t labels_size;
-    Defered_Operand defered_operands[DEFERED_OPERANDS_CAPACITY];
-    size_t defered_operands_size;
+    Deferred_Operand deferred_operands[DEFERRED_OPERANDS_CAPACITY];
+    size_t deferred_operands_size;
 } Pasm;
 
 Pasm pasm = {0};
 
-Word pasm_find_label_addr(Pasm *pasm, String_View name);
-void pasm_push_label(Pasm *pasm, String_View name, Word addr);
-void pasm_push_defered_operand(Pasm *pasm, Word addr, String_View label);
+Inst_Addr pasm_find_label_addr(Pasm *pasm, String_View name);
+void pasm_push_label(Pasm *pasm, String_View name, Inst_Addr addr);
+void pasm_push_deferred_operand(Pasm *pasm, Inst_Addr addr, String_View label);
 
 
 void adm_translate_source(String_View source, ADM *adm, Pasm *lt);
@@ -198,7 +209,7 @@ Err adm_execute_program(ADM *adm, int limit) {
 
 Err adm_execute_inst(ADM *adm) {
 
-    if (adm->ip < 0 || adm->ip >= adm->program_size) {
+    if (adm->ip >= adm->program_size) {
         return ERR_ILLEGAL_INST_ACCESS;
     }
 
@@ -219,7 +230,7 @@ Err adm_execute_inst(ADM *adm) {
             if (adm->stack_size < 2) {
                 return ERR_STACK_UNDERFLOW;
             }
-            adm->stack[adm->stack_size - 2] += adm->stack[adm->stack_size - 1];
+            adm->stack[adm->stack_size - 2].as_u64 += adm->stack[adm->stack_size - 1].as_u64;
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
@@ -227,7 +238,7 @@ Err adm_execute_inst(ADM *adm) {
             if (adm->stack_size < 2) {
                 return ERR_STACK_UNDERFLOW;
             }
-            adm->stack[adm->stack_size - 2] -= adm->stack[adm->stack_size - 1];
+            adm->stack[adm->stack_size - 2].as_u64 -= adm->stack[adm->stack_size - 1].as_u64;
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
@@ -235,7 +246,7 @@ Err adm_execute_inst(ADM *adm) {
             if (adm->stack_size < 2) {
                 return ERR_STACK_UNDERFLOW;
             }
-            adm->stack[adm->stack_size - 2] *= adm->stack[adm->stack_size - 1];
+            adm->stack[adm->stack_size - 2].as_u64 *= adm->stack[adm->stack_size - 1].as_u64;
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
@@ -244,15 +255,15 @@ Err adm_execute_inst(ADM *adm) {
                 return ERR_STACK_UNDERFLOW;
             }
 
-            if (adm->stack[adm->stack_size - 1] == 0) {
+            if (adm->stack[adm->stack_size - 1].as_u64 == 0) {
                 return ERR_DIV_BY_ZERO;
             }
-            adm->stack[adm->stack_size - 2] /= adm->stack[adm->stack_size - 1];
+            adm->stack[adm->stack_size - 2].as_u64 /= adm->stack[adm->stack_size - 1].as_u64;
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
         case INST_JMP:
-            adm->ip = inst.operand;
+            adm->ip = inst.operand.as_u64;
             break;
         case INST_HALT:
             adm->halt = 1;
@@ -262,7 +273,7 @@ Err adm_execute_inst(ADM *adm) {
                 return ERR_STACK_UNDERFLOW;
             }
 
-            adm->stack[adm->stack_size - 2] = adm->stack[adm->stack_size - 1] == adm->stack[adm->stack_size - 2];
+            adm->stack[adm->stack_size - 2].as_u64 = adm->stack[adm->stack_size - 1].as_u64 == adm->stack[adm->stack_size - 2].as_u64;
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
@@ -271,9 +282,9 @@ Err adm_execute_inst(ADM *adm) {
                 return ERR_STACK_UNDERFLOW;
             }
 
-            if (adm->stack[adm->stack_size - 1]) {
+            if (adm->stack[adm->stack_size - 1].as_u64) {
                 adm->stack_size -= 1;
-                adm->ip = inst.operand;
+                adm->ip = inst.operand.as_u64;
             } else {
                 adm->ip += 1;
             }
@@ -283,7 +294,7 @@ Err adm_execute_inst(ADM *adm) {
                 return ERR_STACK_UNDERFLOW;
             }
 
-            printf("%ld\n", adm->stack[adm->stack_size - 1]);
+            printf("%lu\n", adm->stack[adm->stack_size - 1].as_u64);
             adm->stack_size -= 1;
             adm->ip += 1;
             break;
@@ -291,15 +302,12 @@ Err adm_execute_inst(ADM *adm) {
             if (adm->stack_size >= ADM_STACK_CAPACITY) {
                 return ERR_STACK_OVERFLOW;
             }
-            if (adm->stack_size - inst.operand <= 0) {
+            if (adm->stack_size - inst.operand.as_u64 <= 0) {
                 return ERR_STACK_UNDERFLOW;
             }
 
-            if (inst.operand < 0) {
-                return ERR_ILLEGAL_OPERAND;
-            }
 
-            adm->stack[adm->stack_size] = adm->stack[adm->stack_size - 1 - inst.operand];
+            adm->stack[adm->stack_size] = adm->stack[adm->stack_size - 1 - inst.operand.as_u64];
             adm->stack_size += 1;
             adm->ip += 1;
             break;
@@ -312,8 +320,11 @@ Err adm_execute_inst(ADM *adm) {
 void adm_dump_stack(FILE *stream, const ADM *adm) {
     fprintf(stream, "Stack:\n");
     if (adm->stack_size > 0) {
-        for (Word i = 0; i < adm->stack_size; ++i) {
-            fprintf(stream, "%ld\n", adm->stack[i]);
+        for (Inst_Addr i = 0; i < adm->stack_size; ++i) {
+            fprintf(stream, " u64: %lu, i64: %ld, f64: %lf, ptr: %p\n", adm->stack[i].as_u64, 
+                    adm->stack[i].as_i64, 
+                    adm->stack[i].as_f64, 
+                    adm->stack[i].as_ptr);
         }
     } else {
         fprintf(stream, "    [empty]\n");
@@ -474,7 +485,7 @@ int sv_to_int(String_View sv) {
 
 
 
-Word pasm_find_label_addr(Pasm *pasm, String_View name) {
+Inst_Addr pasm_find_label_addr(Pasm *pasm, String_View name) {
     for (size_t i = 0; i < pasm->labels_size; ++i) {
         printf("label_table_find: i=%zu, name=%.*s\n", i, (int)pasm->labels[i].name.count, pasm->labels[i].name.data);
         if (sv_eq(pasm->labels[i].name, name)) {
@@ -485,7 +496,7 @@ Word pasm_find_label_addr(Pasm *pasm, String_View name) {
     exit(1);
 }
 
-void pasm_push_label(Pasm *pasm, String_View name, Word addr) {
+void pasm_push_label(Pasm *pasm, String_View name, Inst_Addr addr) {
     assert(pasm->labels_size < LABEL_CAPACITY);
     pasm->labels[pasm->labels_size++] = (Label) {
         .name = name,
@@ -493,9 +504,9 @@ void pasm_push_label(Pasm *pasm, String_View name, Word addr) {
     };
 }
 
-void pasm_push_defered_operand(Pasm *pasm, Word addr, String_View label) {
-    assert(pasm->defered_operands_size < DEFERED_OPERANDS_CAPACITY);
-    pasm->defered_operands[pasm->defered_operands_size++] = (Defered_Operand) {
+void pasm_push_deferred_operand(Pasm *pasm, Inst_Addr addr, String_View label) {
+    assert(pasm->deferred_operands_size < DEFERRED_OPERANDS_CAPACITY);
+    pasm->deferred_operands[pasm->deferred_operands_size++] = (Deferred_Operand) {
         .addr = addr,
         .label = label,
     };
@@ -542,12 +553,12 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
             printf("Found push %.*s\n", (int)line.count, line.data);
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_PUSH, 
-                .operand = sv_to_int(sv_trim(line))
+                .operand = {.as_i64 = sv_to_int(sv_trim(line))}
             };
         } else if (sv_eq(word, cstr_as_sv("dup"))) {
             adm->program[adm->program_size++] = (Inst){
                 .type = INST_DUP, 
-                .operand = sv_to_int(sv_trim(line))
+                .operand = {.as_i64 = sv_to_int(sv_trim(line))}
             };
         } else if (sv_eq(word, cstr_as_sv("plus"))) {
             adm->program[adm->program_size++] = (Inst){
@@ -559,11 +570,11 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
             if (labelInt > 0 && isdigit(*labelString.data)) {
                 adm->program[adm->program_size++] = (Inst){
                     .type = INST_JMP,
-                    .operand = labelInt, 
+                    .operand = {.as_i64 = labelInt}, 
                 };
                 printf("Adding jmp to addr %d\n", labelInt);
             } else {
-                pasm_push_defered_operand(lt, adm->program_size, labelString);
+                pasm_push_deferred_operand(lt, adm->program_size, labelString);
                 adm->program[adm->program_size++] = (Inst){
                     .type = INST_JMP
                 };
@@ -575,18 +586,18 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
                 exit(1);
         }
     }
-    for (size_t i = 0; i < pasm.defered_operands_size; ++i) {
-        Word addr = pasm_find_label_addr(lt, pasm.defered_operands[i].label);
+    for (size_t i = 0; i < pasm.deferred_operands_size; ++i) {
+        Inst_Addr addr = pasm_find_label_addr(lt, pasm.deferred_operands[i].label);
         /*printf("Resolving unresolved jmp: %.*s at addr %ld to %ld\n", 
-               (int)pasm->defered_operands[i].label.count, 
-               pasm->defered_operands[i].label.data, 
-               pasm->defered_operands[i].addr, 
+               (int)pasm->deferred_operands[i].label.count, 
+               pasm->deferred_operands[i].label.data, 
+               pasm->deferred_operands[i].addr, 
                addr);*/
-        adm->program[pasm.defered_operands[i].addr].operand = addr;
+        adm->program[pasm.deferred_operands[i].addr].operand.as_u64 = addr;
     }
     
-    for (Word i = 0; i < adm->program_size; ++i) {
-        printf("%s %ld\n", inst_type_as_cstr(adm->program[i].type), adm->program[i].operand);
+    for (Inst_Addr i = 0; i < adm->program_size; ++i) {
+        printf("%s %ld\n", inst_type_as_cstr(adm->program[i].type), adm->program[i].operand.as_i64);
     }
 }
 

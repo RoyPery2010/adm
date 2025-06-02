@@ -3,7 +3,7 @@ LIBS =
 CC = gcc
 
 .PHONY: all
-all: pasm adme depasm
+all: pasm adme depasm nan
 pasm: ./src/pasm.c ./src/adm.h
 	$(CC) $(CFLAGS) -o pasm ./src/pasm.c $(LIBS)
 
@@ -11,6 +11,8 @@ adme: ./src/adme.c ./src/adm.h
 	$(CC) $(CFLAGS) -o adme ./src/adme.c $(LIBS)
 depasm: ./src/depasm.c ./src/adm.h
 	$(CC) $(CFLAGS) -o depasm ./src/depasm.c $(LIBS)
+nan: ./src/nan.c
+	$(CC) $(CFLAGS) -o nan ./src/nan.c $(LIBS)
 .PHONY: examples
 examples: ./examples/fib.adm ./examples/123.adm
 
