@@ -12,8 +12,8 @@ int main(int argc, char *argv[]) {
     adm_load_program_from_file(&adm, input_file_path);
 
     for (Inst_Addr i = 0; i < adm.program_size; ++i) {
-            printf("%s", inst_names[adm.program[i].type]);
-            if (inst_has_operand[adm.program[i].type]) {
+            printf("%s", inst_name(adm.program[i].type));
+            if (inst_has_operand(adm.program[i].type)) {
                 printf(" %ld", adm.program[i].operand.as_i64);
             }
             printf("\n");

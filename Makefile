@@ -12,9 +12,11 @@ adme: ./src/adme.c ./src/adm.h
 depasm: ./src/depasm.c ./src/adm.h
 	$(CC) $(CFLAGS) -o depasm ./src/depasm.c $(LIBS)
 .PHONY: examples
-examples: ./examples/fib.adm ./examples/123.adm
+examples: ./examples/fib.adm ./examples/123i.adm ./examples/123f.adm
 
 ./examples/fib.adm: pasm ./examples/fib.pasm
 	./pasm ./examples/fib.pasm ./examples/fib.adm
-./examples/123.adm: pasm ./examples/123.pasm
-	./pasm ./examples/123.pasm ./examples/123.adm
+./examples/123i.adm: pasm ./examples/123i.pasm
+	./pasm ./examples/123i.pasm ./examples/123i.adm
+./examples/123f.adm: pasm ./examples/123f.pasm
+	./pasm ./examples/123f.pasm ./examples/123f.adm
