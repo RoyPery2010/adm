@@ -75,6 +75,8 @@ typedef enum {
     INST_PRINT_DEBUG,
     INST_NOT,
     INST_GEF,
+    INST_DROP,
+    INST_RET,
     NUMBER_OF_INSTS,
 } Inst_Type;
 
@@ -183,6 +185,8 @@ const char *inst_name(Inst_Type type) {
         case INST_SWAP:        return "swap";
         case INST_NOT:         return "not";
         case INST_GEF:         return "gef";
+        case INST_DROP:       return "drop";
+        case INST_RET:         return "ret";
         case NUMBER_OF_INSTS:
         default: assert(0 && "inst_name: Unreachable");
     }
@@ -209,6 +213,8 @@ int inst_has_operand(Inst_Type type) {
         case INST_SWAP:        return 0;
         case INST_NOT:         return 0;
         case INST_GEF:         return 0;
+        case INST_DROP:        return 0;
+        case INST_RET:         return 0;
         case NUMBER_OF_INSTS:
         default: assert(0 && "inst_has_operand: Unreachable");
     }
@@ -258,6 +264,8 @@ const char *inst_type_as_cstr(Inst_Type type) {
         case INST_SWAP: return "INST_SWAP";
         case INST_NOT: return "INST_NOT";
         case INST_GEF: return "INST_GEF";
+        case INST_DROP: return "INST_DROP";
+        case INST_RET: return "INST_RET";
         case NUMBER_OF_INSTS: 
         default: assert(0 && "inst_type_as_cstr: unreachable");
     }
@@ -455,6 +463,24 @@ Err adm_execute_inst(ADM *adm) {
             adm->stack[adm->stack_size - 2].as_u64 = adm->stack[adm->stack_size - 1].as_u64 >= adm->stack[adm->stack_size - 2].as_u64;
             adm->stack_size -= 1;
             adm->ip += 1;
+            break;
+        case INST_DROP:
+            if (adm->stack_size < 1) {
+                return ERR_STACK_UNDERFLOW;
+            }
+
+            // Drop the top element of the stack
+            adm->stack_size -= 1;
+            adm->ip += 1;
+            break;
+        case INST_RET:
+            if (adm->stack_size < 1) {
+                return ERR_STACK_UNDERFLOW;
+            }
+
+            // Return from the function, which is just a no-op in this case
+            adm->ip = adm->stack[adm->stack_size - 1].as_u64;
+            adm->stack_size -= 1;
             break;
             
         case NUMBER_OF_INSTS:
@@ -765,6 +791,22 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_PRINT_DEBUG)))) {
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_PRINT_DEBUG
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_MINUSF)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_MINUSF
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_MINUSI)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_MINUSI
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_DROP)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_DROP
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_RET)))) {
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_RET
             };
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_JMP)))) {
             String_View labelString = sv_trim(line);
