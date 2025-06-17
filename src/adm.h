@@ -16,6 +16,7 @@
 #define ARRAY_SIZE(xs) (sizeof(xs) / sizeof((xs)[0]))
 #define ADM_STACK_CAPACITY 1024
 #define ADM_PROGRAM_CAPACITY 1024
+#define ADN_NATIVES_CAPACITY 1024
 #define LABEL_CAPACITY 1024
 #define DEFERRED_OPERANDS_CAPACITY 1024
 
@@ -77,6 +78,8 @@ typedef enum {
     INST_GEF,
     INST_DROP,
     INST_RET,
+    INST_CALL,
+    INST_NATIVE,
     NUMBER_OF_INSTS,
 } Inst_Type;
 
@@ -87,14 +90,22 @@ typedef struct {
     Word operand;
 } Inst;
 
-typedef struct {
+typedef struct ADM ADM;
+
+typedef Err (*ADM_Native)(ADM*);
+
+struct ADM {
     Word stack[ADM_STACK_CAPACITY];
     uint64_t stack_size;
     Inst program[ADM_PROGRAM_CAPACITY];
     uint64_t program_size;
     Inst_Addr ip;
+    ADM_Native natives[ADN_NATIVES_CAPACITY];
+    uint64_t natives_size;
     int halt;
-} ADM;
+};
+
+
 
 
 
@@ -103,8 +114,9 @@ const char *inst_type_as_cstr(Inst_Type type);
 
 
 Err adm_execute_program(ADM *adm, int limit);
+Err adm_alloc(ADM *adm);
 Err adm_execute_inst(ADM *adm);
-
+void adm_push_native(ADM *adm, ADM_Native native);
 void adm_dump_stack(FILE *stream, const ADM *adm);
 
 
@@ -187,6 +199,8 @@ const char *inst_name(Inst_Type type) {
         case INST_GEF:         return "gef";
         case INST_DROP:       return "drop";
         case INST_RET:         return "ret";
+        case INST_CALL:        return "call";
+        case INST_NATIVE:      return "native";
         case NUMBER_OF_INSTS:
         default: assert(0 && "inst_name: Unreachable");
     }
@@ -215,6 +229,8 @@ int inst_has_operand(Inst_Type type) {
         case INST_GEF:         return 0;
         case INST_DROP:        return 0;
         case INST_RET:         return 0;
+        case INST_CALL:        return 1;
+        case INST_NATIVE:      return 1; // Native instructions may have operands, but it's not enforced
         case NUMBER_OF_INSTS:
         default: assert(0 && "inst_has_operand: Unreachable");
     }
@@ -251,7 +267,7 @@ const char *inst_type_as_cstr(Inst_Type type) {
         case INST_MINUSI: return "INST_MINUSI";
         case INST_MULTI: return "INST_MULTI";
         case INST_DIVI: return "INST_DIVI";
-        case INST_PLUSF: return "INST_PLUSIF";
+        case INST_PLUSF: return "INST_PLUSF";
         case INST_MINUSF: return "INST_MINUSF";
         case INST_MULTF: return "INST_MULTF";
         case INST_DIVF: return "INST_DIVF";
@@ -266,6 +282,8 @@ const char *inst_type_as_cstr(Inst_Type type) {
         case INST_GEF: return "INST_GEF";
         case INST_DROP: return "INST_DROP";
         case INST_RET: return "INST_RET";
+        case INST_CALL: return "INST_CALL";
+        case INST_NATIVE: return "INST_NATIVE";
         case NUMBER_OF_INSTS: 
         default: assert(0 && "inst_type_as_cstr: unreachable");
     }
@@ -288,7 +306,7 @@ Err adm_execute_program(ADM *adm, int limit) {
 }
 
 Err adm_execute_inst(ADM *adm) {
-
+    printf("Executing instruction at ip=%ld: %s\n", adm->ip, inst_type_as_cstr(adm->program[adm->ip].type));
     if (adm->ip >= adm->program_size) {
         return ERR_ILLEGAL_INST_ACCESS;
     }
@@ -482,12 +500,33 @@ Err adm_execute_inst(ADM *adm) {
             adm->ip = adm->stack[adm->stack_size - 1].as_u64;
             adm->stack_size -= 1;
             break;
-            
+        case INST_CALL:
+            if (adm->stack_size >= ADM_STACK_CAPACITY) {
+                return ERR_STACK_OVERFLOW;
+            }
+
+            adm->stack[adm->stack_size++].as_u64 = adm->ip + 1; // Save the return address
+            adm->ip = inst.operand.as_u64;
+            break;
+        case INST_NATIVE:
+            if (inst.operand.as_u64 >= adm->natives_size) {
+                return ERR_ILLEGAL_OPERAND;
+            }
+
+            adm->natives[inst.operand.as_u64](adm);
+            adm->ip += 1;
+            break;
+
         case NUMBER_OF_INSTS:
         default:
             return ERR_ILLEGAL_INST;
         }
         return ERR_OK;
+}
+
+void adm_push_native(ADM *adm, ADM_Native native) {
+    assert(adm->natives_size < ADN_NATIVES_CAPACITY);
+    adm->natives[adm->natives_size++] = native;
 }
 
 void adm_dump_stack(FILE *stream, const ADM *adm) {
@@ -709,10 +748,12 @@ Word number_literal_as_word(String_View sv) {
 
 
 void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
+    //printf("adm_translate_source: %.*s count=%d\n", (int)source.count, source.data, (int)source.count);
     adm->program_size = 0;
     while (source.count > 0) {
         //if (adm->program_size >= 8) break;
         assert(adm->program_size < ADM_PROGRAM_CAPACITY);
+        //printf("Source: %.*s count=%d\n", (int)source.count, source.data, (int)source.count);
         String_View line = sv_trim(sv_chop_by_delim(&source, '\n'));
         printf("Line 1: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
         if (line.count > 0 && *line.data != '#') {
@@ -774,7 +815,8 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
             };
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_SWAP)))) {
             adm->program[adm->program_size++] = (Inst) {
-                .type = INST_SWAP
+                .type = INST_SWAP,
+                .operand = {.as_u64 = sv_to_int(sv_trim(line))},
             };
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_EQ)))) {
             adm->program[adm->program_size++] = (Inst) {
@@ -808,6 +850,22 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_RET
             };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_CALL)))) {
+            String_View labelString = sv_trim(line);
+            int labelInt = sv_to_int(labelString);
+            if (labelInt > 0 && isdigit(*labelString.data)) {
+                adm->program[adm->program_size++] = (Inst){
+                    .type = INST_CALL,
+                    .operand = {.as_i64 = labelInt}, 
+                };
+                //printf("Adding jmp to addr %d\n", labelInt);
+            } else {
+                pasm_push_deferred_operand(lt, adm->program_size, labelString);
+                adm->program[adm->program_size++] = (Inst){
+                    .type = INST_CALL
+                };
+                //printf("Adding unresolved jmp to label %.*s at addr %ld\n", (int)labelString.count, labelString.data, adm->program_size);
+            }
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_JMP)))) {
             String_View labelString = sv_trim(line);
             int labelInt = sv_to_int(labelString);
@@ -825,8 +883,14 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
                 printf("Adding unresolved jmp to label %.*s at addr %ld\n", 
                        (int)labelString.count, labelString.data, adm->program_size);
             }
-        }
-        else if (sv_eq(word, cstr_as_sv(inst_name(INST_JMP_IF)))) {
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_NATIVE)))) {
+            String_View labelString = sv_trim(line);
+            int labelInt = sv_to_int(labelString);
+            adm->program[adm->program_size++] = (Inst) {
+                .type = INST_NATIVE,
+                .operand = {.as_i64 = labelInt},
+            };
+        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_JMP_IF)))) {
             String_View labelString = sv_trim(line);
             int labelInt = sv_to_int(labelString);
             if (labelInt > 0 && isdigit(*labelString.data)) {
@@ -894,14 +958,13 @@ String_View slurp_file(const char *file_path) {
     }
 
     size_t n = fread(buffer, 1, m, f);
-    
+    printf("n = %ld, m = %ld, buffer = %s\n", n, m, buffer);
     if (ferror(f)) {
         fprintf(stderr, "ERROR: Could not read file `%s`: %s\n", file_path, strerror(errno));
         exit(1);
     }
 
     fclose(f);
-
     return (String_View) {
         .count = n,
         .data = buffer,

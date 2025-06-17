@@ -28,6 +28,7 @@ int main(int argc, char **argv) {
     const char *output_file_path = shift(&argc, &argv);
 
     String_View source = slurp_file(input_file_path);
+    printf("Pasm: %.*s count=%d\n", (int)source.count, source.data, (int)source.count);
     adm_translate_source(source, &adm, &pasm);
 
     if (adm.program_size == 0) {

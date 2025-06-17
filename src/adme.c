@@ -1,5 +1,6 @@
 #define ADM_IMPLEMENTATION
 #include "./adm.h"
+#include <inttypes.h>
 
 static char *shift(int *argc, char ***argv) {
     assert(*argc > 0);
@@ -11,6 +12,27 @@ static char *shift(int *argc, char ***argv) {
 
 static void usage(FILE *stream, const char *program) {
     fprintf(stream, "Usage: %s -i <input.adm> -l <limit> [-h] [-d]\n", program);
+}
+
+Err adm_alloc(ADM *adm) {
+    if (adm->stack_size < 1) {
+        return ERR_STACK_UNDERFLOW;
+    }
+
+    adm->stack[adm->stack_size - 1].as_ptr = malloc(adm->stack[adm->stack_size - 1].as_u64);
+
+    return ERR_OK;
+}
+
+static Err adm_free(ADM *adm) {
+    if (adm->stack_size < 1) {
+        return ERR_STACK_UNDERFLOW;
+    }
+
+    free(adm->stack[adm->stack_size - 1].as_ptr);
+    adm->stack_size -= 1;
+    return ERR_OK;
+
 }
 
 int main(int argc, char **argv) {
@@ -53,6 +75,8 @@ int main(int argc, char **argv) {
         exit(1);
     }
     adm_load_program_from_file(&adm, input_file_path);
+    adm_push_native(&adm, adm_alloc);
+    adm_push_native(&adm, adm_free);
     if (!debug) {
         Err err = adm_execute_program(&adm, limit);
         adm_dump_stack(stdout, &adm);
@@ -64,6 +88,7 @@ int main(int argc, char **argv) {
         while (limit != 0 && !adm.halt) {
             adm_dump_stack(stdout, &adm);
             getchar();
+            printf("%s %" PRIu64 "\n", inst_name(adm.program[adm.ip].type), adm.program[adm.ip].operand.as_u64);
             Err err = adm_execute_inst(&adm);
             if (err != ERR_OK) {
                 fprintf(stderr, "ERROR: %s\n", err_as_cstr(err));
