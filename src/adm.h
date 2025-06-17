@@ -29,7 +29,6 @@
 #define MAKE_INST_HALT {.type = INST_HALT, .operand = 0}
 #define MAKE_INST_JMP_IF(addr) {.type = INST_JMP_IF, .operand = (addr)}
 #define MAKE_INST_EQ {.type = INST_EQ}
-#define MAKE_INST_PRINT_DEBUG {.type = INST_PRINT_DEBUG, .operand = 0}
 #define MAKE_INST_DUP(addr) {.type = INST_DUP, .operand = (addr)}
 
 typedef uint64_t Inst_Addr;
@@ -73,7 +72,6 @@ typedef enum {
     INST_JMP_IF,
     INST_EQ,
     INST_HALT,
-    INST_PRINT_DEBUG,
     INST_NOT,
     INST_GEF,
     INST_DROP,
@@ -193,7 +191,6 @@ const char *inst_name(Inst_Type type) {
         case INST_JMP_IF:      return "jmp_if";
         case INST_EQ:          return "eq";
         case INST_HALT:        return "halt";
-        case INST_PRINT_DEBUG: return "print_debug";
         case INST_SWAP:        return "swap";
         case INST_NOT:         return "not";
         case INST_GEF:         return "gef";
@@ -223,7 +220,6 @@ int inst_has_operand(Inst_Type type) {
         case INST_JMP_IF:      return 1;
         case INST_EQ:          return 0;
         case INST_HALT:        return 0;
-        case INST_PRINT_DEBUG: return 0;
         case INST_SWAP:        return 0;
         case INST_NOT:         return 0;
         case INST_GEF:         return 0;
@@ -275,7 +271,6 @@ const char *inst_type_as_cstr(Inst_Type type) {
         case INST_JMP_IF: return "INST_JMP_IF";
         case INST_EQ: return "INST_EQ";
         case INST_HALT: return "INST_HALT";
-        case INST_PRINT_DEBUG: return "INST_PRINT_DEBUG";
         case INST_DUP: return "INST_DUP";
         case INST_SWAP: return "INST_SWAP";
         case INST_NOT: return "INST_NOT";
@@ -422,18 +417,6 @@ Err adm_execute_inst(ADM *adm) {
             } else {
                 adm->ip += 1;
             }
-            break;
-        case INST_PRINT_DEBUG:
-            if (adm->stack_size < 1) {
-                return ERR_STACK_UNDERFLOW;
-            }
-
-            fprintf(stdout, " u64: %lu, i64: %ld, f64: %lf, ptr: %p\n", adm->stack[adm->stack_size - 1].as_u64, 
-                    adm->stack[adm->stack_size - 1].as_i64, 
-                    adm->stack[adm->stack_size - 1].as_f64, 
-                    adm->stack[adm->stack_size - 1].as_ptr);
-            adm->stack_size -= 1;
-            adm->ip += 1;
             break;
         case INST_DUP:
             if (adm->stack_size >= ADM_STACK_CAPACITY) {
@@ -829,10 +812,6 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_GEF)))) {
             adm->program[adm->program_size++] = (Inst) {
                 .type = INST_GEF
-            };
-        } else if (sv_eq(word, cstr_as_sv(inst_name(INST_PRINT_DEBUG)))) {
-            adm->program[adm->program_size++] = (Inst) {
-                .type = INST_PRINT_DEBUG
             };
         } else if (sv_eq(word, cstr_as_sv(inst_name(INST_MINUSF)))) {
             adm->program[adm->program_size++] = (Inst) {
