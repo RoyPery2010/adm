@@ -4,3 +4,4 @@ push 3
 plusi
 plusi
 halt
+native 3

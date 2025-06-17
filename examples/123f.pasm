@@ -4,3 +4,4 @@ push 3.0
 plusf
 plusf
 halt
+native 2

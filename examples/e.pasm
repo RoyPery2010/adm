@@ -22,5 +22,4 @@ loop:
     gef
 
     jmp_if loop
-    print_debug
     halt

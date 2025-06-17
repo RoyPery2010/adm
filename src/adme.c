@@ -35,6 +35,46 @@ static Err adm_free(ADM *adm) {
 
 }
 
+static Err adm_print_f64(ADM *adm) {
+    if (adm->stack_size < 1) {
+        return ERR_STACK_UNDERFLOW;
+    }
+
+    printf("%lf\n", adm->stack[adm->stack_size - 1].as_f64);
+    adm->stack_size -= 1;
+    return ERR_OK;
+}
+static Err adm_print_i64(ADM *adm) {
+    if (adm->stack_size < 1) {
+        return ERR_STACK_UNDERFLOW;
+    }
+
+    printf("%" PRId64 "\n", adm->stack[adm->stack_size - 1].as_i64);
+    adm->stack_size -= 1;
+    return ERR_OK;
+}
+
+static Err adm_print_u64(ADM *adm) {
+    if (adm->stack_size < 1) {
+        return ERR_STACK_UNDERFLOW;
+    }
+
+    printf("%" PRIu64 "\n", adm->stack[adm->stack_size - 1].as_u64);
+    adm->stack_size -= 1;
+    return ERR_OK;
+}
+
+static Err adm_print_ptr(ADM *adm) {
+    if (adm->stack_size < 1) {
+        return ERR_STACK_UNDERFLOW;
+    }
+
+    printf("%p\n", adm->stack[adm->stack_size - 1].as_ptr);
+    adm->stack_size -= 1;
+    return ERR_OK;
+}
+
+
 int main(int argc, char **argv) {
     const char *program = shift(&argc, &argv); // skip the program name
     const char *input_file_path = NULL;
@@ -75,8 +115,13 @@ int main(int argc, char **argv) {
         exit(1);
     }
     adm_load_program_from_file(&adm, input_file_path);
-    adm_push_native(&adm, adm_alloc);
-    adm_push_native(&adm, adm_free);
+    adm_push_native(&adm, adm_alloc);     //0
+    adm_push_native(&adm, adm_free);      //1
+    adm_push_native(&adm, adm_print_f64); //2
+    adm_push_native(&adm, adm_print_i64); //3
+    adm_push_native(&adm, adm_print_u64); //4
+    adm_push_native(&adm, adm_print_ptr); //5
+
     if (!debug) {
         Err err = adm_execute_program(&adm, limit);
         adm_dump_stack(stdout, &adm);
