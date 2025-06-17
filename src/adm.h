@@ -30,6 +30,7 @@
 #define MAKE_INST_JMP_IF(addr) {.type = INST_JMP_IF, .operand = (addr)}
 #define MAKE_INST_EQ {.type = INST_EQ}
 #define MAKE_INST_DUP(addr) {.type = INST_DUP, .operand = (addr)}
+#define PASM_COMMENTS_STYLE ';'
 
 typedef uint64_t Inst_Addr;
 
@@ -739,11 +740,11 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *lt) {
         //printf("Source: %.*s count=%d\n", (int)source.count, source.data, (int)source.count);
         String_View line = sv_trim(sv_chop_by_delim(&source, '\n'));
         printf("Line 1: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
-        if (line.count > 0 && *line.data != '#') {
+        if (line.count > 0 && *line.data != PASM_COMMENTS_STYLE) {
             line = sv_trim(line);
         }
         //printf("Line 2: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
-        if (line.count == 0 || line.data[0] == '#') {
+        if (line.count == 0 || line.data[0] == PASM_COMMENTS_STYLE) {
             continue; // skip empty lines and comments
         }
         //printf("Line 3: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
