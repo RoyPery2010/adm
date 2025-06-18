@@ -1,3 +1,5 @@
+#include "./natives.hpasm"
+
 main:
     push 0.0
     push 1.0

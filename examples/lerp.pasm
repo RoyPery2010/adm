@@ -1,3 +1,4 @@
+#include "./natives.hpasm"
     jmp main
 
 lerpf:
@@ -29,7 +30,7 @@ loop:
     dup 3
     dup 3
     call lerpf
-    native 2
+    native print_f64
 
     swap 1
     dup 1

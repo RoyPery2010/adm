@@ -18,7 +18,7 @@ loop:
     swap 2
 
     dup 2
-    push 69
+    push 100.0
     gef
 
     jmp_if loop
