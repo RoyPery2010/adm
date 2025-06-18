@@ -1,4 +1,4 @@
-#include "./natives.hpasm"
+#include "natives.hpasm"
 
 main:
     push 0.0

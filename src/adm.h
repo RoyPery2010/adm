@@ -133,8 +133,6 @@ void adm_load_program_from_memory(ADM *adm, Inst *program, size_t program_size);
 void adm_save_program_to_file(const ADM *adm, const char *file_path);
 void adm_load_program_from_file(ADM *adm, const char *file_path);
 
-
-
 typedef struct
 {
     String_View name;
@@ -785,10 +783,12 @@ String_View sv_chop_by_delim(String_View *sv, char delim)
     {
         sv->count -= i + 1;
         sv->data += i + 1;
-    } /*/ else {
-         sv->count -= i;
-         sv->data += i;
-     }*/
+    }
+    else
+    {
+        sv->count -= i;
+        sv->data += i;
+    }
     return result;
 }
 int sv_eq(String_View a, String_View b)
@@ -879,7 +879,7 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *pasm)
         // printf("Source: %.*s count=%d\n", (int)source.count, source.data, (int)source.count);
         String_View line = sv_trim(sv_chop_by_delim(&source, '\n'));
         printf("Line 1: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
-        // printf("Line 2: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
+
         if (line.count == 0 || line.data[0] == PASM_COMMENTS_STYLE)
         {
             continue; // skip empty lines and comments
@@ -889,50 +889,66 @@ void adm_translate_source(String_View source, ADM *adm, Pasm *pasm)
         String_View original = line;
 
         String_View token = sv_chop_by_delim(&line, ' ');
-        printf("Word: `%.*s` count=%d\n", (int)token.count, token.data, (int)token.count);
-        if (line.count > 0 && *line.data != PASM_COMMENTS_STYLE)
-        {
-            if (token.count > 0 && token.data[token.count - 1] == ':')
-            {
-                String_View label = {
-                    .count = token.count - 1,
-                    .data = token.data,
+        printf("token: `%.*s` count=%d\n", (int)token.count, token.data, (int)token.count);
+        printf("Line 2: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
 
-                };
-                token = sv_trim(sv_chop_by_delim(&line, ' '));
-                printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
-                pasm_push_label(pasm, label, adm->program_size);
-            }
-            else if (token.count > 0){
-                String_View operand = sv_trim(sv_chop_by_delim(&line, PASM_COMMENTS_STYLE));
-                Inst_Type inst_type = INST_NOP;
-                if (inst_by_name(token, &inst_type)) {
+        if (token.count > 0 && token.data[token.count - 1] == ':')
+        {
+            String_View label = {
+                .count = token.count - 1,
+                .data = token.data,
+
+            };
+            token = sv_trim(sv_chop_by_delim(&line, ' '));
+            printf("Label: %.*s %ld\n", (int)label.count, label.data, adm->program_size);
+            pasm_push_label(pasm, label, adm->program_size);
+        }
+        else if (token.count > 0)
+        {
+            String_View operand = sv_trim(sv_chop_by_delim(&line, ' '));
+            printf("Operand: %.*s count=%d\n", (int)operand.count, operand.data, (int)operand.count);
+            printf("Line 3: %.*s count=%d\n", (int)line.count, line.data, (int)line.count);
+            Inst_Type inst_type = INST_NOP;
+            if (inst_by_name(token, &inst_type))
+            {
+                adm->program[adm->program_size].type = inst_type;
+                if (inst_has_operand(inst_type))
+                {
                     adm->program[adm->program_size].type = inst_type;
-                    if (inst_has_operand(inst_type)) {
-                        adm->program[adm->program_size].type = inst_type;
-                        if (!number_literal_as_word(operand, &adm->program[adm->program_size].operand)) {
-                            pasm_push_deferred_operand(pasm, adm->program_size, operand);
-                        }
+
+                    if (operand.count == 0)
+                    {
+                        fprintf(stderr, "ERROR: instruction: `%.*s` requires an operand\n", (int)token.count, token.data);
+                        exit(1);
                     }
-                    adm->program_size += 1;
-                } else {
-                    fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
-                    exit(1);
+
+                    if (!number_literal_as_word(operand, &adm->program[adm->program_size].operand))
+                    {
+                        pasm_push_deferred_operand(pasm, adm->program_size, operand);
+                    }
                 }
+                adm->program_size += 1;
+            }
+            else
+            {
+                fprintf(stderr, "Unknown instruction: %.*s\n", (int)original.count, original.data);
+                exit(1);
             }
         }
     }
-    for (size_t i = 0; i < pasm->deferred_operands_size; ++i) {
-                Inst_Addr addr = pasm_find_label_addr(pasm, pasm->deferred_operands[i].label);
-                /*printf("Resolving unresolved jmp: %.*s at addr %ld to %ld\n",
-                       (int)pasm->deferred_operands[i].label.count,
-                       pasm->deferred_operands[i].label.data,
-                       pasm->deferred_operands[i].addr,
-                       addr);*/
-                adm->program[pasm->deferred_operands[i].addr].operand.as_u64 = addr;
+    for (size_t i = 0; i < pasm->deferred_operands_size; ++i)
+    {
+        Inst_Addr addr = pasm_find_label_addr(pasm, pasm->deferred_operands[i].label);
+        /*printf("Resolving unresolved jmp: %.*s at addr %ld to %ld\n",
+               (int)pasm->deferred_operands[i].label.count,
+               pasm->deferred_operands[i].label.data,
+               pasm->deferred_operands[i].addr,
+               addr);*/
+        adm->program[pasm->deferred_operands[i].addr].operand.as_u64 = addr;
     }
-    for (Inst_Addr i = 0; i < adm->program_size; ++i) {
-                printf("%s %ld\n", inst_type_as_cstr(adm->program[i].type), adm->program[i].operand.as_i64);
+    for (Inst_Addr i = 0; i < adm->program_size; ++i)
+    {
+        printf("%s %ld\n", inst_type_as_cstr(adm->program[i].type), adm->program[i].operand.as_i64);
     }
 }
 
